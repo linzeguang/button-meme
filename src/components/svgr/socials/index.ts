@@ -1,0 +1,5 @@
+export { default as Facebook } from './Facebook.svg?react'
+export { default as Telegram } from './Telegram.svg?react'
+export { default as Twitter } from './Twitter.svg?react'
+export { default as WhatsApp } from './WhatsApp.svg?react'
+export { default as YouTube } from './YouTube.svg?react'

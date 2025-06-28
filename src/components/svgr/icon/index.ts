@@ -1,0 +1,5 @@
+export { default as Tip } from './tip.svg?react'
+export { default as Search } from './search.svg?react'
+export { default as Filter } from './filter.svg?react'
+export { default as DateIcon } from './date.svg?react'
+export { default as Copy } from './copy.svg?react'
