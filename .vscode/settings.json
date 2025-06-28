@@ -1,0 +1,17 @@
+{
+  "editor.formatOnSave": true, // 保存时自动格式化
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always" // 保存时自动修复 ESLint 问题
+  },
+
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "files.eol": "\n", // 统一换行符
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 默认使用 Prettier
+  "prettier.requireConfig": true, // 仅在存在 Prettier 配置文件时启用
+  "typescript.preferences.importModuleSpecifier": "non-relative", // 支持路径别名时推荐使用
+  "path-intellisense.mappings": {
+    "@": "${workspaceRoot}/src"
+  }
+}
