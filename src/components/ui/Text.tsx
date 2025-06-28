@@ -37,16 +37,7 @@ export const Text = React.forwardRef<React.ElementRef<'span'>, TextProps>(
 )
 Text.displayName = 'Text'
 
-export const UnboundedText = React.forwardRef<
+export const HarmonyOSSansText = React.forwardRef<
   React.ComponentRef<typeof Text>,
   React.ComponentPropsWithoutRef<typeof Text>
->((props, ref) => <Text {...props} ref={ref} className={cn('font-Unbounded', props.className)} />)
-
-export const Exo2Text = React.forwardRef<React.ComponentRef<typeof Text>, React.ComponentPropsWithoutRef<typeof Text>>(
-  (props, ref) => <Text {...props} ref={ref} className={cn('font-Exo2', props.className)} />
-)
-
-export const FunnelDisplayText = React.forwardRef<
-  React.ComponentRef<typeof Text>,
-  React.ComponentPropsWithoutRef<typeof Text>
->((props, ref) => <Text {...props} ref={ref} className={cn('font-FunnelDisplay', props.className)} />)
+>((props, ref) => <Text {...props} ref={ref} className={cn('font-HarmonyOSSans', props.className)} />)

@@ -11,7 +11,7 @@ import { Dialog, type DialogMethods } from '@/components/ui/Dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/Form'
 import { Input } from '@/components/ui/Input'
 import { Switch } from '@/components/ui/Switch'
-import { Exo2Text } from '@/components/ui/Text'
+import { HarmonyOSSansText } from '@/components/ui/Text'
 
 const quickInputs: ButtonRadioProps['options'] = [
   {
@@ -59,7 +59,7 @@ const SlippageDialog: React.FC = () => {
         children: (
           <Button size="xs" outline>
             {/* <Icon.Slippage /> */}
-            <Exo2Text>0.5%</Exo2Text>
+            <HarmonyOSSansText>0.5%</HarmonyOSSansText>
           </Button>
         )
       }}
