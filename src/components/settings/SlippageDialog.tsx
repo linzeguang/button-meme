@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
-import { Icon } from '@/components/svgr'
+// import { Icon } from '@/components/svgr'
 import { Grid } from '@/components/ui/Box'
 import { Button, ButtonRadio, type ButtonRadioProps } from '@/components/ui/Button'
 import { Dialog, type DialogMethods } from '@/components/ui/Dialog'
@@ -58,7 +58,7 @@ const SlippageDialog: React.FC = () => {
         asChild: true,
         children: (
           <Button size="xs" outline>
-            <Icon.Slippage />
+            {/* <Icon.Slippage /> */}
             <Exo2Text>0.5%</Exo2Text>
           </Button>
         )

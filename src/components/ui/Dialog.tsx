@@ -2,7 +2,6 @@ import React, { useImperativeHandle, useState } from 'react'
 
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 
-import { Icon } from '@/components/svgr'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
@@ -96,7 +95,7 @@ export const Dialog = React.forwardRef<DialogMethods, DialogProps>((props, metho
                   shadow={false}
                   className={cn('absolute right-0 size-6 border-0 !p-0 backdrop-blur-none', !title && 'top-0')}
                 >
-                  <Icon.Close />
+                  {/* <Icon.Close /> */}
                 </Button>
               </DialogClose>
             )}

@@ -2,7 +2,6 @@ import React, { type ButtonHTMLAttributes } from 'react'
 
 import { cva, type VariantProps } from 'class-variance-authority'
 
-import { Icon } from '@/components/svgr'
 import { Grid } from '@/components/ui/Box'
 import { cn } from '@/lib/utils'
 
@@ -102,7 +101,7 @@ export const SelectorButton = React.forwardRef<React.ComponentRef<typeof Button>
   ({ children, ...rest }, ref) => (
     <Button ref={ref} variant="secondary" size="sm" {...rest}>
       {children}
-      <Icon.SelectorArrow />
+      {/* <Icon.SelectorArrow /> */}
     </Button>
   )
 )

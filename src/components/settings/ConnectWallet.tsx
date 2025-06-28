@@ -19,7 +19,7 @@ const ConnectWallet: React.FC = () => {
           children: (
             <Button className="font-FunnelDisplay" variant="primary" onClick={() => disconnect()}>
               {formatAddress(address)}
-              <Icon.SelectorArrow />
+              {/* <Icon.SelectorArrow /> */}
             </Button>
           )
         }}
@@ -28,7 +28,7 @@ const ConnectWallet: React.FC = () => {
           className: 'space-y-2'
         }}
       >
-        <DropdownMenuItem className="flex items-center gap-2">
+        {/* <DropdownMenuItem className="flex items-center gap-2">
           <Icon.Profile />
           <FunnelDisplayText className="text-sm">Profile</FunnelDisplayText>
         </DropdownMenuItem>
@@ -43,7 +43,7 @@ const ConnectWallet: React.FC = () => {
           <FunnelDisplayText className="text-sm" onClick={() => disconnect()}>
             Disconnect
           </FunnelDisplayText>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenu>
     )
 
