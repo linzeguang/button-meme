@@ -8,16 +8,12 @@ import SideBar from '@/layouts/SideBar'
 
 const RootLayout: React.FC = () => {
   return (
-    <>
-      <section className="section grid h-screen grid-cols-[auto_1fr] grid-rows-[4.5rem_1fr_2rem]">
-        <Header />
-        <SideBar />
-        <Main />
-        <Footer />
-      </section>
-      {/* <RightBottomCircle />
-      <LeftTopCircle /> */}
-    </>
+    <section className="grid h-screen grid-cols-[auto_1fr] grid-rows-[4.5rem_1fr_2rem]">
+      <Header />
+      <SideBar />
+      <Main />
+      <Footer />
+    </section>
   )
 }
 
