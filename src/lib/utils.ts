@@ -15,3 +15,9 @@ export function randomColor() {
 export function copy(text: string) {
   navigator.clipboard.writeText(text)
 }
+
+export function toggleLight() {
+  document.documentElement.classList.toggle('light')
+
+  return document.documentElement.classList.contains('light')
+}

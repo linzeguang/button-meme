@@ -1,11 +1,18 @@
 import React from 'react'
 
-import { FunnelDisplayText } from '@/components/ui/Text'
+import { toggleLight } from '@/lib/utils'
 
 const Home: React.FC = () => {
   return (
     <div>
-      <FunnelDisplayText>home</FunnelDisplayText>
+      <button
+        onClick={() => {
+          const isLight = toggleLight()
+          console.log('>>>>>> isLight: ', isLight)
+        }}
+      >
+        theme
+      </button>
     </div>
   )
 }

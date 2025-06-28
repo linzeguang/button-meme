@@ -1,3 +1,5 @@
+@custom-variant light (&:where(.light, .light *));
+
 @theme {
   /* text */
   --text-xxs: 10px;
@@ -31,4 +33,17 @@
 
   --color-border: #fff;
   --color-border-thin: #23252b;
+}
+
+@layer theme {
+  .light {
+    /* color */
+    --color-primary: red;
+    --color-secondary: #4994ff;
+    --color-info: #4994ff;
+    --color-success: #00b42a;
+    --color-destructive: #f53f3f;
+    --color-warning: #ff7d00;
+    --color-disabled: #a4a4a4;
+  }
 }

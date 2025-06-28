@@ -30,10 +30,7 @@ export const features: AppKitOptions['features'] = {
 }
 
 // for custom networks visit -> https://docs.reown.com/appkit/react/core/custom-networks
-export const networks = [{ ...monadTestnet, rpcUrls: { default: { http: [RPC_URL] } } }] as [
-  AppKitNetwork,
-  ...AppKitNetwork[]
-]
+export const networks = [mainnet] as [AppKitNetwork, ...AppKitNetwork[]]
 
 //Set up the Wagmi Adapter (Config)
 export const wagmiAdapter = new WagmiAdapter({
