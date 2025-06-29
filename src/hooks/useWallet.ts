@@ -8,7 +8,8 @@ export const useWallet = () => {
   const { disconnect } = useDisconnect()
 
   const connect = useCallback(() => {
-    open({ view: 'Connect', namespace: 'eip155' })
+    open()
+    // { view: 'Connect', namespace: 'eip155' }
   }, [open])
 
   return {

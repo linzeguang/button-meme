@@ -5,7 +5,7 @@ import { Container } from '@/components/ui/Box'
 
 const Header: React.FC = () => {
   return (
-    <header className="header col-span-1 row-span-1">
+    <header className="header col-span-2">
       <Container className="flex h-full items-center justify-end gap-2">
         <ConnectWallet />
       </Container>

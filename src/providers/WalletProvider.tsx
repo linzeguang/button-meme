@@ -15,9 +15,9 @@ createAppKit({
   networks,
   metadata,
   features,
-  themeMode: 'light',
+  themeMode: 'dark',
   themeVariables: {
-    '--w3m-accent': '#0069ff'
+    '--w3m-accent': '#8bfe83'
   }
 })
 
