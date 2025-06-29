@@ -15,5 +15,5 @@ export const Grid = React.forwardRef<ComponentRef<typeof Box>, ComponentPropsWit
 ))
 
 export const Container = React.forwardRef<ComponentRef<typeof Box>, ComponentPropsWithoutRef<typeof Box>>(
-  (props, ref) => <Box ref={ref} {...props} className={cn('px-10', props.className)} />
+  (props, ref) => <Box ref={ref} {...props} className={cn('px-6', props.className)} />
 )

@@ -6,43 +6,30 @@ import { Grid } from '@/components/ui/Box'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'px-2 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer disabled:pointer-events-none disabled:opacity-50 border ',
+  cn(
+    'flex items-center justify-center gap-2 px-2 border rounded-sm',
+    'transition-all cursor-pointer disabled:pointer-events-none disabled:opacity-50'
+  ),
   {
     variants: {
       variant: {
-        default:
-          'bg-white/50 border-white backdrop-blur-sm shadow-sm shadow-primary/15 hover:text-white hover:bg-primary',
-        primary: 'bg-primary border-primary hover:bg-primary/90 text-white shadow-md shadow-primary/50',
-        secondary: 'bg-background-secondary border-white hover:bg-background-secondary/90'
+        primary: 'bg-primary border-primary text-primary-foreground',
+        secondary: ''
       },
       size: {
-        xxs: 'h-6 text-xs space-x-1 rounded-sm',
-        xs: 'h-7 text-sm space-x-1 rounded-sm',
+        xxs: 'h-6 text-xs space-x-1',
+        xs: 'h-7 text-sm space-x-1',
         sm: 'h-8 text-sm',
         md: 'h-10 text-base',
         lg: 'h-12 text-base'
       },
-      outline: {
-        true: 'border-white/10 bg-white/1 backdrop-blur-md'
-      },
       ghost: {
-        true: 'bg-transparent'
-      },
-      shadow: {
-        false: 'shadow-none'
+        true: 'bg-transparent border-none'
       }
     },
-    compoundVariants: [
-      {
-        outline: true,
-        variant: 'primary',
-        className: 'bg-primary/10 border-primary text-primary hover:text-white hover:bg-primary'
-      }
-    ],
+    compoundVariants: [],
     defaultVariants: {
-      variant: 'default',
-      size: 'md',
-      shadow: true
+      size: 'md'
     }
   }
 )
@@ -50,10 +37,8 @@ const buttonVariants = cva(
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {}
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { className, ghost, outline, size, shadow, variant, ...rest } = props
-  return (
-    <button ref={ref} className={cn(buttonVariants({ ghost, outline, size, shadow, variant, className }))} {...rest} />
-  )
+  const { className, ghost, size, variant, ...rest } = props
+  return <button ref={ref} className={cn(buttonVariants({ ghost, size, variant, className }))} {...rest} />
 })
 
 interface BaseOption {
@@ -71,7 +56,7 @@ export interface ButtonRadioProps<D extends BaseOption = BaseOption> extends Rea
 export const ButtonRadio = <D extends BaseOption = BaseOption>({
   optionProps,
   options,
-  value: currentValue,
+  // value: currentValue,
   onValueChange,
   ...rest
 }: ButtonRadioProps<D>) => {
@@ -80,8 +65,8 @@ export const ButtonRadio = <D extends BaseOption = BaseOption>({
       {options.map((option) => (
         <Button
           key={option.value}
-          outline={currentValue === option.value}
-          variant={currentValue === option.value ? 'primary' : 'secondary'}
+          // outline={currentValue === option.value}
+          // variant={currentValue === option.value ? 'primary' : 'secondary'}
           size="md"
           type="button"
           {...optionProps}
