@@ -41,6 +41,10 @@
     @apply bg-background-popover;
   }
 
+  .card {
+    @apply border-border rounded-md border p-4;
+  }
+
   .dividing-wieght {
     --dividing-wieght: 1px; /* 分割线粗细 */
   }

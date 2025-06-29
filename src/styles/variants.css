@@ -44,15 +44,17 @@
 
   --color-text-primary: #fff;
   --color-text-secondary: #898b8a;
-  /* --color-text-tertiary: #999;
+  --color-text-tertiary: #737373;
+  --color-text-placeholder: #9ca3af;
+  /* 
   --color-text-disabled: #c9cdd4;
   --color-text-icon: #333; */
 
   --color-background-primary: #000000;
   --color-background-secondary: #131313;
   --color-background-tertiary: #191919;
-  /* --color-background-popover: #131313;
-  --color-background-overlay: #3333331a; */
+  --color-background-popover: var(--color-background-secondary);
+  --color-background-overlay: #3333331a;
 
   --color-border: #2a2a2a;
   /* --color-border-thin: #23252b; */
