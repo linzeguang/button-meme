@@ -104,14 +104,19 @@ const SideBar: React.FC = () => {
   const renderAccordionTrigger = useCallback(
     (option: Exclude<(typeof accordionOptions)[number], undefined>) => {
       return (
-        <Flex className={cn('hover:text-primary flex-1 cursor-pointer items-center', collapsed && 'justify-center')}>
+        <Flex
+          className={cn(
+            'hover:text-primary hover:[&_.accordion-arrow]:text-primary flex-1 cursor-pointer items-center',
+            collapsed && 'justify-center'
+          )}
+        >
           <option.icon className="w-10" />
           <HarmonyOSSansText
             className={cn('flex-1 overflow-hidden text-sm font-bold whitespace-nowrap', collapsed && 'w-0')}
           >
             {option.name}
           </HarmonyOSSansText>
-          {option.childrens && <AccordionArrow className={cn(collapsed && 'w-0')} />}
+          {option.childrens && <AccordionArrow className={cn('text-accordion-arrow', collapsed && 'w-0')} />}
         </Flex>
       )
     },
@@ -119,58 +124,61 @@ const SideBar: React.FC = () => {
   )
 
   return (
-    <aside
-      className={cn(
-        'aside row-span-2 px-2 py-3 transition-all',
-        'data-[collapsed=false]:w-45 data-[collapsed=true]:w-14'
-      )}
-      data-collapsed={collapsed}
-      onMouseEnter={() => {
-        setCollapsed(false)
-      }}
-      onMouseLeave={() => {
-        setCollapsed(true)
-        setAccordionValue('')
-      }}
-    >
-      <AccordionRoot
-        className="space-y-3.5"
-        type="single"
-        collapsible
-        value={accordionValue}
-        onValueChange={setAccordionValue}
-      >
-        {accordionOptions.map((option, index) =>
-          !option ? (
-            <Dividing key={index} />
-          ) : (
-            <AccordionItem key={option.value} value={option.value}>
-              {option.childrens ? (
-                <>
-                  <AccordionTrigger showArrow={false}>{renderAccordionTrigger(option)}</AccordionTrigger>
-                  <AccordionContent className="flex flex-col gap-1 text-balance">
-                    {option.childrens.map((children, i) => (
-                      <a
-                        key={i}
-                        className="bg-background-tertiary hover:text-primary block cursor-pointer py-1 pl-10 text-xs"
-                        onClick={(ev) => {
-                          ev.preventDefault()
-                          children.onClick()
-                        }}
-                      >
-                        {children.name}
-                      </a>
-                    ))}
-                  </AccordionContent>
-                </>
-              ) : (
-                renderAccordionTrigger(option)
-              )}
-            </AccordionItem>
-          )
+    <div className="relative row-span-2 w-14">
+      <aside
+        className={cn(
+          'absolute h-full',
+          'aside px-2 py-3 transition-all [&_*]:transition-all',
+          'data-[collapsed=false]:w-50 data-[collapsed=true]:w-14'
         )}
-      </AccordionRoot>
-    </aside>
+        data-collapsed={collapsed}
+        onMouseEnter={() => {
+          setCollapsed(false)
+        }}
+        onMouseLeave={() => {
+          setCollapsed(true)
+          setAccordionValue('')
+        }}
+      >
+        <AccordionRoot
+          className="space-y-3.5"
+          type="single"
+          collapsible
+          value={accordionValue}
+          onValueChange={setAccordionValue}
+        >
+          {accordionOptions.map((option, index) =>
+            !option ? (
+              <Dividing key={index} />
+            ) : (
+              <AccordionItem key={option.value} value={option.value}>
+                {option.childrens ? (
+                  <>
+                    <AccordionTrigger showArrow={false}>{renderAccordionTrigger(option)}</AccordionTrigger>
+                    <AccordionContent className="flex flex-col gap-1 text-balance">
+                      {option.childrens.map((children, i) => (
+                        <a
+                          key={i}
+                          className="bg-background-tertiary hover:text-primary block cursor-pointer py-1 pl-10 text-xs"
+                          onClick={(ev) => {
+                            ev.preventDefault()
+                            children.onClick()
+                          }}
+                        >
+                          {children.name}
+                        </a>
+                      ))}
+                    </AccordionContent>
+                  </>
+                ) : (
+                  renderAccordionTrigger(option)
+                )}
+              </AccordionItem>
+            )
+          )}
+        </AccordionRoot>
+      </aside>
+    </div>
   )
 }
 
