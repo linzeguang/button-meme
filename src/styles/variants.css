@@ -35,12 +35,11 @@
   /* color */
   --color-primary: #8bfe83;
   --color-primary-foreground: #131313;
-  /* --color-secondary: #4994ff;
   --color-info: #4994ff;
-  --color-success: #00b42a;
-  --color-destructive: #f53f3f;
+  --color-success: #10b981;
+  --color-destructive: #ef4444;
   --color-warning: #ff7d00;
-  --color-disabled: #a4a4a4; */
+  --color-disabled: #a4a4a4;
 
   --color-text-primary: #fff;
   --color-text-secondary: #898b8a;

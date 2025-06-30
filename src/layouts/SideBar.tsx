@@ -112,7 +112,10 @@ const SideBar: React.FC = () => {
         >
           <option.icon className="w-10" />
           <HarmonyOSSansText
-            className={cn('flex-1 overflow-hidden text-sm font-bold whitespace-nowrap', collapsed && 'w-0')}
+            className={cn(
+              'flex-1 overflow-hidden text-sm font-bold whitespace-nowrap text-inherit',
+              collapsed && 'w-0'
+            )}
           >
             {option.name}
           </HarmonyOSSansText>
@@ -127,7 +130,7 @@ const SideBar: React.FC = () => {
     <div className="relative row-span-2 w-14">
       <aside
         className={cn(
-          'absolute h-full',
+          'absolute z-10 h-full',
           'aside px-2 py-3 transition-all [&_*]:transition-all',
           'data-[collapsed=false]:w-50 data-[collapsed=true]:w-14'
         )}

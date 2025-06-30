@@ -8,9 +8,10 @@ import { cn } from '@/lib/utils'
 const textVariants = cva('', {
   variants: {
     variant: {
-      primary: 'text-color-text-primary',
-      secondary: 'text-color-text-secondary',
-      tertiary: 'text-color-text-tertiary',
+      default: 'text-text-primary',
+      primary: 'text-primary',
+      secondary: 'text-text-secondary',
+      tertiary: 'text-text-tertiary',
       disabled: 'text-text-disabled:',
       info: 'text-info',
       success: 'text-success',
@@ -19,7 +20,7 @@ const textVariants = cva('', {
     }
   },
   defaultVariants: {
-    variant: 'primary'
+    variant: 'default'
   }
 })
 
