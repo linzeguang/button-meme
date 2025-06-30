@@ -14,7 +14,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'bg-primary border-primary text-primary-foreground',
-        secondary: ''
+        secondary: '',
+        fourth: 'bg-background-fourth text-text-secondary border-background-fourth'
       },
       size: {
         xxs: 'h-6 text-xs space-x-1',
@@ -25,9 +26,18 @@ const buttonVariants = cva(
       },
       ghost: {
         true: 'bg-transparent border-none'
+      },
+      outline: {
+        true: 'bg-transparent aaaa'
       }
     },
-    compoundVariants: [],
+    compoundVariants: [
+      {
+        outline: true,
+        variant: 'fourth',
+        className: 'text-background-fourth'
+      }
+    ],
     defaultVariants: {
       size: 'md'
     }
@@ -37,8 +47,8 @@ const buttonVariants = cva(
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {}
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { className, ghost, size, variant, ...rest } = props
-  return <button ref={ref} className={cn(buttonVariants({ ghost, size, variant, className }))} {...rest} />
+  const { className, ghost, outline, size, variant, ...rest } = props
+  return <button ref={ref} className={cn(buttonVariants({ ghost, outline, size, variant, className }))} {...rest} />
 })
 
 interface BaseOption {

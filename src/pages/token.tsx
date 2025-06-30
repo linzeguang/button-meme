@@ -3,6 +3,7 @@ import React from 'react'
 import SearchToken from '@/components/token/SearchToken'
 import TokenInfo from '@/components/token/TokenInfo'
 import Tokenomic from '@/components/token/Tokenomic'
+import TokenRecord from '@/components/token/TokenRecord'
 import TvChart from '@/components/token/TvChart'
 import { Flex } from '@/components/ui/Box'
 import Card from '@/components/ui/Card'
@@ -18,7 +19,7 @@ const Token: React.FC = () => {
       </Flex>
       <Flex className="flex-1 flex-col">
         <TvChart />
-        <Card className="h-[560px]">order book</Card>
+        <TokenRecord />
       </Flex>
       <Flex className="w-[30%] max-w-108 flex-col">
         <Card className="h-[288px]">mint</Card>

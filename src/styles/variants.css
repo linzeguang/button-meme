@@ -52,6 +52,7 @@
   --color-background-primary: #000000;
   --color-background-secondary: #131313;
   --color-background-tertiary: #191919;
+  --color-background-fourth: #2a2a2a;
   --color-background-popover: var(--color-background-secondary);
   --color-background-overlay: #3333331a;
 
