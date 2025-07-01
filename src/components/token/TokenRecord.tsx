@@ -5,6 +5,7 @@ import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
 import { Table } from '@/components/ui/Table'
+import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
 enum RECORD_TYPE {
@@ -50,11 +51,11 @@ const TokenRecord: React.FC = () => {
 
   const dataSource: TradeData[] = Array.from({ length: 100 }, () => ({
     base: 'LABUBU',
-    baseAmount: (Math.random() * 1_000_000_000).toString(),
+    baseAmount: formatNumber(Math.random() * 1_000_000_000),
     date: '2025-12-12',
-    price: (Math.random() * 1_000).toString(),
+    price: formatNumber(Math.random() * 1_000),
     quote: 'ETH',
-    quoteAmount: (Math.random() * 1_000_000).toString(),
+    quoteAmount: formatNumber(Math.random() * 1_000_000),
     tx: '0x*********',
     type: Math.random() > 0.5 ? TRADE_TYPE.Buy : TRADE_TYPE.Sell
   }))
@@ -122,7 +123,6 @@ const TokenRecord: React.FC = () => {
               {
                 name: 'View',
                 field: 'tx',
-                align: 'end',
                 render: (value) => <span className="text-primary">{value}</span>
               }
             ]}

@@ -66,6 +66,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
           {memoData.map((data, index) => (
             <TableRow
               key={typeof rowKey === 'function' ? rowKey(data, index) : (data[rowKey] as string)}
+              data-index={index + 1}
               {...tbodyTrProps}
             >
               {columns.map((column) => (
@@ -74,7 +75,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
                   style={{ textAlign: column.align || 'start', width: column.width }}
                   {...tdProps}
                 >
-                  {column.render?.(data[column.field], data) || (data[column.field] as React.ReactNode)}
+                  {column.render?.(data[column.field], data, index) || (data[column.field] as React.ReactNode)}
                 </TableDateCell>
               ))}
             </TableRow>
@@ -105,5 +106,5 @@ export type TableColumn<D extends object> = {
   field: keyof D
   align?: CSSProperties['textAlign']
   width?: CSSProperties['width']
-  render?: (value: D[keyof D], data: D) => React.ReactNode
+  render?: (value: D[keyof D], data: D, index: number) => React.ReactNode
 }
