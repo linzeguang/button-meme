@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 
 const inputVariants = cva(
   cn(
-    'px-2 flex items-center gap-2 border border-border rounded-md bg-background-secondary transition-all',
+    'px-2 flex items-center gap-2 border border-transparent rounded-sm bg-background-input transition-all',
     'focus-within:border-primary',
     // 'focus-within:shadow-primary/50 focus-within:shadow-[0_0_32px_0]',
     '[&_input]:h-full'
@@ -21,7 +21,7 @@ const inputVariants = cva(
       }
     },
     defaultVariants: {
-      size: 'md'
+      size: 'sm'
     }
   }
 )

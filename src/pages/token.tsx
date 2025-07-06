@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Invite from '@/components/token/Invite'
 import OnChainInfo from '@/components/token/OnChainInfo'
 import Reward from '@/components/token/Reward'
 import { SearchToken } from '@/components/token/Search'
@@ -52,6 +53,7 @@ const Token: React.FC = () => {
           <TokenInfo defaultValue="" />
           <Tokenomic defaultValue="" />
           <TokenRanking />
+          <Invite />
         </Flex>
       </Flex>
     )

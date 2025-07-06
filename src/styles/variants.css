@@ -54,6 +54,7 @@
   --color-background-fourth: #2a2a2a;
   --color-background-popover: var(--color-background-secondary);
   --color-background-overlay: #3333331a;
+  --color-background-input: #000;
 
   --color-border: #2a2a2a;
   /* --color-border-thin: #23252b; */
