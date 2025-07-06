@@ -1,10 +1,10 @@
-import React, { useMemo, type CSSProperties } from 'react'
+import React, { useId, useMemo, type CSSProperties } from 'react'
 
 import { Pagination } from '@/components/ui/Pagination'
 import { cn } from '@/lib/utils'
 
 export const TableRoot = React.forwardRef<React.ElementRef<'table'>, React.TableHTMLAttributes<HTMLTableElement>>(
-  (props, ref) => <table ref={ref} {...props} className={cn('w-full', props.className)} />
+  (props, ref) => <table ref={ref} {...props} className={cn('w-full table-fixed', props.className)} />
 )
 export const TableCaption = React.forwardRef<
   React.ElementRef<'caption'>,
@@ -39,49 +39,69 @@ export const Table = <D extends object>(props: TableProps<D>) => {
     tbodyTrProps,
     tdProps,
     pagination,
+    scroll,
     ...rest
   } = props
+  const id = useId()
   const memoData = useMemo(() => {
     if (!pagination) return dataSource
     const { page, pageSize } = pagination
     return dataSource.slice(pageSize * (page - 1), page * pageSize)
   }, [dataSource, pagination])
+  const memoColgroup = useMemo(
+    () => (
+      <colgroup>
+        {columns.map((column) => (
+          <col key={column.field.toString()} style={{ width: column.width }} />
+        ))}
+      </colgroup>
+    ),
+    [columns]
+  )
   return (
-    <div>
-      <TableRoot {...rest}>
-        <TableHead {...theadProps}>
-          <TableRow {...therdTrProps}>
-            {columns.map((column) => (
-              <TableHeadCell
-                key={column.field.toString()}
-                style={{ textAlign: column.align || 'start', width: column.width }}
-                {...thProps}
-              >
-                {column.name}
-              </TableHeadCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody {...tbodyProps}>
-          {memoData.map((data, index) => (
-            <TableRow
-              key={typeof rowKey === 'function' ? rowKey(data, index) : (data[rowKey] as string)}
-              data-index={index + 1}
-              {...tbodyTrProps}
-            >
+    <div id={`table-${id}`}>
+      <div id={`table-head-${id}`}>
+        <TableRoot {...rest}>
+          {memoColgroup}
+          <TableHead {...theadProps}>
+            <TableRow {...therdTrProps}>
               {columns.map((column) => (
-                <TableDateCell
+                <TableHeadCell
                   key={column.field.toString()}
-                  style={{ textAlign: column.align || 'start', width: column.width }}
-                  {...tdProps}
+                  {...thProps}
+                  style={{ textAlign: column.align || 'start', ...thProps?.style }}
                 >
-                  {column.render?.(data[column.field], data, index) || (data[column.field] as React.ReactNode)}
-                </TableDateCell>
+                  {column.name}
+                </TableHeadCell>
               ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </TableRoot>
+          </TableHead>
+        </TableRoot>
+      </div>
+      <div id={`table-body-${id}`} style={scroll?.y ? { maxHeight: scroll.y, overflowY: 'scroll' } : undefined}>
+        <TableRoot {...rest}>
+          {memoColgroup}
+          <TableBody {...tbodyProps}>
+            {memoData.map((data, index) => (
+              <TableRow
+                key={typeof rowKey === 'function' ? rowKey(data, index) : (data[rowKey] as string)}
+                data-index={index + 1}
+                {...tbodyTrProps}
+              >
+                {columns.map((column) => (
+                  <TableDateCell
+                    key={column.field.toString()}
+                    {...tdProps}
+                    style={{ textAlign: column.align || 'start', ...tdProps?.style }}
+                  >
+                    {column.render?.(data[column.field], data, index) || (data[column.field] as React.ReactNode)}
+                  </TableDateCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </TableRoot>
+      </div>
       {pagination && <Pagination {...pagination} />}
     </div>
   )
@@ -99,6 +119,9 @@ export interface TableProps<D extends object> extends React.ComponentPropsWithRe
   tbodyTrProps?: React.ComponentPropsWithRef<typeof TableRow>
   tdProps?: React.ComponentPropsWithRef<typeof TableDateCell>
   pagination?: React.ComponentPropsWithRef<typeof Pagination>
+  scroll?: {
+    y?: string | number
+  }
 }
 
 export type TableColumn<D extends object> = {

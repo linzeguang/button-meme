@@ -25,11 +25,11 @@ const data = [
   }
 ]
 
-const Tokenomic: React.FC = () => {
-  const [value] = useState('tokenomic')
+const Tokenomic: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
+  const [value, setValue] = useState(props.defaultValue ?? 'tokenomic')
 
   return (
-    <AccordionRoot type="single" collapsible value={value}>
+    <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
         value="tokenomic"
         name={

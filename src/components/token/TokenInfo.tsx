@@ -6,8 +6,8 @@ import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 
-const TokenInfo: React.FC = () => {
-  const [value] = useState('tokenInfo')
+const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
+  const [value, setValue] = useState(props.defaultValue ?? 'tokenInfo')
 
   const baseInfos = [
     {
@@ -30,7 +30,7 @@ const TokenInfo: React.FC = () => {
   ]
 
   return (
-    <AccordionRoot type="single" collapsible value={value}>
+    <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
         value="tokenInfo"
         name={

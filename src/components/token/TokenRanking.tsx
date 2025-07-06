@@ -16,9 +16,9 @@ type HolderData = {
   reward: string
 }
 
-const TokenHolder: React.FC = () => {
-  const [value] = useState('tokenHolder')
-  const dataSource: HolderData[] = Array.from({ length: 10 }, (_, index) => ({
+const TokenRanking: React.FC = () => {
+  const [value] = useState('tokenRanking')
+  const dataSource: HolderData[] = Array.from({ length: 100 }, (_, index) => ({
     id: index.toString(),
     address: '0x***********',
     amount: formatNumber(Math.random() * 1_000_000_000),
@@ -28,10 +28,10 @@ const TokenHolder: React.FC = () => {
   return (
     <AccordionRoot type="single" collapsible value={value}>
       <TokenAccordionItem
-        value="tokenHolder"
+        value="tokenRanking"
         name={
           <>
-            <HarmonyOSSansText>TokenHolder</HarmonyOSSansText>
+            <HarmonyOSSansText>Hash Ranking</HarmonyOSSansText>
             <Icon.Tip className="text-text-secondary" />
           </>
         }
@@ -79,7 +79,6 @@ const TokenHolder: React.FC = () => {
               thProps={{
                 className: 'text-text-secondary'
               }}
-              tbodyProps={{ className: 'max-h-[300px] overflow-y-scroll' }}
               tbodyTrProps={{
                 className: cn(
                   'bg-linear-to-r hover:!text-primary text-text-secondary',
@@ -91,7 +90,11 @@ const TokenHolder: React.FC = () => {
               tdProps={{
                 className: 'text-xs'
               }}
+              scroll={{ y: 320 }}
             />
+            <HarmonyOSSansText className="text-center text-[0.625rem]" variant="secondary">
+              - Out of TOP 100 -
+            </HarmonyOSSansText>
           </div>
         }
       />
@@ -99,4 +102,4 @@ const TokenHolder: React.FC = () => {
   )
 }
 
-export default TokenHolder
+export default TokenRanking

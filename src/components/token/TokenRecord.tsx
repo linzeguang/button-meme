@@ -91,6 +91,7 @@ const TokenRecord: React.FC = () => {
               {
                 name: 'Type',
                 field: 'type',
+                width: 80,
                 render: (value) => {
                   const isBuy = value === TRADE_TYPE.Buy
                   return <span className={isBuy ? 'text-success' : 'text-destructive'}>{isBuy ? 'Buy' : 'Sell'}</span>

@@ -31,7 +31,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement>, VariantPro
 
 export const Text = React.forwardRef<React.ElementRef<'span'>, TextProps>(
   ({ className, children, as: Tag = 'p', asChild, variant, ...rest }, ref) => (
-    <Slot.Root ref={ref} className={cn(textVariants({ variant, className }))} {...rest}>
+    <Slot.Root ref={ref} className={cn(textVariants({ className, variant }))} {...rest}>
       {asChild ? children : <Tag>{children}</Tag>}
     </Slot.Root>
   )

@@ -1,10 +1,6 @@
 @custom-variant light (&:where(.light, .light *));
 
 @theme {
-  /* text */
-  --text-xxs: 10px;
-  --text-xxxs: 8px;
-
   /* shadow */
   --shadow-sm: 0px 0px 4px 0px var(--tw-shadow-color);
   --shadow-md: 0px 4px 12px 0px var(--tw-shadow-color);
