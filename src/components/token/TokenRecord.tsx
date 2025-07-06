@@ -64,23 +64,24 @@ const TokenRecord: React.FC = () => {
     <AccordionRoot type="single" collapsible value={value}>
       <TokenAccordionItem
         value="record"
+        triggerClassName="pt-0"
         name={
           <Flex className="gap-0.5">
             {recordTypes.map((type) => (
-              <Button
+              <div
                 key={type.value}
-                ghost
                 className={cn(
-                  'relative px-4 transition-all after:absolute after:bottom-0 after:h-0.5 after:w-full',
+                  'relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
                   recordType === type.value && 'text-primary after:bg-primary'
                 )}
                 onClick={() => setRecordType(type.value)}
               >
                 {type.name}
-              </Button>
+              </div>
             ))}
           </Flex>
         }
+        contentClassName="pt-0 border-none"
         content={
           <Table<TradeData>
             columns={[
@@ -139,7 +140,6 @@ const TokenRecord: React.FC = () => {
             }}
           />
         }
-        contentClassName="border-none"
       />
     </AccordionRoot>
   )
