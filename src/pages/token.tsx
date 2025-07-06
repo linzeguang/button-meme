@@ -1,6 +1,7 @@
 import React from 'react'
 
 import OnChainInfo from '@/components/token/OnChainInfo'
+import Reward from '@/components/token/Reward'
 import { SearchToken } from '@/components/token/Search'
 import TokenInfo from '@/components/token/TokenInfo'
 import Tokenomic from '@/components/token/Tokenomic'
@@ -45,6 +46,7 @@ const Token: React.FC = () => {
         </Flex>
         <Flex className="w-[30%] max-w-108 flex-col">
           <OnChainInfo />
+          <Reward />
           {/* <Card className="h-[288px]">mint</Card>
           <Card className="h-[348px]">trade</Card> */}
           <TokenInfo defaultValue="" />
