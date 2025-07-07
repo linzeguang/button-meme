@@ -52,7 +52,7 @@ export const RadioGroup = React.forwardRef<React.ComponentRef<typeof RadioGroupR
   return (
     <RadioGroupRoot ref={ref} className={radioGroupVariants({ className, variant, orientation, size })} {...rest}>
       {options.map(({ value, label, className }) => (
-        <Flex className="item-wrapper">
+        <Flex key={`${value}-${id}`} className="item-wrapper">
           <RadioGroupItem value={value} id={`${value}-${id}`} className={cn('item cursor-pointer', className)}>
             <RadioGroupIndicator />
           </RadioGroupItem>

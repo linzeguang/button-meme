@@ -45,14 +45,14 @@ const Token: React.FC = () => {
           <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full w-108" />
           <TvChart />
           <TokenRecord />
+          <TokenRanking />
         </Flex>
         <Flex className="w-[30%] max-w-108 flex-col">
           <OnChainInfo />
           <Reward />
           <Trade />
-          <TokenInfo defaultValue="" />
-          <Tokenomic defaultValue="" />
-          <TokenRanking />
+          <TokenInfo />
+          <Tokenomic />
           <Invite />
         </Flex>
       </Flex>
