@@ -8,9 +8,9 @@ import TokenInfo from '@/components/token/TokenInfo'
 import Tokenomic from '@/components/token/Tokenomic'
 import TokenRanking from '@/components/token/TokenRanking'
 import TokenRecord from '@/components/token/TokenRecord'
+import Trade from '@/components/token/Trade'
 import TvChart from '@/components/token/TvChart'
 import { Flex } from '@/components/ui/Box'
-import Card from '@/components/ui/Card'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { cn } from '@/lib/utils'
 
@@ -31,8 +31,9 @@ const Token: React.FC = () => {
         </Flex>
         <Flex className="w-[30%] max-w-108 flex-col">
           <OnChainInfo />
-          <Card className="h-[288px]">mint</Card>
-          <Card className="h-[348px]">trade</Card>
+          <Reward />
+          <Trade />
+          <Invite />
         </Flex>
       </Flex>
     )
@@ -48,8 +49,7 @@ const Token: React.FC = () => {
         <Flex className="w-[30%] max-w-108 flex-col">
           <OnChainInfo />
           <Reward />
-          {/* <Card className="h-[288px]">mint</Card>
-          <Card className="h-[348px]">trade</Card> */}
+          <Trade />
           <TokenInfo defaultValue="" />
           <Tokenomic defaultValue="" />
           <TokenRanking />
