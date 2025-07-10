@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import externalGlobals from 'rollup-plugin-external-globals'
 import { visualizer } from 'rollup-plugin-visualizer'
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import cdn from 'vite-plugin-cdn-import'
 import svgr from 'vite-plugin-svgr'
 
@@ -12,6 +12,7 @@ import { external, globals, modules } from './cdn.modules'
 
 // https://vite.dev/config/
 export default defineConfig((env) => {
+  const processEnv = loadEnv(env.mode, process.cwd())
   const isVisualizer = process.argv.includes('--visualizer')
   const isProd = env.mode === 'production'
   const timestamp = Date.now()
@@ -36,7 +37,13 @@ export default defineConfig((env) => {
       __BUILD_TIME__: JSON.stringify(timestamp)
     },
     server: {
-      port: 2888
+      port: 2888,
+      proxy: {
+        [processEnv.VITE_API_BASE_URL]: {
+          target: processEnv.VITE_API_TARGET_URL,
+          changeOrigin: true
+        }
+      }
     },
     build: {
       sourcemap: true,
