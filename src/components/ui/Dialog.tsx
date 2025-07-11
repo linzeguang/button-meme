@@ -92,7 +92,7 @@ export const Dialog = React.forwardRef<DialogMethods, DialogProps>((props, metho
                 <Button
                   ghost
                   size="xs"
-                  shadow={false}
+                  // shadow={false}
                   className={cn('absolute right-0 size-6 border-0 !p-0 backdrop-blur-none', !title && 'top-0')}
                 >
                   {/* <Icon.Close /> */}
