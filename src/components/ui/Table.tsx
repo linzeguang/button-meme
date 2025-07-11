@@ -43,11 +43,13 @@ export const Table = <D extends object>(props: TableProps<D>) => {
     ...rest
   } = props
   const id = useId()
+
   const memoData = useMemo(() => {
     if (!pagination) return dataSource
     const { page, pageSize } = pagination
     return dataSource.slice(pageSize * (page - 1), page * pageSize)
   }, [dataSource, pagination])
+
   const memoColgroup = useMemo(
     () => (
       <colgroup>
@@ -58,6 +60,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
     ),
     [columns]
   )
+
   return (
     <div id={`table-${id}`}>
       <div id={`table-head-${id}`}>
@@ -125,9 +128,11 @@ export interface TableProps<D extends object> extends React.ComponentPropsWithRe
 }
 
 export type TableColumn<D extends object> = {
-  name: React.ReactNode
-  field: keyof D
-  align?: CSSProperties['textAlign']
-  width?: CSSProperties['width']
-  render?: (value: D[keyof D], data: D, index: number) => React.ReactNode
-}
+  [K in keyof D]: {
+    name: React.ReactNode
+    field: K
+    align?: CSSProperties['textAlign']
+    width?: CSSProperties['width']
+    render?: (value: D[K], row: D, index: number) => React.ReactNode
+  }
+}[keyof D]

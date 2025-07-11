@@ -11,7 +11,7 @@ export interface Rank {
 
 export const useRank = () => {
   const [pid, setPid] = useState(0)
-  const [epoch, setEpoch] = useState(0)
+  const [epoch, setEpoch] = useState(1)
 
   const { data, ...rest } = useFetch<Rank[]>({ url: `/rank/ts/${pid}/${epoch}` })
 

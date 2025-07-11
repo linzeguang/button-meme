@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Icon } from '@/components/svgr'
 import { SearchHolder } from '@/components/token/Search'
@@ -6,24 +6,33 @@ import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Table } from '@/components/ui/Table'
 import { HarmonyOSSansText } from '@/components/ui/Text'
-import { formatNumber } from '@/lib/format'
+import { Rank, useRank } from '@/hooks/services/useRank'
+import { formatAddress } from '@/lib/format'
 import { cn } from '@/lib/utils'
-
-type HolderData = {
-  id: string
-  address: string
-  amount: string
-  reward: string
-}
 
 const TokenRanking: React.FC = () => {
   const [value] = useState('tokenRanking')
-  const dataSource: HolderData[] = Array.from({ length: 100 }, (_, index) => ({
-    id: index.toString(),
-    address: '0x***********',
-    amount: formatNumber(Math.random() * 1_000_000_000),
-    reward: formatNumber(Math.random() * 1_000_000)
-  }))
+  const [searchValue, setSearchValue] = useState('')
+
+  const { data } = useRank()
+
+  useEffect(() => {
+    const index = searchValue ? data?.findIndex(({ account }) => account.includes(searchValue)) : -1
+    let el: Element | null
+    if (index === -1 && searchValue) {
+      el = document.querySelector(`[data-index="out"]`)
+      el?.classList.add('!text-primary')
+    } else {
+      el = document.querySelector(`[data-index="${index}"]`)
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+    if (el) {
+      el.classList.add('!text-primary')
+      return () => {
+        el.classList.remove('!text-primary')
+      }
+    }
+  }, [data, searchValue])
 
   return (
     <AccordionRoot type="single" collapsible value={value}>
@@ -37,14 +46,14 @@ const TokenRanking: React.FC = () => {
         }
         content={
           <div className="space-y-4">
-            <SearchHolder />
-            <Table<HolderData>
+            <SearchHolder value={searchValue} onChange={(ev) => setSearchValue(ev.target.value)} />
+            <Table<Rank>
               className="border-separate border-spacing-y-0.5"
               columns={[
                 {
                   name: null,
-                  field: 'id',
-                  width: '22px',
+                  field: 'tsRankIndex',
+                  width: '32px',
                   render: (_, __, index) => {
                     return index === 0 ? (
                       <Icon.Top1 />
@@ -61,21 +70,22 @@ const TokenRanking: React.FC = () => {
                 },
                 {
                   name: 'Address',
-                  field: 'address'
+                  field: 'account',
+                  render: (address) => formatAddress(address)
                 },
                 {
                   name: 'TS',
-                  field: 'amount',
+                  field: 'ts',
                   align: 'center'
                 },
                 {
                   name: 'Reward',
-                  field: 'reward',
+                  field: 'tsReward',
                   align: 'end'
                 }
               ]}
-              dataSource={dataSource}
-              rowKey={(_, index) => index.toString()}
+              dataSource={data || []}
+              rowKey="account"
               thProps={{
                 className: 'text-text-secondary'
               }}
@@ -92,7 +102,7 @@ const TokenRanking: React.FC = () => {
               }}
               scroll={{ y: 320 }}
             />
-            <HarmonyOSSansText className="text-center text-[0.625rem]" variant="secondary">
+            <HarmonyOSSansText data-index="out" className="text-center text-[0.625rem]" variant="secondary">
               - Out of TOP 100 -
             </HarmonyOSSansText>
           </div>
