@@ -6,7 +6,7 @@ import { ENV_PARAMS } from '@/constants/evnParams'
 
 import type { AppKitOptions, CreateAppKit } from '@reown/appkit/react'
 
-export const RPC_URL = ENV_PARAMS.RPC
+export const RPC_URL = ENV_PARAMS.RPC_BASE_URL
 export const CHAIN_ID = ENV_PARAMS.CHAIN_ID
 export const NETWORK = defineChain({
   id: Number(CHAIN_ID),
