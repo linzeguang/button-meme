@@ -29,7 +29,8 @@ const useMediaQuery = () => {
       gt2XL: ['2xl', '3xl'].includes(breakpoint),
       gtXL: ['xl', '2xl', '3xl'].includes(breakpoint),
       gtLG: ['lg', 'xl', '2xl', '3xl'].includes(breakpoint),
-      gtMD: ['md', 'lg', 'xl', '2xl', '3xl'].includes(breakpoint)
+      gtMD: ['md', 'lg', 'xl', '2xl', '3xl'].includes(breakpoint),
+      isMobile: !['lg', 'xl', '2xl', '3xl'].includes(breakpoint)
     }),
     [breakpoint]
   )

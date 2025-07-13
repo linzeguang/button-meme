@@ -2,14 +2,22 @@ import React from 'react'
 
 import ConnectWallet from '@/components/settings/ConnectWallet'
 import { Logo } from '@/components/svgr'
-import { Container } from '@/components/ui/Box'
+import { Container, Flex } from '@/components/ui/Box'
+import useMediaQuery from '@/hooks/useMediaQuery'
+import Menu from '@/layouts/Menu'
+import { cn } from '@/lib/utils'
 
-const Header: React.FC = () => {
+const Header: React.FC<React.HTMLAttributes<HTMLElement>> = (props) => {
+  const { isMobile } = useMediaQuery()
+
   return (
-    <header className="header col-span-2">
+    <header {...props} className={cn('header', props.className)}>
       <Container className="flex h-full items-center justify-between gap-2">
-        <Logo.Withname className="text-primary" />
-        <ConnectWallet />
+        {!isMobile ? <Logo.Withname className="text-primary" /> : <Logo.Icon className="text-primary" />}
+        <Flex className="gap-6">
+          <ConnectWallet />
+          {isMobile && <Menu />}
+        </Flex>
       </Container>
     </header>
   )
