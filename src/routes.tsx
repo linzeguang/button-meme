@@ -17,7 +17,8 @@ export const router = createBrowserRouter([
       {
         index: true,
         path: ROUTE_PATH.HOME,
-        Component: lazy(() => import('@/pages/home'))
+        // Component: lazy(() => import('@/pages/home'))
+        Component: () => <Navigate to={ROUTE_PATH.TOKEN + `/0x3e7712cf29164432efc6ef0aa669c10b674efe43`} />
       },
       {
         path: ROUTE_PATH.TOKEN,
