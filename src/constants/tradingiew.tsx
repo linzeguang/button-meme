@@ -32,13 +32,13 @@ export const SUPPORTED_RESOLUTIONS = Object.keys(SUPPORTED_RESOLUTIONS_MAP) as R
 
 export const DEFAULT_RESOLUTIONS = SUPPORTED_RESOLUTIONS[0] // 5m
 
-const RED = '#FB5543'
-const GREEN = '#10D32A'
-const FOREGROUND = '#00BDFF'
+const RED = '#ef4444'
+const GREEN = '#10b981'
+const FOREGROUND = '#8bfe83'
 
 const THEME = {
-  BACKGROUND: '#1A153D',
-  BORDER: 'rgba(164, 164, 164, 0.2)',
+  BACKGROUND: '#131313',
+  BORDER: '#2a2a2a',
   TEXTCOLOR: '#fff'
 }
 
@@ -114,6 +114,7 @@ export const defaultChartProps = {
   user_id: 'public_user_id',
   fullscreen: false,
   autosize: true,
+  theme: 'dark',
   custom_css_url: '/charting_library/tradingview-chart.css',
   disabled_features: disabledFeatures,
   enabled_features: enabledFeatures,

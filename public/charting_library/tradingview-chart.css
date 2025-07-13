@@ -12,13 +12,13 @@
 
 .theme-dark:root {
   --text: #fff;
-  --text-hover: #fff;
+  --text-hover: #000;
   --background: transparent;
-  --active-text: #00BDFF;
-  --active-background: #00BDFF;
-  --primary-background: #1A153D;
-  --secondary-background: #1A153D;
-  --border: rgba(164, 164, 164, 0.2);
+  --active-text: #8bfe83;
+  --active-background: #8bfe83;
+  --primary-background: #131313;
+  --secondary-background: #131313;
+  --border: #2a2a2a;
 }
 
 /* dark */

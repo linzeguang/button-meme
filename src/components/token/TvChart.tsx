@@ -1,19 +1,55 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
-// import DataFeed from '@/lib/datafeed'
+import DataFeed from '@/lib/datafeed'
+import { useTokenProviderContext } from '@/providers/TokenProvider'
+import {
+  ChartingLibraryWidgetOptions,
+  IChartingLibraryWidget,
+  ResolutionString
+} from 'public/charting_library/charting_library'
+
+import { defaultChartProps, getChartOverrides } from '@/constants/tradingiew'
 
 const TvChart: React.FC = () => {
-  // const datafeed = useRef(new DataFeed())
+  const chartContainerRef = useRef<HTMLDivElement | null>(null)
+  const widgetRef = useRef<IChartingLibraryWidget>()
+  const datafeed = useRef(new DataFeed())
+
+  const { tokenAddress } = useTokenProviderContext()
 
   useEffect(() => {
-    return () => {
-      //
+    let widget: IChartingLibraryWidget | undefined = undefined
+    const script = document.createElement('script')
+    script.src = '/charting_library/charting_library.standalone.js' // TradingView 库的路径
+    script.async = true
+    document.body.appendChild(script)
+
+    script.onload = () => {
+      const widgetOptions: ChartingLibraryWidgetOptions = {
+        symbol: tokenAddress,
+        interval: '1' as ResolutionString,
+        datafeed: datafeed.current,
+        container: chartContainerRef.current!,
+        ...getChartOverrides(),
+        ...defaultChartProps
+      }
+      widget = new window.TradingView.widget(widgetOptions)
+
+      widget.onChartReady(() => {
+        widgetRef.current = widget
+        const chart = widget!.chart()
+        chart.onIntervalChanged().subscribe(null, (interval) => {
+          console.log('Interval changed to:', interval)
+          setInterval(interval)
+          datafeed.current.onResetCacheNeededCallback?.()
+        })
+      })
     }
-  }, [])
+  }, [tokenAddress])
 
   return (
     <AccordionRoot type="single" collapsible value="tvchart">
@@ -49,7 +85,7 @@ const TvChart: React.FC = () => {
             </Flex>
           </>
         }
-        content={<div id="chart" className="!h-78" />}
+        content={<div ref={chartContainerRef} className="!h-120" />}
       />
     </AccordionRoot>
   )

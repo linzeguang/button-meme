@@ -51,6 +51,11 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     onResult: HistoryCallback
   ) {
     console.log('>>>>>> getBars: ', { symbolInfo, resolution, periodParams })
+    if (periodParams.firstDataRequest) {
+      const data = await this.fetchHistory()
+      onResult(data, { noData: false })
+    }
+
     onResult([], { noData: true })
   }
   subscribeBars(
@@ -67,8 +72,27 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     console.log('>>>>>> unsubscribeBars: ', listenerGuid)
   }
   async generateSymbolInfo(symbolName: string) {
+    const decimals = 18
+    const pricescale = Math.pow(10, decimals)
     console.log('>>>>>> generateSymbolInfo: ', { symbolName })
-    return {} as LibrarySymbolInfo
+    return {
+      name: 'name',
+      full_name: 'full_name',
+      ticker: symbolName,
+      description: 'symbolName',
+      session: '24x7',
+      minmov: 1,
+      timezone: 'Etc/UTC',
+      type: 'crypto',
+      visible_plots_set: 'ohlc',
+      // exchange: 'Button',
+      listed_exchange: '-',
+      pricescale,
+      format: 'price',
+      has_intraday: true,
+      has_daily: true,
+      has_weekly_and_monthly: true
+    } as LibrarySymbolInfo
   }
   async fetchHistory(): Promise<Bar[]> {
     try {
