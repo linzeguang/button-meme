@@ -11,6 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_RPC_URL: string
   readonly VITE_CHAIN_ID: string
   readonly VITE_INFO_CONTRACT: `0x${string}`
+  readonly VITE_BURN_CONTRACT: `0x${string}`
 }
 
 interface ImportMeta {

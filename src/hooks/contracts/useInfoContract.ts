@@ -1,12 +1,161 @@
-import { useReadContract } from 'wagmi'
+import { useMemo } from 'react'
+
+import { Address, erc20Abi } from 'viem'
+import { useAccount, useReadContract, useReadContracts } from 'wagmi'
 
 import { InfoAbi } from '@/constants/abi'
+import { ENV_PARAMS } from '@/constants/evnParams'
 
-const useInfoContract = () => {
-  return useReadContract({
-    abi: InfoAbi,
-    address: '0x184a9e7D2D955c91dfebCAE5102157B52455202E'
-  })
+export interface Project {
+  name: string
+  epoch: number
+  id: bigint
 }
 
-export default useInfoContract
+export const useProjects = () => {
+  const { data: count } = useReadContract({
+    abi: InfoAbi,
+    address: ENV_PARAMS.INFO_CONTRACT,
+    functionName: 'getProjectCount'
+  })
+  const { data } = useReadContracts({
+    contracts: Array.from({ length: Number(count) }, (_, index) => ({
+      abi: InfoAbi,
+      address: ENV_PARAMS.INFO_CONTRACT,
+      functionName: 'getProjectInfo',
+      args: [BigInt(index)]
+    }))
+  })
+
+  return useMemo(
+    () =>
+      data?.map<Project>(({ result }, index) => {
+        const [name, epoch] = result as unknown as [string, number]
+        return {
+          name,
+          epoch,
+          id: BigInt(index)
+        }
+      }),
+    [data]
+  )
+}
+
+export const useBaseInfo = (id: bigint) => {
+  const { data } = useReadContract({
+    abi: InfoAbi,
+    address: ENV_PARAMS.INFO_CONTRACT,
+    functionName: 'getBaseInfo',
+    args: [id]
+  })
+
+  const { data: mintTokenInfo } = useReadContracts({
+    contracts: [
+      {
+        abi: erc20Abi,
+        address: data?.[2],
+        functionName: 'name'
+      },
+      {
+        abi: erc20Abi,
+        address: data?.[2],
+        functionName: 'symbol'
+      },
+      {
+        abi: erc20Abi,
+        address: data?.[2],
+        functionName: 'decimals'
+      },
+      {
+        abi: erc20Abi,
+        address: data?.[2],
+        functionName: 'balanceOf',
+        args: [ENV_PARAMS.BURN_CONTRACT]
+      }
+    ]
+  })
+
+  return useMemo(() => {
+    if (!data) return undefined
+    if (!mintTokenInfo) return undefined
+    const [
+      miningPool,
+      stableToken,
+      mintToken,
+      checkMerkleRoot,
+      epochReleaseRate,
+      startBlock,
+      totalLPH,
+      userRewardsAcc,
+      thRewardsAcc,
+      tsRewardsAcc
+    ] = data
+    const [{ result: name }, { result: symbol }, { result: decimals }, { result: burnedAmount }] = mintTokenInfo
+
+    return {
+      miningPool,
+      stableToken,
+      checkMerkleRoot,
+      epochReleaseRate,
+      startBlock,
+      totalLPH,
+      userRewardsAcc,
+      thRewardsAcc,
+      tsRewardsAcc,
+      mintToken: {
+        address: mintToken,
+        name,
+        symbol,
+        decimals,
+        burnedAmount
+      }
+    }
+  }, [data, mintTokenInfo])
+}
+
+export const useUserInfo = (id: bigint) => {
+  const { address } = useAccount()
+
+  const { data } = useReadContract({
+    abi: InfoAbi,
+    address: ENV_PARAMS.INFO_CONTRACT,
+    functionName: 'getUserInfo',
+    args: [id, address as Address]
+  })
+
+  return useMemo(() => {
+    if (!data) return undefined
+    const [investedAcc, lph, lphRewardPending, claimedRewardsLPH, claimedRewardsTH, claimedRewardsTS, referencesCount] =
+      data
+
+    return {
+      investedAcc,
+      lph,
+      lphRewardPending,
+      claimedRewardsLPH,
+      claimedRewardsTH,
+      claimedRewardsTS,
+      referencesCount
+    }
+  }, [data])
+}
+
+export const useSaleEstimate = (id: bigint, amountIn: bigint) => {
+  const { data } = useReadContract({
+    abi: InfoAbi,
+    address: ENV_PARAMS.INFO_CONTRACT,
+    functionName: 'saleEstimate',
+    args: [id, amountIn]
+  })
+
+  return useMemo(() => {
+    if (!data) return undefined
+    const [totalFund, myFund, myLPH] = data
+
+    return {
+      totalFund,
+      myFund,
+      myLPH
+    }
+  }, [data])
+}
