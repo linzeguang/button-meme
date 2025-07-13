@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
+
+import { useParams } from 'react-router'
 
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import DataFeed from '@/lib/datafeed'
 
 const TvChart: React.FC = () => {
-  const [value] = useState('tvchart')
+  const datafeed = useRef(new DataFeed())
 
   useEffect(() => {
     return () => {
@@ -15,7 +18,7 @@ const TvChart: React.FC = () => {
   }, [])
 
   return (
-    <AccordionRoot type="single" collapsible value={value}>
+    <AccordionRoot type="single" collapsible value="tvchart">
       <TokenAccordionItem
         value="tvchart"
         triggerClassName="p-0 flex-col items-start"

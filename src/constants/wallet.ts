@@ -1,9 +1,23 @@
-import { mainnet, monadTestnet, type AppKitNetwork } from '@reown/appkit/networks'
+import { mainnet, type AppKitNetwork } from '@reown/appkit/networks'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
+import { defineChain } from 'viem'
+
+import { ENV_PARAMS } from '@/constants/evnParams'
 
 import type { AppKitOptions, CreateAppKit } from '@reown/appkit/react'
 
-export const RPC_URL = import.meta.env.VITE_MONAD_RPC || monadTestnet.rpcUrls.default.http[0]
+export const RPC_URL = ENV_PARAMS.RPC
+export const CHAIN_ID = ENV_PARAMS.CHAIN_ID
+export const NETWORK = defineChain({
+  id: Number(CHAIN_ID),
+  name: 'SJATSH',
+  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: [RPC_URL]
+    }
+  }
+})
 
 // Get projectId from https://cloud.reown.com
 export const projectId = import.meta.env.VITE_PROJECT_ID // this is a public projectId only to use on localhost
@@ -30,7 +44,7 @@ export const features: AppKitOptions['features'] = {
 }
 
 // for custom networks visit -> https://docs.reown.com/appkit/react/core/custom-networks
-export const networks = [mainnet] as [AppKitNetwork, ...AppKitNetwork[]]
+export const networks = [NETWORK] as [...AppKitNetwork[]]
 
 //Set up the Wagmi Adapter (Config)
 export const wagmiAdapter = new WagmiAdapter({

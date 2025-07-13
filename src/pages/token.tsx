@@ -13,60 +13,59 @@ import TvChart from '@/components/token/TvChart'
 import { Flex } from '@/components/ui/Box'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { cn } from '@/lib/utils'
+import TokenProvider from '@/providers/TokenProvider'
 
 const Token: React.FC = () => {
   const { gt2XL, gtLG } = useMediaQuery()
 
-  if (gt2XL)
-    return (
-      <Flex className={cn('gap-6 pt-10 [&>div]:gap-6')}>
-        <Flex className="relative w-[24%] max-w-108 flex-col">
-          <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full" />
-          <TokenInfo />
-          <Tokenomic />
-          <TokenRanking />
-        </Flex>
-        <Flex className="flex-1 flex-col">
-          <TvChart />
-          <TokenRecord />
-        </Flex>
-        <Flex className="w-[30%] max-w-108 flex-col">
-          <OnChainInfo />
-          <Reward />
-          <Trade />
-          <Invite />
-        </Flex>
-      </Flex>
-    )
-
-  if (gtLG)
-    return (
-      <Flex className={cn('gap-4 pt-10 [&>div]:gap-4')}>
-        <Flex className="relative flex-1 flex-col">
-          <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full w-108" />
-          <TvChart />
-          <TokenRecord />
-          <TokenRanking />
-        </Flex>
-        <Flex className="w-[30%] max-w-108 flex-col">
-          <OnChainInfo />
-          <Reward />
-          <Trade />
-          <TokenInfo />
-          <Tokenomic />
-          <Invite />
-        </Flex>
-      </Flex>
-    )
-
   return (
-    <Flex className={cn('flex-col gap-4 pt-0')}>
-      <SearchToken wrapperClassName="w-full" />
-      <TokenInfo className="flex-1" defaultValue="" />
-      <Tokenomic className="flex-1" defaultValue="" />
-      <TvChart />
-      <TokenRecord />
-    </Flex>
+    <TokenProvider>
+      {gt2XL ? (
+        <Flex className={cn('gap-6 pt-10 [&>div]:gap-6')}>
+          <Flex className="relative w-[24%] max-w-108 flex-col">
+            <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full" />
+            <TokenInfo />
+            <Tokenomic />
+            <TokenRanking />
+          </Flex>
+          <Flex className="flex-1 flex-col">
+            <TvChart />
+            <TokenRecord />
+          </Flex>
+          <Flex className="w-[30%] max-w-108 flex-col">
+            <OnChainInfo />
+            <Reward />
+            <Trade />
+            <Invite />
+          </Flex>
+        </Flex>
+      ) : gtLG ? (
+        <Flex className={cn('gap-4 pt-10 [&>div]:gap-4')}>
+          <Flex className="relative flex-1 flex-col">
+            <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full w-108" />
+            <TvChart />
+            <TokenRecord />
+            <TokenRanking />
+          </Flex>
+          <Flex className="w-[30%] max-w-108 flex-col">
+            <OnChainInfo />
+            <Reward />
+            <Trade />
+            <TokenInfo />
+            <Tokenomic />
+            <Invite />
+          </Flex>
+        </Flex>
+      ) : (
+        <Flex className={cn('flex-col gap-4 pt-0')}>
+          <SearchToken wrapperClassName="w-full" />
+          <TokenInfo className="flex-1" defaultValue="" />
+          <Tokenomic className="flex-1" defaultValue="" />
+          <TvChart />
+          <TokenRecord />
+        </Flex>
+      )}
+    </TokenProvider>
   )
 }
 

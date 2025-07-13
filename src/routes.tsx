@@ -1,21 +1,30 @@
 import { lazy } from 'react'
 
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, Navigate } from 'react-router'
 
 import RootLayout from '@/layouts'
 
-export enum RoutePath {
-  Root = '/'
+export enum ROUTE_PATH {
+  HOME = '/',
+  TOKEN = '/token'
 }
 
 export const router = createBrowserRouter([
   {
-    path: RoutePath.Root,
+    path: ROUTE_PATH.HOME,
     Component: RootLayout,
     children: [
       {
         index: true,
-        path: RoutePath.Root,
+        path: ROUTE_PATH.HOME,
+        Component: lazy(() => import('@/pages/home'))
+      },
+      {
+        path: ROUTE_PATH.TOKEN,
+        Component: () => <Navigate to={ROUTE_PATH.HOME} replace />
+      },
+      {
+        path: ROUTE_PATH.TOKEN + `/:tokenAddress`,
         Component: lazy(() => import('@/pages/token'))
       }
     ]

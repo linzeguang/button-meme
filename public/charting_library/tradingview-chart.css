@@ -1,0 +1,69 @@
+/* light */
+:root:not(.theme-dark) {
+  --text: #495057;
+  --text-hover: #fff;
+  --background: transparent;
+  --active-text: #00BDFF;
+  --active-background: #00BDFF;
+  --primary-background: #fff;
+  --secondary-background: #fff;
+  --border: rgba(164, 164, 164, 0.2);
+}
+
+.theme-dark:root {
+  --text: #fff;
+  --text-hover: #fff;
+  --background: transparent;
+  --active-text: #00BDFF;
+  --active-background: #00BDFF;
+  --primary-background: #1A153D;
+  --secondary-background: #1A153D;
+  --border: rgba(164, 164, 164, 0.2);
+}
+
+/* dark */
+:root {
+  --tv-color-platform-background: var(--primary-background);
+  --tv-color-pane-background: var(--secondary-background);
+
+  --tv-color-toolbar-button-background: var(--background);
+  --tv-color-toolbar-button-background-hover: var(--active-background);
+  --tv-color-toolbar-button-background-expanded: var(--active-background);
+  --tv-color-toolbar-button-background-active: var(--active-background);
+  --tv-color-toolbar-button-background-active-hover: var(--active-background);
+
+  --tv-color-toolbar-button-text: var(--text);
+  --tv-color-toolbar-button-text-hover: var(--text-hover);
+  --tv-color-toolbar-button-text-active: var(--active-text);
+  --tv-color-toolbar-button-text-active-hover: var(--text-hover);
+
+  --tv-color-item-active-text: var(--text);
+  --tv-color-toolbar-toggle-button-background-active: var(--active-background);
+  --tv-color-toolbar-toggle-button-background-active-hover: var(--active-background);
+
+  --tv-color-popup-background: var(--primary-background);
+  --tv-color-popup-element-text: var(--text);
+  --tv-color-popup-element-text-hover: var(--text-hover);
+  --tv-color-popup-element-text-active: var(--text-hover);
+  --tv-color-popup-element-background-hover: var(--active-background);
+  --tv-color-popup-element-background-active: var(--active-background);
+
+  --tv-color-popup-element-toolbox-text: var(--text);
+  --tv-color-popup-element-toolbox-text-hover: var(--text-hover);
+  --tv-color-popup-element-toolbox-text-active-hover: var(--text-hover);
+
+  --tv-color-popup-element-toolbox-background-hover: var(--primary-background);
+  --tv-color-popup-element-toolbox-background-active-hover: var(--primary-background);
+
+  --tv-color-popup-element-secondary-text: var(--text);
+}
+
+.layout__area--top {
+  border-bottom: 1px solid var(--border) !important;
+}
+.layout__area--left {
+  border-right: 1px solid var(--border) !important;
+}
+.chart-controls-bar {
+  border-top: 1px solid var(--border) !important;
+}
