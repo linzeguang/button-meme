@@ -1,3 +1,4 @@
+import { formatLargeNumber } from '@/lib/format'
 import {
   ChartingLibraryFeatureset,
   ChartingLibraryWidgetOptions,
@@ -59,6 +60,8 @@ const chartStyleOverrides = ['candleStyle', 'hollowCandleStyle', 'haStyle'].redu
 
 export const getChartOverrides = (): Pick<Partial<ChartingLibraryWidgetOptions>, 'overrides' | 'loading_screen'> => ({
   overrides: {
+    'scales.properties.show_left_scale': true,
+    'scales.properties.show_right_scale': true,
     'paneProperties.topMargin': 16,
     'paneProperties.bottomMargin': 12,
     'paneProperties.background': THEME.BACKGROUND,
@@ -124,5 +127,11 @@ export const defaultChartProps = {
   ] as TimeFrameItem[],
   favorites: {
     intervals: SUPPORTED_RESOLUTIONS
-  }
+  },
+  custom_formatters: {
+    priceFormatterFactory: () => ({
+      // 定义格式化方法，将价格值格式化为自定义样式
+      format: (value: any) => formatLargeNumber(value, undefined, 6) // 使用前导零格式化价格
+    })
+  } as any
 } satisfies Partial<ChartingLibraryWidgetOptions>
