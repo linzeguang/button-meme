@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-import { createBrowserRouter, Navigate } from 'react-router'
+import { createHashRouter, Navigate } from 'react-router'
 
 import RootLayout from '@/layouts'
 
@@ -9,7 +9,7 @@ export enum ROUTE_PATH {
   TOKEN = '/token'
 }
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: ROUTE_PATH.HOME,
     Component: RootLayout,
