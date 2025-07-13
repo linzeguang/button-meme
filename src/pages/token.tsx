@@ -11,14 +11,12 @@ import TokenRecord from '@/components/token/TokenRecord'
 import Trade from '@/components/token/Trade'
 import TvChart from '@/components/token/TvChart'
 import { Flex } from '@/components/ui/Box'
-import { usePrice } from '@/hooks/services/usePrice'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { cn } from '@/lib/utils'
 
 const Token: React.FC = () => {
   const { gt2XL, gtLG } = useMediaQuery()
 
-  usePrice()
   if (gt2XL)
     return (
       <Flex className={cn('gap-6 pt-10 [&>div]:gap-6')}>

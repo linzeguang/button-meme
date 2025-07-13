@@ -14,11 +14,20 @@ export const useFetch = <T, D = any>(parmas: {
 }) => {
   const { url, method, data, config, options } = parmas
 
-  const resp = useSWR<Result<T>>([url, method, data, { ...config }], fetcher, {
-    errorRetryCount: 5,
-    dedupingInterval: 5000,
-    ...options
-  })
+  const resp = useSWR<Result<T>>(
+    {
+      url,
+      method,
+      data,
+      config: { ...config }
+    },
+    fetcher,
+    {
+      errorRetryCount: 5,
+      dedupingInterval: 5000,
+      ...options
+    }
+  )
 
   useEffect(() => {
     if (resp.data && resp.data.code !== 0) {

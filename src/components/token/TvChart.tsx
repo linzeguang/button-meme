@@ -1,12 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+import { KLineChartPro } from '@yennis/klinecharts-pro'
+import '@yennis/klinecharts-pro/dist/klinecharts-pro.css'
 
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { INTERVAL, PERIODS } from '@/constants/kline'
+import Datafeed from '@/lib/datafeed'
 
 const TvChart: React.FC = () => {
   const [value] = useState('tvchart')
+
+  useEffect(() => {
+    // 创建实例
+    const chart = new KLineChartPro({
+      container: document.getElementById('chart')!,
+      theme: 'dark',
+      locale: 'en-US',
+      symbol: {
+        exchange: 'XNYS',
+        market: 'stocks',
+        name: 'Alibaba Group Holding Limited American Depositary Shares, each represents eight Ordinary Shares',
+        shortName: 'BABA',
+        ticker: 'BABA',
+        priceCurrency: 'usd',
+        type: 'ADRC',
+        pricePrecision: 18
+      },
+      period: PERIODS[INTERVAL.MINUTE_1],
+      datafeed: new Datafeed(),
+      watermark: '',
+      drawingBarHidden: true,
+      periods: Object.values(PERIODS),
+      mainIndicators: [],
+      subIndicators: []
+    })
+    console.log('>>>>>> chart: ', chart)
+
+    return () => {
+      //
+    }
+  }, [])
+
   return (
     <AccordionRoot type="single" collapsible value={value}>
       <TokenAccordionItem
@@ -42,7 +79,7 @@ const TvChart: React.FC = () => {
             </Flex>
           </>
         }
-        content={<div className="h-78"></div>}
+        content={<div id="chart" className="!h-78" />}
       />
     </AccordionRoot>
   )

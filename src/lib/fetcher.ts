@@ -3,12 +3,27 @@ export enum METHOD {
   POST = 'POST'
 }
 
-const fetcher = async ([url, method, data, config]: [string | null, METHOD, any, RequestInit | undefined]) => {
+// [url, method, data, config]: [string | null, METHOD, any, RequestInit | undefined]
+
+const fetcher = async <T = any>({
+  url,
+  method,
+  data,
+  config,
+  php
+}: {
+  url: string | null
+  method: METHOD
+  data?: any
+  config?: RequestInit
+  php?: boolean
+}) => {
   if (!url) return
 
   // 拼接请求url
-  url = import.meta.env.VITE_API_BASE_URL + url
-  if (import.meta.env.VITE_MODE === 'production') url = import.meta.env.VITE_API_TARGET_URL + url
+  url = (php ? import.meta.env.VITE_PHP_BASE_URL : import.meta.env.VITE_API_BASE_URL) + url
+  if (import.meta.env.VITE_MODE === 'production')
+    url = (php ? import.meta.env.VITE_PHP_TARGET_URL : import.meta.env.VITE_API_TARGET_URL) + url
 
   // 初始化body数据
   let body: BodyInit | undefined
@@ -29,7 +44,7 @@ const fetcher = async ([url, method, data, config]: [string | null, METHOD, any,
     throw error
   }
 
-  return res.json()
+  return res.json() as T
 }
 
 export default fetcher
