@@ -13,7 +13,8 @@ const Header: React.FC<React.HTMLAttributes<HTMLElement>> = (props) => {
   return (
     <header {...props} className={cn('header', props.className)}>
       <Container className="flex h-full items-center justify-between gap-2">
-        {!isMobile ? <Logo.Withname className="text-primary" /> : <Logo.Icon className="text-primary" />}
+        {/* {!isMobile ? <Logo.Withname className="text-primary" /> : <Logo.Icon className="text-primary" />} */}
+        <Logo.Withname className="text-primary" />
         <Flex className="gap-6">
           <ConnectWallet />
           {isMobile && <Menu />}
