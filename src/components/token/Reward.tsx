@@ -5,8 +5,10 @@ import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import useMediaQuery from '@/hooks/useMediaQuery'
 
 const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
+  const { isMobile } = useMediaQuery()
   const [value, setValue] = useState(props.defaultValue ?? 'reward')
 
   return (
@@ -18,13 +20,13 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
         content={
           <Flex className="items-center justify-between">
             <HarmonyOSSansText as="div" variant="primary" className="flex flex-col gap-1">
-              <span className="text-primary text-2xl font-bold">28888.88</span>
-              <HarmonyOSSansText variant="secondary" className="flex gap-4 text-sm">
+              <span className="text-primary text-lg font-bold lg:text-2xl">28888.88</span>
+              <HarmonyOSSansText variant="secondary" className="flex gap-4 text-xs lg:text-sm">
                 <span>/ Total</span>
                 <span>2565363.36</span>
               </HarmonyOSSansText>
             </HarmonyOSSansText>
-            <Button variant="primary" className="min-w-[10rem]">
+            <Button variant="primary" size={isMobile ? 'sm' : 'md'} className="min-w-[6rem] xl:min-w-[10rem]">
               Claim
             </Button>
           </Flex>

@@ -7,10 +7,12 @@ import { AccordionRoot } from '@/components/ui/Accordion'
 import { Table } from '@/components/ui/Table'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { Rank, useRank } from '@/hooks/services/useRank'
+import useMediaQuery from '@/hooks/useMediaQuery'
 import { formatAddress } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
 const TokenRanking: React.FC = () => {
+  const { isMobile } = useMediaQuery()
   const [value] = useState('tokenRanking')
   const [searchValue, setSearchValue] = useState('')
 
@@ -71,7 +73,7 @@ const TokenRanking: React.FC = () => {
                 {
                   name: 'Address',
                   field: 'account',
-                  render: (address) => formatAddress(address)
+                  render: (address) => formatAddress(address, undefined, isMobile ? -2 : undefined)
                 },
                 {
                   name: 'TS',

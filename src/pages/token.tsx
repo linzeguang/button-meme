@@ -62,7 +62,11 @@ const Token: React.FC = () => {
           <TokenInfo className="flex-1" defaultValue="" />
           <Tokenomic className="flex-1" defaultValue="" />
           <TvChart />
+          <OnChainInfo />
+          <Reward />
           <TokenRecord />
+          <TokenRanking />
+          <Invite />
         </Flex>
       )}
     </TokenProvider>

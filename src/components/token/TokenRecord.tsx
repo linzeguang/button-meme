@@ -48,7 +48,7 @@ const TokenRecord: React.FC = () => {
     []
   )
 
-  const dataSource: TradeData[] = Array.from({ length: 100 }, () => ({
+  const dataSource: TradeData[] = Array.from({ length: 10 }, () => ({
     base: 'LABUBU',
     baseAmount: formatNumber(Math.random() * 1_000_000_000),
     date: '2025-12-12',
@@ -91,7 +91,6 @@ const TokenRecord: React.FC = () => {
               {
                 name: 'Type',
                 field: 'type',
-                width: 80,
                 render: (value) => {
                   const isBuy = value === TRADE_TYPE.Buy
                   return <span className={isBuy ? 'text-success' : 'text-destructive'}>{isBuy ? 'Buy' : 'Sell'}</span>

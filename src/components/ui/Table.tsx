@@ -19,10 +19,10 @@ export const TableBody = React.forwardRef<React.ElementRef<'tbody'>, React.HTMLA
 export const TableRow = React.forwardRef<React.ElementRef<'tr'>, React.HTMLAttributes<HTMLTableRowElement>>(
   (props, ref) => <tr ref={ref} {...props} className={cn('', props.className)} />
 )
-export const TableHeadCell = React.forwardRef<React.ElementRef<'th'>, React.HTMLAttributes<HTMLTableCellElement>>(
+export const TableHeadCell = React.forwardRef<React.ElementRef<'th'>, React.ThHTMLAttributes<HTMLTableCellElement>>(
   (props, ref) => <th ref={ref} {...props} className={cn('text-text-primary p-2 font-normal', props.className)} />
 )
-export const TableDateCell = React.forwardRef<React.ElementRef<'td'>, React.HTMLAttributes<HTMLTableCellElement>>(
+export const TableDateCell = React.forwardRef<React.ElementRef<'td'>, React.TdHTMLAttributes<HTMLTableCellElement>>(
   (props, ref) => <td ref={ref} {...props} className={cn('px-2 py-2.5', props.className)} />
 )
 
@@ -63,49 +63,61 @@ export const Table = <D extends object>(props: TableProps<D>) => {
 
   return (
     <div id={`table-${id}`}>
-      <div id={`table-head-${id}`}>
-        <TableRoot {...rest}>
-          {memoColgroup}
-          <TableHead {...theadProps}>
-            <TableRow {...therdTrProps}>
-              {columns.map((column) => (
-                <TableHeadCell
-                  key={column.field.toString()}
-                  {...thProps}
-                  style={{ textAlign: column.align || 'start', ...thProps?.style }}
-                >
-                  {column.name}
-                </TableHeadCell>
-              ))}
-            </TableRow>
-          </TableHead>
-        </TableRoot>
-      </div>
-      <div id={`table-body-${id}`} style={scroll?.y ? { maxHeight: scroll.y, overflowY: 'scroll' } : undefined}>
-        <TableRoot {...rest}>
-          {memoColgroup}
-          <TableBody {...tbodyProps}>
-            {memoData.map((data, index) => (
-              <TableRow
-                key={typeof rowKey === 'function' ? rowKey(data, index) : (data[rowKey] as string)}
-                data-index={index + 1}
-                {...tbodyTrProps}
-              >
+      <div className="w-full overflow-x-auto">
+        <div style={scroll?.y ? { maxHeight: scroll.y, overflowY: 'auto' } : undefined} className="scrollbar-none">
+          <TableRoot {...rest} className={cn('w-full table-auto', rest.className)}>
+            {memoColgroup}
+            <TableHead
+              id={`table-head-${id}`}
+              {...theadProps}
+              className={cn('sticky top-0 z-10', theadProps?.className)}
+            >
+              <TableRow {...therdTrProps}>
                 {columns.map((column) => (
-                  <TableDateCell
+                  <TableHeadCell
                     key={column.field.toString()}
-                    {...tdProps}
-                    style={{ textAlign: column.align || 'start', ...tdProps?.style }}
+                    {...thProps}
+                    style={{ textAlign: column.align || 'start', ...thProps?.style }}
                   >
-                    {column.render?.(data[column.field], data, index) || (data[column.field] as React.ReactNode)}
-                  </TableDateCell>
+                    {column.name}
+                  </TableHeadCell>
                 ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </TableRoot>
+            </TableHead>
+            <TableBody id={`table-body-${id}`} {...tbodyProps}>
+              {memoData.length ? (
+                memoData.map((data, index) => (
+                  <TableRow
+                    key={typeof rowKey === 'function' ? rowKey(data, index) : (data[rowKey] as string)}
+                    data-index={index + 1}
+                    {...tbodyTrProps}
+                  >
+                    {columns.map((column) => (
+                      <TableDateCell
+                        key={column.field.toString()}
+                        {...tdProps}
+                        style={{ textAlign: column.align || 'start', ...tdProps?.style }}
+                      >
+                        {column.render?.(data[column.field], data, index) || (data[column.field] as React.ReactNode)}
+                      </TableDateCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow key="nodata" {...tbodyTrProps}>
+                  <TableDateCell
+                    colSpan={columns.length}
+                    className="font-HarmonyOSSans text-text-secondary py-6 text-center"
+                  >
+                    No Data
+                  </TableDateCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </TableRoot>
+        </div>
       </div>
-      {pagination && <Pagination {...pagination} />}
+      {!!dataSource.length && pagination && <Pagination {...pagination} />}
     </div>
   )
 }
