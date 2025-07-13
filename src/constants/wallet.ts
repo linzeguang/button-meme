@@ -8,7 +8,7 @@ import type { AppKitOptions, CreateAppKit } from '@reown/appkit/react'
 
 export const RPC_URL = ENV_PARAMS.RPC_BASE_URL
 export const CHAIN_ID = ENV_PARAMS.CHAIN_ID
-export const NETWORK = defineChain({
+export const sjatsh = defineChain({
   id: Number(CHAIN_ID),
   name: 'SJATSH',
   nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
@@ -44,7 +44,7 @@ export const features: AppKitOptions['features'] = {
 }
 
 // for custom networks visit -> https://docs.reown.com/appkit/react/core/custom-networks
-export const networks = [NETWORK] as [...AppKitNetwork[]]
+export const networks = [sjatsh] as [AppKitNetwork, ...AppKitNetwork[]]
 
 //Set up the Wagmi Adapter (Config)
 export const wagmiAdapter = new WagmiAdapter({
