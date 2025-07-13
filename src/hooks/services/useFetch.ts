@@ -14,6 +14,8 @@ export const useFetch = <T, D = any>(parmas: {
 }) => {
   const { url, method, data, config, options } = parmas
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   const resp = useSWR<Result<T>>(
     {
       url,

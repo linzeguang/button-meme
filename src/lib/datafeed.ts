@@ -61,7 +61,7 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
   subscribeBars(
     symbolInfo: LibrarySymbolInfo,
     resolution: ResolutionString,
-    onTick: SubscribeBarsCallback,
+    _onTick: SubscribeBarsCallback,
     listenerGuid: string,
     onResetCacheNeededCallback: () => void
   ) {
