@@ -72,7 +72,7 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     console.log('>>>>>> unsubscribeBars: ', listenerGuid)
   }
   async generateSymbolInfo(symbolName: string) {
-    const decimals = 18
+    const decimals = 15
     const pricescale = Math.pow(10, decimals)
     console.log('>>>>>> generateSymbolInfo: ', { symbolName })
     return {

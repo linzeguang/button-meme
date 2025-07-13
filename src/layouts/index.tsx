@@ -12,6 +12,7 @@ const RootLayout: React.FC = () => {
       <Header className="lg:col-span-full" />
       {!isMobile && <SideBar className="lg:col-span-1" />}
       <Main />
+      {/* {isMobile && } */}
     </section>
   )
 }

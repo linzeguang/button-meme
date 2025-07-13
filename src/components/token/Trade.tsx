@@ -7,11 +7,14 @@ import z from 'zod'
 import { Icon } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
+import { Container } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
+import { Dialog } from '@/components/ui/Dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/Form'
 import { Input } from '@/components/ui/Input'
 import { RadioGroup } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { cn } from '@/lib/utils'
 
 export enum TRADE_TYPE {
   BUY = 'buy',
@@ -24,9 +27,7 @@ const formSchema = z.object({
   amountOut: z.string()
 })
 
-export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
-  const [value, setValue] = useState(props.defaultValue ?? 'trade')
-
+const TradeForm: React.FC = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,6 +43,79 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
   }, [])
 
   return (
+    <Form {...form}>
+      <form className="space-y-5" onSubmit={form.handleSubmit(handleSubmit)}>
+        <FormField
+          control={form.control}
+          name="tradeType"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <RadioGroup
+                  value={field.value}
+                  variant="button"
+                  options={[
+                    {
+                      value: TRADE_TYPE.BUY,
+                      label: 'Buy',
+                      className: 'data-[state=checked]:bg-buy'
+                    },
+                    {
+                      value: TRADE_TYPE.SELL,
+                      label: 'Sell',
+                      className: 'data-[state=checked]:bg-sell'
+                    }
+                  ]}
+                  onValueChange={(type) => field.onChange(type as TRADE_TYPE)}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <div className="space-y-2.5">
+          <FormField
+            control={form.control}
+            name="amountIn"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center justify-between">
+                  <HarmonyOSSansText>Amount</HarmonyOSSansText>
+                  <HarmonyOSSansText>balance</HarmonyOSSansText>
+                </FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="amountOut"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex items-center justify-between">
+                  <HarmonyOSSansText>Amount</HarmonyOSSansText>
+                  <HarmonyOSSansText>balance</HarmonyOSSansText>
+                </FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </div>
+        <Button variant="primary" type="submit" size="sm" className="w-full">
+          Buy Hash & Mint
+        </Button>
+      </form>
+    </Form>
+  )
+}
+
+export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
+  const [value, setValue] = useState(props.defaultValue ?? 'trade')
+
+  return (
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
         value="trade"
@@ -51,77 +125,38 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
             <Icon.Tip className="text-text-secondary" />
           </>
         }
-        content={
-          <Form {...form}>
-            <form className="space-y-5" onSubmit={form.handleSubmit(handleSubmit)}>
-              <FormField
-                control={form.control}
-                name="tradeType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <RadioGroup
-                        value={field.value}
-                        variant="button"
-                        options={[
-                          {
-                            value: TRADE_TYPE.BUY,
-                            label: 'Buy',
-                            className: 'data-[state=checked]:bg-buy'
-                          },
-                          {
-                            value: TRADE_TYPE.SELL,
-                            label: 'Sell',
-                            className: 'data-[state=checked]:bg-sell'
-                          }
-                        ]}
-                        onValueChange={(type) => field.onChange(type as TRADE_TYPE)}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <div className="space-y-2.5">
-                <FormField
-                  control={form.control}
-                  name="amountIn"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center justify-between">
-                        <HarmonyOSSansText>Amount</HarmonyOSSansText>
-                        <HarmonyOSSansText>balance</HarmonyOSSansText>
-                      </FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="amountOut"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center justify-between">
-                        <HarmonyOSSansText>Amount</HarmonyOSSansText>
-                        <HarmonyOSSansText>balance</HarmonyOSSansText>
-                      </FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <Button variant="primary" type="submit" size="sm" className="w-full">
-                Buy Hash & Mint
-              </Button>
-            </form>
-          </Form>
-        }
+        content={<TradeForm />}
       />
     </AccordionRoot>
   )
 }
 
-export default Trade
+export const FooterTrade = () => {
+  return (
+    <Container
+      className={cn(
+        'fixed right-0 bottom-0 left-0 z-16',
+        'flex items-center gap-4',
+        'bg-background-popover border-border h-20 border-t'
+      )}
+    >
+      <Button variant="fourth" className="text-text-primary px-1">
+        <Icon.ScrollTop />
+      </Button>
+      <Dialog
+        title="Trade"
+        closeable
+        trigger={{
+          asChild: true,
+          children: (
+            <Button variant="primary" className="flex-1">
+              Trade
+            </Button>
+          )
+        }}
+      >
+        <TradeForm />
+      </Dialog>
+    </Container>
+  )
+}

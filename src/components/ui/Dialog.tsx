@@ -2,6 +2,7 @@ import React, { useImperativeHandle, useState } from 'react'
 
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 
+import { Icon } from '@/components/svgr'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
@@ -20,7 +21,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'overlay fixed top-0 right-0 bottom-0 left-0 z-[998]',
+      'overlay fixed top-0 right-0 bottom-0 left-0 z-[998] bg-black/80',
       'data-[state=open]:animate-in data-[state=open]:fade-in-0',
       'data-[state=closed]:animate-out data-[state=closed]:fade-out-0',
       className
@@ -74,7 +75,7 @@ export const Dialog = React.forwardRef<DialogMethods, DialogProps>((props, metho
           {...content}
           className={cn(
             'fixed top-1/2 left-1/2 z-[999] -translate-1/2',
-            'border-border popover rounded-md border p-4',
+            'border-border popover w-[calc(100vw-3rem)] rounded-md border p-4 lg:w-auto',
             'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-1/4',
             'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom-1/4',
             content?.className
@@ -92,10 +93,9 @@ export const Dialog = React.forwardRef<DialogMethods, DialogProps>((props, metho
                 <Button
                   ghost
                   size="xs"
-                  // shadow={false}
                   className={cn('absolute right-0 size-6 border-0 !p-0 backdrop-blur-none', !title && 'top-0')}
                 >
-                  {/* <Icon.Close /> */}
+                  <Icon.Close />
                 </Button>
               </DialogClose>
             )}

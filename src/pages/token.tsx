@@ -8,7 +8,7 @@ import TokenInfo from '@/components/token/TokenInfo'
 import Tokenomic from '@/components/token/Tokenomic'
 import TokenRanking from '@/components/token/TokenRanking'
 import TokenRecord from '@/components/token/TokenRecord'
-import Trade from '@/components/token/Trade'
+import { Trade, FooterTrade } from '@/components/token/Trade'
 import TvChart from '@/components/token/TvChart'
 import { Flex } from '@/components/ui/Box'
 import useMediaQuery from '@/hooks/useMediaQuery'
@@ -57,17 +57,20 @@ const Token: React.FC = () => {
           </Flex>
         </Flex>
       ) : (
-        <Flex className={cn('flex-col gap-4 pt-0')}>
-          <SearchToken wrapperClassName="w-full" />
-          <TokenInfo className="flex-1" defaultValue="" />
-          <Tokenomic className="flex-1" defaultValue="" />
-          <TvChart />
-          <OnChainInfo />
-          <Reward />
-          <TokenRecord />
-          <TokenRanking />
-          <Invite />
-        </Flex>
+        <>
+          <Flex className={cn('flex-col gap-4 pt-0 pb-20')}>
+            <SearchToken wrapperClassName="w-full" />
+            <TokenInfo className="flex-1" defaultValue="" />
+            <Tokenomic className="flex-1" defaultValue="" />
+            <TvChart />
+            <OnChainInfo />
+            <Reward />
+            <TokenRecord />
+            <TokenRanking />
+            <Invite />
+          </Flex>
+          <FooterTrade />
+        </>
       )}
     </TokenProvider>
   )

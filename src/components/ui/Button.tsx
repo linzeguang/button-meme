@@ -14,7 +14,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'bg-primary border-primary text-primary-foreground',
-        secondary: '',
+        secondary: 'bg-background-secondary',
         fourth: 'bg-background-fourth text-text-secondary border-background-fourth'
       },
       size: {
