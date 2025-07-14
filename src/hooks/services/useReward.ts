@@ -43,7 +43,7 @@ export const useUserReward = (project: Project) => {
   const { address } = useAccount()
 
   const { data, ...rest } = useFetch<UserReward>({
-    url: address && project ? `/rewards/${project.id}/${project.epoch}/${address}` : null
+    url: address && project ? `/user/${project.id}/${project.epoch}/${address}` : null
   })
 
   return {

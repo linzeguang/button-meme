@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
+import { SimpleBalance } from '@/components/common/Balance'
 import { Icon } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
@@ -14,7 +15,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/Input'
 import { RadioGroup } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { useTrade } from '@/hooks/contracts/useMiningPool'
 import { cn } from '@/lib/utils'
+import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 export enum TRADE_TYPE {
   BUY = 'buy',
@@ -24,7 +27,7 @@ export enum TRADE_TYPE {
 const formSchema = z.object({
   tradeType: z.enum([TRADE_TYPE.BUY, TRADE_TYPE.SELL]),
   amountIn: z.string(),
-  amountOut: z.string()
+  amountOut: z.string().optional()
 })
 
 const TradeForm: React.FC = () => {
@@ -37,10 +40,17 @@ const TradeForm: React.FC = () => {
     }
   })
 
-  const handleSubmit = useCallback((values: z.infer<typeof formSchema>) => {
-    console.log('>>>>>> handleSubmit: values', values)
-    // dialogRef.current?.close()
-  }, [])
+  const { tokenInfo } = useTokenProviderContext()
+  const { buy } = useTrade()
+
+  const handleSubmit = useCallback(
+    (values: z.infer<typeof formSchema>) => {
+      console.log('>>>>>> handleSubmit: values', values)
+      buy()
+      // dialogRef.current?.close()
+    },
+    [buy]
+  )
 
   return (
     <Form {...form}>
@@ -80,10 +90,12 @@ const TradeForm: React.FC = () => {
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
                   <HarmonyOSSansText>Amount</HarmonyOSSansText>
-                  <HarmonyOSSansText>balance</HarmonyOSSansText>
+                  <HarmonyOSSansText>
+                    <SimpleBalance token={tokenInfo?.stableToken.address} />
+                  </HarmonyOSSansText>
                 </FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input size="lg" suffixNode={tokenInfo?.stableToken.symbol} {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -95,10 +107,12 @@ const TradeForm: React.FC = () => {
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
                   <HarmonyOSSansText>Amount</HarmonyOSSansText>
-                  <HarmonyOSSansText>balance</HarmonyOSSansText>
+                  <HarmonyOSSansText>
+                    <SimpleBalance token={tokenInfo?.mintToken.address} />
+                  </HarmonyOSSansText>
                 </FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input size="lg" suffixNode={tokenInfo?.mintToken.symbol} {...field} />
                 </FormControl>
               </FormItem>
             )}

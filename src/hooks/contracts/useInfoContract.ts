@@ -55,10 +55,25 @@ export const useTokenBaseInfo = (project?: Project) => {
     }
   })
 
-  const mintToken = useMemo(() => data?.[2], [data])
+  const [stableToken, mintToken] = useMemo(() => [data?.[1], data?.[2]], [data])
 
-  const { data: mintTokenInfo } = useReadContracts({
+  const { data: info } = useReadContracts({
     contracts: [
+      {
+        abi: erc20Abi,
+        address: stableToken,
+        functionName: 'name'
+      },
+      {
+        abi: erc20Abi,
+        address: stableToken,
+        functionName: 'symbol'
+      },
+      {
+        abi: erc20Abi,
+        address: stableToken,
+        functionName: 'decimals'
+      },
       {
         abi: erc20Abi,
         address: mintToken,
@@ -82,10 +97,11 @@ export const useTokenBaseInfo = (project?: Project) => {
       }
     ]
   })
+  console.log('>>>>>> erc20Info: ', info)
 
   return useMemo<TokenInfo | undefined>(() => {
     if (!data) return undefined
-    if (!mintTokenInfo) return undefined
+    if (!info) return undefined
     const [
       miningPool,
       stableToken,
@@ -98,11 +114,18 @@ export const useTokenBaseInfo = (project?: Project) => {
       thRewardsAcc,
       tsRewardsAcc
     ] = data
-    const [{ result: name }, { result: symbol }, { result: decimals }, { result: burnedAmount }] = mintTokenInfo
+    const [
+      { result: stableTokenName },
+      { result: stableTokenSymbol },
+      { result: stableTokenDecimals },
+      { result: mintTokenName },
+      { result: mintTokenSymbol },
+      { result: mintTokenDecimals },
+      { result: mintTokenBurnedAmount }
+    ] = info
 
     return {
       miningPool,
-      stableToken,
       checkMerkleRoot,
       epochReleaseRate,
       startBlock,
@@ -112,14 +135,20 @@ export const useTokenBaseInfo = (project?: Project) => {
       tsRewardsAcc,
       mintToken: {
         address: mintToken,
-        name: name!,
-        symbol: symbol!,
-        decimals: decimals!,
-        burnedAmount: burnedAmount!
+        name: mintTokenName!,
+        symbol: mintTokenSymbol!,
+        decimals: mintTokenDecimals!,
+        burnedAmount: mintTokenBurnedAmount!
+      },
+      stableToken: {
+        address: stableToken,
+        name: stableTokenName!,
+        symbol: stableTokenSymbol!,
+        decimals: stableTokenDecimals!
       },
       project: project!
     }
-  }, [data, mintTokenInfo, project])
+  }, [data, info, project])
 }
 
 export const useTokenUserInfo = (project?: Project) => {
