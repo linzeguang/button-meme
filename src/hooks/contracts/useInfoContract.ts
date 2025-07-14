@@ -14,12 +14,15 @@ export const useProjects = () => {
 
   const { data: count } = useReadContract({
     abi: InfoAbi,
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getProjectCount'
   })
   const { data } = useReadContracts({
     contracts: Array.from({ length: Number(count) }, (_, index) => ({
       abi: InfoAbi,
+
+      chainId: ENV_PARAMS.CHAIN_ID,
       address: ENV_PARAMS.INFO_CONTRACT,
       functionName: 'getProjectInfo',
       args: [BigInt(index)]
