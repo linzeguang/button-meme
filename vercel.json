@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://api.comfox.ai/:path*"
+      "destination": "https://button.beecom.ai/:path*"
     },
     {
       "source": "/php/:path*",
