@@ -47,6 +47,7 @@ export const useProjects = () => {
 export const useTokenBaseInfo = (project?: Project) => {
   const { data } = useReadContract({
     abi: InfoAbi,
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getBaseInfo',
     args: project && [BigInt(project.id)],
@@ -61,6 +62,7 @@ export const useTokenBaseInfo = (project?: Project) => {
     contracts: [
       {
         abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
         address: stableToken,
         functionName: 'name'
       },
@@ -71,26 +73,31 @@ export const useTokenBaseInfo = (project?: Project) => {
       },
       {
         abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
         address: stableToken,
         functionName: 'decimals'
       },
       {
         abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
         address: mintToken,
         functionName: 'name'
       },
       {
         abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
         address: mintToken,
         functionName: 'symbol'
       },
       {
         abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
         address: mintToken,
         functionName: 'decimals'
       },
       {
         abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
         address: mintToken,
         functionName: 'balanceOf',
         args: [ENV_PARAMS.BURN_CONTRACT]
@@ -156,6 +163,7 @@ export const useTokenUserInfo = (project?: Project) => {
 
   const { data } = useReadContract({
     abi: InfoAbi,
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getUserInfo',
     args: project && [BigInt(project.id), address as Address],
@@ -184,6 +192,7 @@ export const useTokenUserInfo = (project?: Project) => {
 export const useSaleEstimate = (id: bigint, amountIn: bigint) => {
   const { data } = useReadContract({
     abi: InfoAbi,
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'saleEstimate',
     args: [id, amountIn]
