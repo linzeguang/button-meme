@@ -1,4 +1,5 @@
-import { SUPPORTED_RESOLUTIONS } from '@/constants/tradingiew'
+import { SUPPORTED_RESOLUTIONS, SUPPORTED_RESOLUTIONS_MAP } from '@/constants/tradingiew'
+import { TokenInfo } from '@/hooks/contracts/types'
 import fetcher, { METHOD } from '@/lib/fetcher'
 import {
   Bar,
@@ -49,9 +50,8 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     periodParams: PeriodParams,
     onResult: HistoryCallback
   ) {
-    console.log('>>>>>> getBars: ', { symbolInfo, resolution, periodParams })
     if (periodParams.firstDataRequest) {
-      const data = await this.fetchHistory()
+      const data = await this.fetchHistory(symbolInfo.ticker!, resolution)
       onResult(data, { noData: false })
     }
 
@@ -71,20 +71,19 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     console.log('>>>>>> unsubscribeBars: ', listenerGuid)
   }
   async generateSymbolInfo(symbolName: string) {
-    const decimals = 18
-    const pricescale = Math.pow(10, decimals)
-    console.log('>>>>>> generateSymbolInfo: ', { symbolName })
+    const [address, name, symbol] = this.parseInitSymbol(symbolName)
+    const pricescale = Math.pow(10, 18)
     return {
-      name: 'name',
-      full_name: 'full_name',
-      ticker: symbolName,
-      description: 'symbolName',
+      name: symbol,
+      full_name: name,
+      ticker: address,
+      description: symbol,
       session: '24x7',
       minmov: 1,
       timezone: 'Etc/UTC',
       type: 'crypto',
       visible_plots_set: 'ohlc',
-      // exchange: 'Button',
+      exchange: 'Button',
       listed_exchange: '-',
       pricescale,
       format: 'price',
@@ -93,20 +92,19 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
       has_weekly_and_monthly: true
     } as LibrarySymbolInfo
   }
-  async fetchHistory(): Promise<Bar[]> {
+  async fetchHistory(ticker: string, resolution: ResolutionString): Promise<Bar[]> {
     try {
       const data = await fetcher<Kline[]>({
         url: '/getKine.php',
         method: METHOD.GET,
         data: {
-          ca: '0x3e7712cf29164432efc6ef0aa669c10b674efe43',
-          interval: '1m'
+          ca: ticker,
+          interval: SUPPORTED_RESOLUTIONS_MAP[resolution]
         },
         php: true
       })
 
-      if (!data) throw false
-
+      if (!data) return []
       return (
         data?.map<Bar>(({ close, high, low, open, open_time }) => ({
           close: Number(close),
@@ -119,5 +117,12 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     } catch {
       return []
     }
+  }
+  static generateInitSymbol(info: TokenInfo['mintToken']) {
+    const { address, name, symbol, decimals } = info
+    return `${address}-${name}-${symbol}-${decimals}`
+  }
+  parseInitSymbol(initSymbol: string) {
+    return initSymbol.split('-')
   }
 }

@@ -14,8 +14,8 @@ export const SUPPORTED_RESOLUTIONS_MAP = {
   '30': '30m',
   '60': '1h',
   '240': '4h',
-  '1D': '1D',
-  '1W': '1W'
+  '1D': '1d',
+  '1W': '1w'
 } as Record<ResolutionString, string>
 
 export const Supported_Resolutions_To_Minute = {
@@ -31,7 +31,7 @@ export const Supported_Resolutions_To_Minute = {
 
 export const SUPPORTED_RESOLUTIONS = Object.keys(SUPPORTED_RESOLUTIONS_MAP) as ResolutionString[]
 
-export const DEFAULT_RESOLUTIONS = SUPPORTED_RESOLUTIONS[0] // 5m
+export const DEFAULT_RESOLUTIONS = SUPPORTED_RESOLUTIONS[0] // 1m
 
 const RED = '#ef4444'
 const GREEN = '#10b981'

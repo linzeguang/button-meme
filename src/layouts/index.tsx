@@ -7,6 +7,7 @@ import SideBar from '@/layouts/SideBar'
 
 const RootLayout: React.FC = () => {
   const { isMobile } = useMediaQuery()
+
   return (
     <section className="grid h-screen grid-rows-[4.5rem_1fr] lg:grid-cols-[auto_1fr]">
       <Header className="lg:col-span-full" />

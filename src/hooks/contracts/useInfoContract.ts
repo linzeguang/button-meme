@@ -6,7 +6,7 @@ import { useAccount, useReadContract, useReadContracts } from 'wagmi'
 
 import { InfoAbi } from '@/constants/abi'
 import { ENV_PARAMS } from '@/constants/evnParams'
-import { Project } from '@/hooks/contracts/types'
+import { Project, TokenInfo, TokenUserInfo } from '@/hooks/contracts/types'
 import { projectsAtom } from '@/stores/token'
 
 export const useProjects = () => {
@@ -33,7 +33,7 @@ export const useProjects = () => {
         return {
           name,
           epoch,
-          id: BigInt(index)
+          id: index
         }
       }),
     [data]
@@ -44,12 +44,12 @@ export const useProjects = () => {
   }, [projects, setProjects])
 }
 
-export const useBaseInfo = (id: bigint) => {
+export const useTokenBaseInfo = (id: number) => {
   const { data } = useReadContract({
     abi: InfoAbi,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getBaseInfo',
-    args: [id]
+    args: [BigInt(id)]
   })
 
   const { data: mintTokenInfo } = useReadContracts({
@@ -78,7 +78,7 @@ export const useBaseInfo = (id: bigint) => {
     ]
   })
 
-  return useMemo(() => {
+  return useMemo<TokenInfo | undefined>(() => {
     if (!data) return undefined
     if (!mintTokenInfo) return undefined
     const [
@@ -116,17 +116,17 @@ export const useBaseInfo = (id: bigint) => {
   }, [data, mintTokenInfo])
 }
 
-export const useUserInfo = (id: bigint) => {
+export const useTokenUserInfo = (id: number) => {
   const { address } = useAccount()
 
   const { data } = useReadContract({
     abi: InfoAbi,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getUserInfo',
-    args: [id, address as Address]
+    args: [BigInt(id), address as Address]
   })
 
-  return useMemo(() => {
+  return useMemo<TokenUserInfo | undefined>(() => {
     if (!data) return undefined
     const [investedAcc, lph, lphRewardPending, claimedRewardsLPH, claimedRewardsTH, claimedRewardsTS, referencesCount] =
       data

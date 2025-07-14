@@ -1,5 +1,8 @@
 import React, { useCallback, useImperativeHandle, useState } from 'react'
 
+import { useAtomValue } from 'jotai/react'
+import { useNavigate } from 'react-router'
+
 import { Sidebar } from '@/components/svgr'
 import {
   AccordionArrow,
@@ -12,10 +15,15 @@ import { Flex } from '@/components/ui/Box'
 import { Dividing } from '@/components/ui/Dividing'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { cn, toggleLight } from '@/lib/utils'
+import { ROUTE_PATH } from '@/routes'
+import { projectsAtom } from '@/stores/token'
 
 const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolean; className?: string }>(
   ({ collapsed, className }, ref) => {
+    const navigate = useNavigate()
+
     const [accordionValue, setAccordionValue] = useState<string>('')
+    const projects = useAtomValue(projectsAtom)
 
     const accordionOptions: Array<
       | {
@@ -40,16 +48,10 @@ const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolea
         name: 'Token',
         value: 'token',
         icon: Sidebar.Home,
-        childrens: [
-          {
-            name: 'Token List',
-            onClick: () => {}
-          },
-          {
-            name: 'Token List',
-            onClick: () => {}
-          }
-        ]
+        childrens: projects.map(({ name, id }) => ({
+          name,
+          onClick: () => navigate(ROUTE_PATH.TOKEN + `/${id}`)
+        }))
       },
       undefined,
       {

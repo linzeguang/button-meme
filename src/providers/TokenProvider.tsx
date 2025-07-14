@@ -2,20 +2,29 @@ import React, { createContext, useContext } from 'react'
 
 import { useParams } from 'react-router'
 
+import { TokenInfo, TokenUserInfo } from '@/hooks/contracts/types'
+import { useTokenBaseInfo, useTokenUserInfo } from '@/hooks/contracts/useInfoContract'
+
 export interface TokenProviderContextProps {
-  tokenAddress: string
+  tokenId: number
+  tokenInfo: TokenInfo | undefined
+  tokenUserInfo: TokenUserInfo | undefined
 }
 
 const TokenProviderContext = createContext<TokenProviderContextProps>({
-  tokenAddress: ''
+  tokenId: 0,
+  tokenInfo: undefined,
+  tokenUserInfo: undefined
 })
 
 const TokenProvider: React.FC<Omit<React.ComponentPropsWithRef<typeof TokenProviderContext.Provider>, 'value'>> = (
   props
 ) => {
-  const { tokenAddress } = useParams<{ tokenAddress: string }>()
+  const { id } = useParams<{ id: string }>()
+  const tokenInfo = useTokenBaseInfo(Number(id))
+  const tokenUserInfo = useTokenUserInfo(Number(id))
 
-  return <TokenProviderContext.Provider value={{ tokenAddress: tokenAddress! }} {...props} />
+  return <TokenProviderContext.Provider value={{ tokenId: Number(id), tokenInfo, tokenUserInfo }} {...props} />
 }
 
 export default TokenProvider

@@ -1,27 +1,28 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
+
+import { useAtom } from 'jotai/react'
 
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { defaultChartProps, getChartOverrides } from '@/constants/tradingiew'
 import DataFeed from '@/lib/datafeed'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
-import {
-  ChartingLibraryWidgetOptions,
-  IChartingLibraryWidget,
-  ResolutionString
-} from 'public/charting_library/charting_library'
-
-import { defaultChartProps, getChartOverrides } from '@/constants/tradingiew'
+import { intervalAtom } from '@/stores/token'
+import { ChartingLibraryWidgetOptions, IChartingLibraryWidget } from 'public/charting_library/charting_library'
 
 const TvChart: React.FC = () => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null)
   const widgetRef = useRef<IChartingLibraryWidget>()
   const datafeed = useRef(new DataFeed())
 
-  const { tokenAddress } = useTokenProviderContext()
+  const [interval, setInterval] = useAtom(intervalAtom)
+  const { tokenInfo } = useTokenProviderContext()
 
-  useEffect(() => {
+  const initChart = useCallback(() => {
+    if (!tokenInfo) return
+
     let widget: IChartingLibraryWidget | undefined = undefined
     const script = document.createElement('script')
     script.src = '/charting_library/charting_library.standalone.js' // TradingView 库的路径
@@ -30,8 +31,8 @@ const TvChart: React.FC = () => {
 
     script.onload = () => {
       const widgetOptions: ChartingLibraryWidgetOptions = {
-        symbol: tokenAddress,
-        interval: '1' as ResolutionString,
+        symbol: DataFeed.generateInitSymbol(tokenInfo.mintToken),
+        interval,
         datafeed: datafeed.current,
         container: chartContainerRef.current!,
         ...getChartOverrides(),
@@ -49,7 +50,16 @@ const TvChart: React.FC = () => {
         })
       })
     }
-  }, [tokenAddress])
+  }, [interval, setInterval, tokenInfo])
+
+  useEffect(() => {
+    if (!widgetRef.current) {
+      initChart()
+    } else {
+      const chart = widgetRef.current.activeChart()
+      if (tokenInfo?.mintToken) chart.setSymbol(DataFeed.generateInitSymbol(tokenInfo.mintToken))
+    }
+  }, [initChart, tokenInfo?.mintToken])
 
   return (
     <AccordionRoot type="single" collapsible value="tvchart">
