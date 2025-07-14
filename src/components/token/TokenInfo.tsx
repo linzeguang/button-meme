@@ -5,27 +5,31 @@ import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { formatAddress } from '@/lib/format'
+import { copy } from '@/lib/utils'
+import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
   const [value, setValue] = useState(props.defaultValue ?? 'tokenInfo')
+  const { tokenInfo } = useTokenProviderContext()
 
   const baseInfos = [
     {
       name: 'Contract',
       value: (
         <HarmonyOSSansText className="text-primary flex items-center gap-1">
-          <span>0x****...****</span>
-          <Icon.Copy />
+          <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span>
+          <Icon.Copy className="cursor-pointer" onClick={() => copy(tokenInfo!.mintToken.address)} />
         </HarmonyOSSansText>
       )
     },
     {
       name: 'Name',
-      value: 'LABUBU'
+      value: tokenInfo ? tokenInfo.mintToken.name : '--'
     },
     {
       name: 'Symbol',
-      value: 'LBB'
+      value: tokenInfo ? tokenInfo.mintToken.symbol : '--'
     }
   ]
 
