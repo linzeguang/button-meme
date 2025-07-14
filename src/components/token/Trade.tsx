@@ -39,8 +39,9 @@ const TradeForm: React.FC = () => {
       amountOut: ''
     }
   })
+  const tradeType = form.watch('tradeType')
 
-  const { tokenInfo } = useTokenProviderContext()
+  const { tokenInfo, tokenUserInfo } = useTokenProviderContext()
   const { buy } = useTrade()
 
   const handleSubmit = useCallback(
@@ -82,20 +83,28 @@ const TradeForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <div className="space-y-2.5">
+        <div className="space-y-4">
           <FormField
             control={form.control}
             name="amountIn"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>Amount</HarmonyOSSansText>
-                  <HarmonyOSSansText>
-                    <SimpleBalance token={tokenInfo?.stableToken.address} />
-                  </HarmonyOSSansText>
+                  <HarmonyOSSansText>From</HarmonyOSSansText>
+                  <SimpleBalance
+                    className="text-sm"
+                    prefix="Balance:"
+                    token={tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.address : tokenInfo?.mintToken.address}
+                  />
                 </FormLabel>
                 <FormControl>
-                  <Input size="lg" suffixNode={tokenInfo?.stableToken.symbol} {...field} />
+                  <Input
+                    size="lg"
+                    suffixNode={
+                      tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol
+                    }
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -106,19 +115,26 @@ const TradeForm: React.FC = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>Amount</HarmonyOSSansText>
-                  <HarmonyOSSansText>
-                    <SimpleBalance token={tokenInfo?.mintToken.address} />
-                  </HarmonyOSSansText>
+                  <HarmonyOSSansText>To</HarmonyOSSansText>
+                  {tradeType === TRADE_TYPE.BUY ? (
+                    <HarmonyOSSansText className="text-sm">{`LPH: ${tokenUserInfo?.lph ?? '--'}`}</HarmonyOSSansText>
+                  ) : (
+                    <SimpleBalance className="text-sm" token={tokenInfo?.stableToken.address} prefix="Balance:" />
+                  )}
                 </FormLabel>
                 <FormControl>
-                  <Input size="lg" suffixNode={tokenInfo?.mintToken.symbol} {...field} />
+                  <Input
+                    size="lg"
+                    readOnly
+                    suffixNode={tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
           />
         </div>
-        <Button variant="primary" type="submit" size="sm" className="w-full">
+        <Button variant="primary" type="submit" size="md" className="w-full">
           Buy Hash & Mint
         </Button>
       </form>
