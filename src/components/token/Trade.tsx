@@ -133,13 +133,7 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
 
 export const FooterTrade = () => {
   return (
-    <Container
-      className={cn(
-        'fixed right-0 bottom-0 left-0 z-16',
-        'flex items-center gap-4',
-        'bg-background-popover border-border h-20 border-t'
-      )}
-    >
+    <Container className={cn('flex h-20 items-center gap-4')}>
       <Button variant="fourth" className="text-text-primary px-1">
         <Icon.ScrollTop />
       </Button>
