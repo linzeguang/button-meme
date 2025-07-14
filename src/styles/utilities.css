@@ -51,10 +51,4 @@
   .dividing-wieght-bold {
     --dividing-wieght: 2px; /* 分割线粗细 */
   }
-
-  /* .klinecharts-pro {
-  }
-  .menu-container {
-    @apply !hidden;
-  } */
 }
