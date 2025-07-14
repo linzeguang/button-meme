@@ -52,26 +52,28 @@ export const useTokenBaseInfo = (id: number) => {
     args: [BigInt(id)]
   })
 
+  const mintToken = useMemo(() => data?.[2], [data])
+
   const { data: mintTokenInfo } = useReadContracts({
     contracts: [
       {
         abi: erc20Abi,
-        address: data?.[2],
+        address: mintToken,
         functionName: 'name'
       },
       {
         abi: erc20Abi,
-        address: data?.[2],
+        address: mintToken,
         functionName: 'symbol'
       },
       {
         abi: erc20Abi,
-        address: data?.[2],
+        address: mintToken,
         functionName: 'decimals'
       },
       {
         abi: erc20Abi,
-        address: data?.[2],
+        address: mintToken,
         functionName: 'balanceOf',
         args: [ENV_PARAMS.BURN_CONTRACT]
       }

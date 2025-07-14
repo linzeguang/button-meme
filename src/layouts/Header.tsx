@@ -15,7 +15,7 @@ const Header: React.FC<React.HTMLAttributes<HTMLElement>> = (props) => {
       <Container className="flex h-full items-center justify-between gap-2">
         {/* {!isMobile ? <Logo.Withname className="text-primary" /> : <Logo.Icon className="text-primary" />} */}
         <Logo.Withname className="text-primary" />
-        <Flex className="gap-6">
+        <Flex className="gap-4">
           <ConnectWallet />
           {isMobile && <Menu />}
         </Flex>

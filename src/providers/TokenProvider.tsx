@@ -24,6 +24,9 @@ const TokenProvider: React.FC<Omit<React.ComponentPropsWithRef<typeof TokenProvi
   const tokenInfo = useTokenBaseInfo(Number(id))
   const tokenUserInfo = useTokenUserInfo(Number(id))
 
+  console.log('>>>>>> tokenInfo: ', tokenInfo)
+  console.log('>>>>>> tokenUserInfo: ', tokenUserInfo)
+
   return <TokenProviderContext.Provider value={{ tokenId: Number(id), tokenInfo, tokenUserInfo }} {...props} />
 }
 
