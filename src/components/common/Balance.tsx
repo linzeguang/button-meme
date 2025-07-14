@@ -4,6 +4,7 @@ import { useAccount, useBalance } from 'wagmi'
 
 import { Icon } from '@/components/svgr'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { ENV_PARAMS } from '@/constants/evnParams'
 import { cn } from '@/lib/utils'
 
 import type { Address } from 'viem'
@@ -17,6 +18,7 @@ export const SimpleBalance: React.FC<
 > = ({ prefix, token, className, renderBalance, ...props }) => {
   const { address } = useAccount()
   const { data, isLoading } = useBalance({
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: address,
     token: token as Address
   })

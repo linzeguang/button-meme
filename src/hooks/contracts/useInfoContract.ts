@@ -18,16 +18,17 @@ export const useProjects = () => {
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getProjectCount'
   })
+  console.log('>>>>>> count: ', count)
   const { data } = useReadContracts({
     contracts: Array.from({ length: Number(count) }, (_, index) => ({
       abi: InfoAbi,
-
       chainId: ENV_PARAMS.CHAIN_ID,
       address: ENV_PARAMS.INFO_CONTRACT,
       functionName: 'getProjectInfo',
       args: [BigInt(index)]
     }))
   })
+  console.log('>>>>>> data: ', data)
 
   const projects = useMemo(
     () =>
@@ -71,6 +72,7 @@ export const useTokenBaseInfo = (project?: Project) => {
       },
       {
         abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
         address: stableToken,
         functionName: 'symbol'
       },

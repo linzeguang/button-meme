@@ -65,7 +65,7 @@ export default defineConfig((env) => {
         : {}
     },
     esbuild: {
-      drop: isProd ? ['console', 'debugger'] : undefined // 删除所有 console 和 debugger
+      // drop: isProd ? ['console', 'debugger'] : undefined // 删除所有 console 和 debugger
     }
   }
 })
