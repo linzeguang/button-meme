@@ -37,7 +37,7 @@ export default defineConfig((env) => {
       __BUILD_TIME__: JSON.stringify(timestamp)
     },
     server: {
-      port: 2888,
+      port: 4888,
       proxy: {
         [processEnv.VITE_API_BASE_URL]: {
           target: processEnv.VITE_API_TARGET_URL,
