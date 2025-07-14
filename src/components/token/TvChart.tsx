@@ -83,13 +83,13 @@ const TvChart: React.FC = () => {
               />
               <Flex className="flex-1 items-center justify-between py-1.5">
                 <HarmonyOSSansText className="text-sm font-bold lg:text-lg">
-                  name{' '}
+                  {tokenInfo?.mintToken.name || '--'}{' '}
                   <HarmonyOSSansText as="span" className="text-xs font-normal lg:text-sm" variant="secondary">
-                    / symbol
+                    / {tokenInfo?.mintToken.symbol || '--'}
                   </HarmonyOSSansText>
                 </HarmonyOSSansText>
                 <HarmonyOSSansText variant="secondary" className="text-sm font-bold lg:text-lg">
-                  EPoch: <HarmonyOSSansText as="span">1</HarmonyOSSansText>
+                  EPoch: <HarmonyOSSansText as="span">{tokenInfo?.project.epoch ?? '--'}</HarmonyOSSansText>
                 </HarmonyOSSansText>
               </Flex>
             </Flex>

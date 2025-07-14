@@ -44,12 +44,15 @@ export const useProjects = () => {
   }, [projects, setProjects])
 }
 
-export const useTokenBaseInfo = (id: number) => {
+export const useTokenBaseInfo = (project?: Project) => {
   const { data } = useReadContract({
     abi: InfoAbi,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getBaseInfo',
-    args: [BigInt(id)]
+    args: project && [BigInt(project.id)],
+    query: {
+      enabled: !!project
+    }
   })
 
   const mintToken = useMemo(() => data?.[2], [data])
@@ -109,23 +112,27 @@ export const useTokenBaseInfo = (id: number) => {
       tsRewardsAcc,
       mintToken: {
         address: mintToken,
-        name,
-        symbol,
-        decimals,
-        burnedAmount
-      }
+        name: name!,
+        symbol: symbol!,
+        decimals: decimals!,
+        burnedAmount: burnedAmount!
+      },
+      project: project!
     }
-  }, [data, mintTokenInfo])
+  }, [data, mintTokenInfo, project])
 }
 
-export const useTokenUserInfo = (id: number) => {
+export const useTokenUserInfo = (project?: Project) => {
   const { address } = useAccount()
 
   const { data } = useReadContract({
     abi: InfoAbi,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getUserInfo',
-    args: [BigInt(id), address as Address]
+    args: project && [BigInt(project.id), address as Address],
+    query: {
+      enabled: !!project
+    }
   })
 
   return useMemo<TokenUserInfo | undefined>(() => {

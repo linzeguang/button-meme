@@ -4,7 +4,10 @@ import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import Calculator from '@/lib/calculator'
+import { fromRawAmount } from '@/lib/rawAmount'
 import { cn } from '@/lib/utils'
+import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 enum INFO_TYPE {
   Overview,
@@ -15,6 +18,8 @@ const OnChainInfo: React.FC = () => {
   const [value] = useState('onChainInfo')
   const [infoType, setInfoType] = useState<INFO_TYPE>(INFO_TYPE.Overview)
 
+  const { tokenInfo, tokenUserInfo, userReward, reward } = useTokenProviderContext()
+
   const infoTypes = useMemo<
     Record<
       INFO_TYPE,
@@ -24,7 +29,7 @@ const OnChainInfo: React.FC = () => {
         infos: Array<
           {
             name: string
-            value: string
+            value: string | number
             highlight?: boolean
           }[]
         >
@@ -39,19 +44,21 @@ const OnChainInfo: React.FC = () => {
           [
             {
               name: 'Total LPH',
-              value: '--'
+              value: tokenInfo ? fromRawAmount(tokenInfo.totalLPH, tokenInfo.mintToken.decimals) : '--'
             },
             {
               name: 'Total TH',
-              value: '--'
+              value: reward?.totalTH ?? '--'
             },
             {
               name: 'Total TS',
-              value: '--'
+              value: reward?.totalTS ?? '--'
             },
             {
               name: 'Burned',
-              value: '--'
+              value: tokenInfo
+                ? fromRawAmount(tokenInfo.mintToken.burnedAmount || 0n, tokenInfo.mintToken.decimals)
+                : '--'
             }
           ]
         ]
@@ -63,51 +70,59 @@ const OnChainInfo: React.FC = () => {
           [
             {
               name: 'My TH',
-              value: '--'
+              value: userReward?.th ?? '--'
             },
             {
-              name: 'My direct referrals',
-              value: '--'
+              name: 'My direct referrals', // 直推人数
+              value: userReward?.referencesCount ?? '--'
             },
             {
               name: 'My harvested TH rewards',
-              value: '--',
+              value:
+                tokenUserInfo && tokenInfo
+                  ? fromRawAmount(tokenUserInfo.claimedRewardsTH, tokenInfo.mintToken.decimals)
+                  : '--',
               highlight: true
             },
             {
               name: 'My harvestable TH rewards',
-              value: '--',
+              value: userReward?.thRewardAcc ?? '--',
               highlight: true
             }
           ],
           [
             {
               name: 'My TS Rank',
-              value: '--'
+              value: userReward?.tsRankIndex ?? '--'
             },
             {
-              name: 'My indirect referrals',
-              value: '--'
+              name: 'My indirect referrals', // 间接推广人数 = 总推 - 直推
+              value: userReward
+                ? Calculator.base(userReward.totalRefsCount).minus(userReward.referencesCount).toString()
+                : '--'
             },
             {
               name: 'MY TS',
-              value: '--'
+              value: userReward?.ts ?? '--'
             },
             {
               name: 'My harvested TS rewards',
-              value: '--',
+              value:
+                tokenUserInfo && tokenInfo
+                  ? fromRawAmount(tokenUserInfo.claimedRewardsTS, tokenInfo.mintToken.decimals)
+                  : '--',
               highlight: true
             },
             {
               name: 'My harvestable TS rewards',
-              value: '--',
+              value: userReward?.tsRewardAcc ?? '--',
               highlight: true
             }
           ]
         ]
       }
     }),
-    []
+    [reward, tokenInfo, tokenUserInfo, userReward]
   )
 
   const infos = useMemo(() => infoTypes[infoType].infos, [infoType, infoTypes])
@@ -138,7 +153,9 @@ const OnChainInfo: React.FC = () => {
           <div>
             {infoType === INFO_TYPE.Overview && (
               <Flex className="h-14 items-center">
-                <HarmonyOSSansText className="text-xl font-bold">EPoch：1</HarmonyOSSansText>
+                <HarmonyOSSansText className="text-xl font-bold">
+                  EPoch：{tokenInfo?.project.epoch ?? '--'}
+                </HarmonyOSSansText>
               </Flex>
             )}
             {infos.map((_infos, index) => (

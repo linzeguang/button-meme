@@ -16,11 +16,12 @@ export interface TokenInfo {
   tsRewardsAcc: bigint
   mintToken: {
     address: `0x${string}`
-    name: string | undefined
-    symbol: string | undefined
-    decimals: number | undefined
-    burnedAmount: bigint | undefined
+    name: string
+    symbol: string
+    decimals: number
+    burnedAmount: bigint
   }
+  project: Project
 }
 
 export interface TokenUserInfo {

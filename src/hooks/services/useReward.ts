@@ -1,7 +1,6 @@
-import { useState } from 'react'
-
 import { useAccount } from 'wagmi'
 
+import { Project } from '@/hooks/contracts/types'
 import { useFetch } from '@/hooks/services/useFetch'
 
 export interface Reward {
@@ -12,17 +11,12 @@ export interface Reward {
   totalTS: string // 当前Epoch的TS排名前100的总和（6位小数）
 }
 
-export const useReward = () => {
-  const [pid, setPid] = useState(0)
-  const [epoch, setEpoch] = useState(0)
-
-  const { data, ...rest } = useFetch<Reward>({ url: `/rewards/${pid}/${epoch}` })
+export const useReward = (project: Project) => {
+  const { data, ...rest } = useFetch<Reward>({ url: project ? `/rewards/${project.id}/${project.epoch}` : null })
 
   return {
     ...rest,
-    data: data?.data,
-    setPid,
-    setEpoch
+    data: data?.data
   }
 }
 
@@ -45,17 +39,15 @@ export interface UserReward {
   totalRefsInvested: number // 我的总推广资金
 }
 
-export const useUserReward = () => {
+export const useUserReward = (project: Project) => {
   const { address } = useAccount()
-  const [pid, setPid] = useState(0)
-  const [epoch, setEpoch] = useState(0)
 
-  const { data, ...rest } = useFetch<UserReward>({ url: address ? `/rewards/${pid}/${epoch}/${address}` : null })
+  const { data, ...rest } = useFetch<UserReward>({
+    url: address && project ? `/rewards/${project.id}/${project.epoch}/${address}` : null
+  })
 
   return {
     ...rest,
-    data: data?.data,
-    setPid,
-    setEpoch
+    data: data?.data
   }
 }
