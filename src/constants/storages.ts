@@ -1,3 +1,4 @@
 export enum STORAGE_KEY {
-  THEME = 'THEME'
+  THEME = 'THEME',
+  PROJECTS = 'PROJECTS'
 }

@@ -1,18 +1,17 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
+import { useSetAtom } from 'jotai/react'
 import { Address, erc20Abi } from 'viem'
 import { useAccount, useReadContract, useReadContracts } from 'wagmi'
 
 import { InfoAbi } from '@/constants/abi'
 import { ENV_PARAMS } from '@/constants/evnParams'
-
-export interface Project {
-  name: string
-  epoch: number
-  id: bigint
-}
+import { Project } from '@/hooks/contracts/types'
+import { projectsAtom } from '@/stores/token'
 
 export const useProjects = () => {
+  const setProjects = useSetAtom(projectsAtom)
+
   const { data: count } = useReadContract({
     abi: InfoAbi,
     address: ENV_PARAMS.INFO_CONTRACT,
@@ -27,7 +26,7 @@ export const useProjects = () => {
     }))
   })
 
-  return useMemo(
+  const projects = useMemo(
     () =>
       data?.map<Project>(({ result }, index) => {
         const [name, epoch] = result as unknown as [string, number]
@@ -39,6 +38,10 @@ export const useProjects = () => {
       }),
     [data]
   )
+
+  useEffect(() => {
+    setProjects(projects || [])
+  }, [projects, setProjects])
 }
 
 export const useBaseInfo = (id: bigint) => {

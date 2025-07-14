@@ -1,3 +1,4 @@
+import { SUPPORTED_RESOLUTIONS } from '@/constants/tradingiew'
 import fetcher, { METHOD } from '@/lib/fetcher'
 import {
   Bar,
@@ -10,8 +11,6 @@ import {
   ResolveCallback,
   SubscribeBarsCallback
 } from 'public/charting_library/charting_library'
-
-import { SUPPORTED_RESOLUTIONS } from '@/constants/tradingiew'
 
 interface Kline {
   close: string
@@ -72,7 +71,7 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     console.log('>>>>>> unsubscribeBars: ', listenerGuid)
   }
   async generateSymbolInfo(symbolName: string) {
-    const decimals = 15
+    const decimals = 18
     const pricescale = Math.pow(10, decimals)
     console.log('>>>>>> generateSymbolInfo: ', { symbolName })
     return {
