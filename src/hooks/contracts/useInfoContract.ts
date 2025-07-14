@@ -42,6 +42,7 @@ export const useProjects = () => {
       }),
     [data]
   )
+  console.log('>>>>>> projects: ', projects)
 
   useEffect(() => {
     setProjects(projects || [])
