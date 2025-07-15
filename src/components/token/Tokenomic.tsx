@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { t } from '@lingui/core/macro'
+import { Trans } from '@lingui/react/macro'
 import { ResponsivePie } from '@nivo/pie'
 
 import { Icon } from '@/components/svgr'
@@ -8,8 +10,6 @@ import { AccordionRoot } from '@/components/ui/Accordion'
 import { Grid } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { randomColor } from '@/lib/utils'
-import { Trans } from '@lingui/react/macro'
-import { t } from '@lingui/core/macro'
 
 const COLOR = {
   LPHMining: randomColor(),

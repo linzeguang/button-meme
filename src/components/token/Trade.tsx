@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { t } from '@lingui/core/macro'
+import { Trans } from '@lingui/react/macro'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
@@ -18,8 +20,6 @@ import { HarmonyOSSansText } from '@/components/ui/Text'
 import { useTrade } from '@/hooks/contracts/useMiningPool'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
-import { Trans } from '@lingui/react/macro'
-import { t } from '@lingui/core/macro'
 
 export enum TRADE_TYPE {
   BUY = 'buy',

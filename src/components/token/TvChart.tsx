@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 
+import { Trans } from '@lingui/react/macro'
 import { useAtom } from 'jotai/react'
 
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
@@ -11,7 +12,6 @@ import DataFeed from '@/lib/datafeed'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
 import { intervalAtom } from '@/stores/token'
 import { ChartingLibraryWidgetOptions, IChartingLibraryWidget } from 'public/charting_library/charting_library'
-import { Trans } from '@lingui/react/macro'
 
 const TvChart: React.FC = () => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null)

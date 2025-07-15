@@ -70,7 +70,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
             <TableHead
               id={`table-head-${id}`}
               {...theadProps}
-              className={cn('sticky top-0 z-10', theadProps?.className)}
+              className={cn('sticky top-0 z-1', theadProps?.className)}
             >
               <TableRow {...therdTrProps}>
                 {columns.map((column) => (

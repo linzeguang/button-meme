@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
+import { t } from '@lingui/core/macro'
+import { Trans } from '@lingui/react/macro'
+
 import { Icon } from '@/components/svgr'
 import { SearchHolder } from '@/components/token/Search'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
@@ -10,8 +13,6 @@ import { Rank, useRank } from '@/hooks/services/useRank'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { formatAddress } from '@/lib/format'
 import { cn } from '@/lib/utils'
-import { Trans } from '@lingui/react/macro'
-import { t } from '@lingui/core/macro'
 
 const TokenRanking: React.FC = () => {
   const { isMobile } = useMediaQuery()

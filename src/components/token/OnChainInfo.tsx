@@ -1,15 +1,17 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
+
+import { t } from '@lingui/core/macro'
+import { Trans } from '@lingui/react/macro'
 
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import useMemoWithLocale from '@/hooks/useMemoWithLocale'
 import Calculator from '@/lib/calculator'
 import { fromRawAmount } from '@/lib/rawAmount'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
-import { t } from '@lingui/core/macro'
-import { Trans } from '@lingui/react/macro'
 
 enum INFO_TYPE {
   Overview,
@@ -22,7 +24,7 @@ const OnChainInfo: React.FC = () => {
 
   const { tokenInfo, tokenUserInfo, userReward, reward } = useTokenProviderContext()
 
-  const infoTypes = useMemo<
+  const infoTypes = useMemoWithLocale<
     Record<
       INFO_TYPE,
       {
@@ -127,7 +129,7 @@ const OnChainInfo: React.FC = () => {
     [reward, tokenInfo, tokenUserInfo, userReward]
   )
 
-  const infos = useMemo(() => infoTypes[infoType].infos, [infoType, infoTypes])
+  const infos = useMemoWithLocale(() => infoTypes[infoType].infos, [infoType, infoTypes])
 
   return (
     <AccordionRoot type="single" collapsible value={value}>

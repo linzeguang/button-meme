@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 
-import { Trans } from '@lingui/react/macro'
 import { t } from '@lingui/core/macro'
+import { Trans } from '@lingui/react/macro'
 
 import { Icon, Socials } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import useMemoWithLocale from '@/hooks/useMemoWithLocale'
 import { formatAddress } from '@/lib/format'
 import { copy } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
@@ -16,25 +17,28 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
   const [value, setValue] = useState(props.defaultValue ?? 'tokenInfo')
   const { tokenInfo } = useTokenProviderContext()
 
-  const baseInfos = [
-    {
-      name: t`Contract`,
-      value: (
-        <HarmonyOSSansText className="text-primary flex items-center gap-1">
-          <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span>
-          <Icon.Copy className="cursor-pointer" onClick={() => copy(tokenInfo!.mintToken.address)} />
-        </HarmonyOSSansText>
-      )
-    },
-    {
-      name: t`Name`,
-      value: tokenInfo ? tokenInfo.mintToken.name : '--'
-    },
-    {
-      name: t`Symbol`,
-      value: tokenInfo ? tokenInfo.mintToken.symbol : '--'
-    }
-  ]
+  const baseInfos = useMemoWithLocale(
+    () => [
+      {
+        name: t`Contract`,
+        value: (
+          <HarmonyOSSansText className="text-primary flex items-center gap-1">
+            <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span>
+            <Icon.Copy className="cursor-pointer" onClick={() => copy(tokenInfo!.mintToken.address)} />
+          </HarmonyOSSansText>
+        )
+      },
+      {
+        name: t`Name`,
+        value: tokenInfo ? tokenInfo.mintToken.name : '--'
+      },
+      {
+        name: t`Symbol`,
+        value: tokenInfo ? tokenInfo.mintToken.symbol : '--'
+      }
+    ],
+    [tokenInfo]
+  )
 
   return (
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>

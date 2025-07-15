@@ -14,11 +14,11 @@ import {
 import { Flex } from '@/components/ui/Box'
 import { Dividing } from '@/components/ui/Dividing'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { LOCALES } from '@/constants/settings'
 import { cn, toggleLight } from '@/lib/utils'
+import { useI18nLocaleProviderContext } from '@/providers/I18nLocaleProvider'
 import { ROUTE_PATH } from '@/routes'
 import { projectsAtom } from '@/stores/token'
-import { LOCALES } from '@/constants/settings'
-import useLocale from '@/hooks/useLocale'
 
 const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolean; className?: string }>(
   ({ collapsed, className }, ref) => {
@@ -27,7 +27,7 @@ const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolea
     const [accordionValue, setAccordionValue] = useState<string>('')
 
     const projects = useAtomValue(projectsAtom)
-    const { setLocale } = useLocale()
+    const { changeLocale } = useI18nLocaleProviderContext()
 
     const accordionOptions: Array<
       | {
@@ -96,7 +96,7 @@ const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolea
         icon: Sidebar.Locale,
         childrens: Object.values(LOCALES).map(({ name, locale }) => ({
           name,
-          onClick: () => setLocale(locale)
+          onClick: () => changeLocale(locale)
         }))
       }
     ]

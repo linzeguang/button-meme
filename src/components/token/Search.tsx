@@ -1,9 +1,10 @@
 import React from 'react'
 
+import { t } from '@lingui/core/macro'
+
 import { Icon } from '@/components/svgr'
 import { Input } from '@/components/ui/Input'
 import { cn } from '@/lib/utils'
-import { t } from '@lingui/core/macro'
 
 export const SearchToken: React.FC<React.ComponentProps<typeof Input>> = ({ className, wrapperClassName, ...rest }) => {
   return (

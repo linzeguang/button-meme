@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react'
 
+import { t } from '@lingui/core/macro'
+
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { Table } from '@/components/ui/Table'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
-import { t } from '@lingui/core/macro'
 
 enum RECORD_TYPE {
   Trade,

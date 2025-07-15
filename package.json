@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "build:visualizer": "vite build -- --visualizer",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "format:fix": "prettier --write \"./src/**/*.{ts,tsx,css}\" --cache",
     "locale:extract": "npx lingui extract",
     "locale:compile": "npx lingui compile"

@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { Trans } from '@lingui/react/macro'
+
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
@@ -9,7 +11,6 @@ import useMediaQuery from '@/hooks/useMediaQuery'
 import Calculator from '@/lib/calculator'
 import { fromRawAmount } from '@/lib/rawAmount'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
-import { Trans } from '@lingui/react/macro'
 
 const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
   const { isMobile } = useMediaQuery()

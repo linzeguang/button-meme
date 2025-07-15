@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Trans } from '@lingui/react/macro'
+
 import { SimpleBalance } from '@/components/common/Balance'
 import { Icon } from '@/components/svgr'
 import { Flex, Grid } from '@/components/ui/Box'
@@ -9,7 +11,6 @@ import { HarmonyOSSansText } from '@/components/ui/Text'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { useWallet } from '@/hooks/useWallet'
 import { formatAddress, formatNumber } from '@/lib/format'
-import { Trans } from '@lingui/react/macro'
 
 export const MobileConnected = () => {
   const { address } = useWallet()

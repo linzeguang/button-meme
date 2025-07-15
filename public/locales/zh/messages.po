@@ -13,19 +13,23 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/token/TokenRanking.tsx:112
+#: src/components/token/TokenRanking.tsx:113
 msgid "- Out of TOP 100 -"
 msgstr ""
 
-#: src/components/token/Reward.tsx:40
+#: src/components/token/OnChainInfo.tsx:148
+#~ msgid "{0}"
+#~ msgstr ""
+
+#: src/components/token/Reward.tsx:41
 msgid "/ Total"
 msgstr ""
 
-#: src/components/token/TokenRecord.tsx:45
+#: src/components/token/TokenRecord.tsx:46
 msgid "Activity Log"
 msgstr ""
 
-#: src/components/token/TokenRanking.tsx:78
+#: src/components/token/TokenRanking.tsx:79
 msgid "Address"
 msgstr ""
 
@@ -34,7 +38,7 @@ msgstr ""
 msgid "Balance:"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:60
+#: src/components/token/OnChainInfo.tsx:62
 msgid "Burned"
 msgstr ""
 
@@ -46,11 +50,11 @@ msgstr ""
 msgid "Buy Hash & Mint"
 msgstr ""
 
-#: src/components/token/Reward.tsx:60
+#: src/components/token/Reward.tsx:61
 msgid "Claim"
 msgstr ""
 
-#: src/components/settings/ConnectWallet.tsx:56
+#: src/components/settings/ConnectWallet.tsx:57
 msgid "Connect Wallet"
 msgstr ""
 
@@ -58,11 +62,11 @@ msgstr ""
 msgid "Contract"
 msgstr "合约地址"
 
-#: src/components/token/Invite.tsx:29
+#: src/components/token/Invite.tsx:30
 msgid "Copy"
 msgstr ""
 
-#: src/components/token/TokenRecord.tsx:89
+#: src/components/token/TokenRecord.tsx:90
 msgid "Date"
 msgstr ""
 
@@ -70,12 +74,12 @@ msgstr ""
 msgid "Defi"
 msgstr ""
 
-#: src/components/token/Search.tsx:28
+#: src/components/token/Search.tsx:29
 msgid "Enter address to query"
 msgstr ""
 
 #: src/components/token/TvChart.tsx:93
-#: src/components/token/OnChainInfo.tsx:159
+#: src/components/token/OnChainInfo.tsx:161
 msgid "EPoch: "
 msgstr ""
 
@@ -83,7 +87,7 @@ msgstr ""
 msgid "From"
 msgstr ""
 
-#: src/components/token/Invite.tsx:21
+#: src/components/token/Invite.tsx:22
 msgid "Invite Friends"
 msgstr ""
 
@@ -91,35 +95,35 @@ msgstr ""
 msgid "LPH Mining"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:78
+#: src/components/token/OnChainInfo.tsx:80
 msgid "My direct referrals"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:90
+#: src/components/token/OnChainInfo.tsx:92
 msgid "My harvestable TH rewards"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:82
+#: src/components/token/OnChainInfo.tsx:84
 msgid "My harvested TH rewards"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:111
+#: src/components/token/OnChainInfo.tsx:113
 msgid "My harvested TS rewards"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:101
+#: src/components/token/OnChainInfo.tsx:103
 msgid "My indirect referrals"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:74
+#: src/components/token/OnChainInfo.tsx:76
 msgid "My TH"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:107
+#: src/components/token/OnChainInfo.tsx:109
 msgid "MY TS"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:97
+#: src/components/token/OnChainInfo.tsx:99
 msgid "My TS Rank"
 msgstr ""
 
@@ -127,22 +131,22 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:43
+#: src/components/token/OnChainInfo.tsx:45
 msgid "Overview"
-msgstr ""
+msgstr "预览"
 
-#: src/components/token/TokenRecord.tsx:117
+#: src/components/token/TokenRecord.tsx:118
 msgid "Price"
 msgstr ""
 
-#: src/components/token/TokenRanking.tsx:48
+#: src/components/token/TokenRanking.tsx:49
 msgid "Ranking"
 msgstr ""
 
-#: src/components/token/TokenRanking.tsx:88
-#: src/components/token/Reward.tsx:26
+#: src/components/token/TokenRanking.tsx:89
+#: src/components/token/Reward.tsx:27
 msgid "Reward"
-msgstr ""
+msgstr "奖励"
 
 #: src/components/token/Trade.tsx:78
 msgid "Sell"
@@ -168,23 +172,23 @@ msgstr ""
 msgid "Tokenomic"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:48
+#: src/components/token/OnChainInfo.tsx:50
 msgid "Total LPH"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:52
+#: src/components/token/OnChainInfo.tsx:54
 msgid "Total TH"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:56
+#: src/components/token/OnChainInfo.tsx:58
 msgid "Total TS"
 msgstr ""
 
-#: src/components/token/TokenRecord.tsx:41
+#: src/components/token/TokenRecord.tsx:42
 msgid "Transaction History"
 msgstr ""
 
-#: src/components/token/TokenRanking.tsx:83
+#: src/components/token/TokenRanking.tsx:84
 msgid "TS"
 msgstr ""
 
@@ -192,18 +196,18 @@ msgstr ""
 msgid "TS Rewards"
 msgstr ""
 
-#: src/components/token/TokenRecord.tsx:93
+#: src/components/token/TokenRecord.tsx:94
 msgid "Type"
 msgstr ""
 
-#: src/components/token/Search.tsx:15
+#: src/components/token/Search.tsx:16
 msgid "Type token symbol, address to find"
 msgstr ""
 
-#: src/components/token/OnChainInfo.tsx:69
+#: src/components/token/OnChainInfo.tsx:71
 msgid "UD"
 msgstr ""
 
-#: src/components/token/TokenRecord.tsx:125
+#: src/components/token/TokenRecord.tsx:126
 msgid "View"
 msgstr ""
