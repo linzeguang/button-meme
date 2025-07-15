@@ -11,7 +11,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format:fix": "prettier --write \"./src/**/*.{ts,tsx,css}\" --cache",
-    "locale": "npx lingui extract && npx lingui compile",
     "locale:extract": "npx lingui extract",
     "locale:compile": "npx lingui compile"
   },

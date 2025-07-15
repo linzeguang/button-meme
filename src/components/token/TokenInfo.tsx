@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+import { Trans } from '@lingui/react/macro'
+import { t } from '@lingui/core/macro'
+
 import { Icon, Socials } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
@@ -15,7 +18,7 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
 
   const baseInfos = [
     {
-      name: 'Contract',
+      name: t`Contract`,
       value: (
         <HarmonyOSSansText className="text-primary flex items-center gap-1">
           <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span>
@@ -24,11 +27,11 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
       )
     },
     {
-      name: 'Name',
+      name: t`Name`,
       value: tokenInfo ? tokenInfo.mintToken.name : '--'
     },
     {
-      name: 'Symbol',
+      name: t`Symbol`,
       value: tokenInfo ? tokenInfo.mintToken.symbol : '--'
     }
   ]
@@ -39,7 +42,9 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
         value="tokenInfo"
         name={
           <>
-            <HarmonyOSSansText>Token</HarmonyOSSansText>
+            <HarmonyOSSansText>
+              <Trans>Token</Trans>
+            </HarmonyOSSansText>
             <Icon.Tip className="text-text-secondary" />
           </>
         }

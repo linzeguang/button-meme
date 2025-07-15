@@ -9,6 +9,7 @@ import { HarmonyOSSansText } from '@/components/ui/Text'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { useWallet } from '@/hooks/useWallet'
 import { formatAddress, formatNumber } from '@/lib/format'
+import { Trans } from '@lingui/react/macro'
 
 export const MobileConnected = () => {
   const { address } = useWallet()
@@ -52,7 +53,7 @@ const ConnectWallet: React.FC = () => {
 
   return (
     <Button variant="primary" size={isMobile ? 'sm' : 'md'} className="font-HarmonyOSSans" onClick={connect}>
-      Connect Wallet
+      <Trans>Connect Wallet</Trans>
     </Button>
   )
 }

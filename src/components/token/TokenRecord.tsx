@@ -6,6 +6,7 @@ import { Flex } from '@/components/ui/Box'
 import { Table } from '@/components/ui/Table'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { t } from '@lingui/core/macro'
 
 enum RECORD_TYPE {
   Trade,
@@ -37,18 +38,18 @@ const TokenRecord: React.FC = () => {
   const recordTypes = useMemo(
     () => [
       {
-        name: '交易记录',
+        name: t`Transaction History`,
         value: RECORD_TYPE.Trade
       },
       {
-        name: '活动记录',
+        name: t`Activity Log`,
         value: RECORD_TYPE.Active
       }
     ],
     []
   )
 
-  const dataSource: TradeData[] = Array.from({ length: 10 }, () => ({
+  const dataSource: TradeData[] = Array.from({ length: 0 }, () => ({
     base: 'LABUBU',
     baseAmount: formatNumber(Math.random() * 1_000_000_000),
     date: '2025-12-12',
@@ -85,11 +86,11 @@ const TokenRecord: React.FC = () => {
           <Table<TradeData>
             columns={[
               {
-                name: 'Date',
+                name: t`Date`,
                 field: 'date'
               },
               {
-                name: 'Type',
+                name: t`Type`,
                 field: 'type',
                 render: (value) => {
                   const isBuy = value === TRADE_TYPE.Buy
@@ -113,7 +114,7 @@ const TokenRecord: React.FC = () => {
                 }
               },
               {
-                name: 'Price',
+                name: t`Price`,
                 field: 'price',
                 render: (value, data) => {
                   const isBuy = data.type === TRADE_TYPE.Buy
@@ -121,7 +122,7 @@ const TokenRecord: React.FC = () => {
                 }
               },
               {
-                name: 'View',
+                name: t`View`,
                 field: 'tx',
                 render: (value) => <span className="text-primary">{value}</span>
               }

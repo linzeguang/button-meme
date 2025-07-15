@@ -11,6 +11,7 @@ import DataFeed from '@/lib/datafeed'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
 import { intervalAtom } from '@/stores/token'
 import { ChartingLibraryWidgetOptions, IChartingLibraryWidget } from 'public/charting_library/charting_library'
+import { Trans } from '@lingui/react/macro'
 
 const TvChart: React.FC = () => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null)
@@ -89,7 +90,8 @@ const TvChart: React.FC = () => {
                   </HarmonyOSSansText>
                 </HarmonyOSSansText>
                 <HarmonyOSSansText variant="secondary" className="text-sm font-bold lg:text-lg">
-                  EPoch: <HarmonyOSSansText as="span">{tokenInfo?.project.epoch ?? '--'}</HarmonyOSSansText>
+                  <Trans>EPoch: </Trans>
+                  <HarmonyOSSansText as="span">{tokenInfo?.project.epoch ?? '--'}</HarmonyOSSansText>
                 </HarmonyOSSansText>
               </Flex>
             </Flex>

@@ -8,6 +8,8 @@ import Calculator from '@/lib/calculator'
 import { fromRawAmount } from '@/lib/rawAmount'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
+import { t } from '@lingui/core/macro'
+import { Trans } from '@lingui/react/macro'
 
 enum INFO_TYPE {
   Overview,
@@ -38,24 +40,24 @@ const OnChainInfo: React.FC = () => {
   >(
     () => ({
       [INFO_TYPE.Overview]: {
-        name: 'Overview',
+        name: t`Overview`,
         value: INFO_TYPE.Overview,
         infos: [
           [
             {
-              name: 'Total LPH',
+              name: t`Total LPH`,
               value: tokenInfo ? fromRawAmount(tokenInfo.totalLPH, tokenInfo.mintToken.decimals) : '--'
             },
             {
-              name: 'Total TH',
+              name: t`Total TH`,
               value: reward?.totalTH ?? '--'
             },
             {
-              name: 'Total TS',
+              name: t`Total TS`,
               value: reward?.totalTS ?? '--'
             },
             {
-              name: 'Burned',
+              name: t`Burned`,
               value: tokenInfo
                 ? fromRawAmount(tokenInfo.mintToken.burnedAmount || 0n, tokenInfo.mintToken.decimals)
                 : '--'
@@ -64,20 +66,20 @@ const OnChainInfo: React.FC = () => {
         ]
       },
       [INFO_TYPE.UD]: {
-        name: 'UD',
+        name: t`UD`,
         value: INFO_TYPE.UD,
         infos: [
           [
             {
-              name: 'My TH',
+              name: t`My TH`,
               value: userReward?.th ?? '--'
             },
             {
-              name: 'My direct referrals', // 直推人数
+              name: t`My direct referrals`, // 直推人数
               value: userReward?.referencesCount ?? '--'
             },
             {
-              name: 'My harvested TH rewards',
+              name: t`My harvested TH rewards`,
               value:
                 tokenUserInfo && tokenInfo
                   ? fromRawAmount(tokenUserInfo.claimedRewardsTH, tokenInfo.mintToken.decimals)
@@ -85,28 +87,28 @@ const OnChainInfo: React.FC = () => {
               highlight: true
             },
             {
-              name: 'My harvestable TH rewards',
+              name: t`My harvestable TH rewards`,
               value: userReward?.thRewardAcc ?? '--',
               highlight: true
             }
           ],
           [
             {
-              name: 'My TS Rank',
+              name: t`My TS Rank`,
               value: userReward?.tsRankIndex ?? '--'
             },
             {
-              name: 'My indirect referrals', // 间接推广人数 = 总推 - 直推
+              name: t`My indirect referrals`, // 间接推广人数 = 总推 - 直推
               value: userReward
                 ? Calculator.base(userReward.totalRefsCount).minus(userReward.referencesCount).toString()
                 : '--'
             },
             {
-              name: 'MY TS',
+              name: t`MY TS`,
               value: userReward?.ts ?? '--'
             },
             {
-              name: 'My harvested TS rewards',
+              name: t`My harvested TS rewards`,
               value:
                 tokenUserInfo && tokenInfo
                   ? fromRawAmount(tokenUserInfo.claimedRewardsTS, tokenInfo.mintToken.decimals)
@@ -114,7 +116,7 @@ const OnChainInfo: React.FC = () => {
               highlight: true
             },
             {
-              name: 'My harvestable TS rewards',
+              name: `My harvestable TS rewards`,
               value: userReward?.tsRewardAcc ?? '--',
               highlight: true
             }
@@ -154,7 +156,8 @@ const OnChainInfo: React.FC = () => {
             {infoType === INFO_TYPE.Overview && (
               <Flex className="h-14 items-center">
                 <HarmonyOSSansText className="text-xl font-bold">
-                  EPoch：{tokenInfo?.project.epoch ?? '--'}
+                  <Trans>EPoch: </Trans>
+                  {tokenInfo?.project.epoch ?? '--'}
                 </HarmonyOSSansText>
               </Flex>
             )}

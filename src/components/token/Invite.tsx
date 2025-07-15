@@ -7,6 +7,7 @@ import { Flex } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { Trans } from '@lingui/react/macro'
 
 const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
   const [value, setValue] = useState(props.defaultValue ?? 'invite')
@@ -15,13 +16,17 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
         value="invite"
-        name={<HarmonyOSSansText>Invite Friends</HarmonyOSSansText>}
+        name={
+          <HarmonyOSSansText>
+            <Trans>Invite Friends</Trans>
+          </HarmonyOSSansText>
+        }
         content={
           <>
             <Flex className="gap-2">
               <Input wrapperClassName="flex-1" disabled />
               <Button variant="primary" size="sm" className="min-w-[6rem]">
-                Copy
+                <Trans>Copy</Trans>
               </Button>
             </Flex>
             <Flex className="gap-2 [&_svg]:h-4.5">

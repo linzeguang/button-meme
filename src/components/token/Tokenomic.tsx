@@ -8,6 +8,8 @@ import { AccordionRoot } from '@/components/ui/Accordion'
 import { Grid } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { randomColor } from '@/lib/utils'
+import { Trans } from '@lingui/react/macro'
+import { t } from '@lingui/core/macro'
 
 const COLOR = {
   LPHMining: randomColor(),
@@ -19,22 +21,22 @@ const COLOR = {
 const data = [
   {
     id: 'LPHMining',
-    label: 'LPH Mining',
+    label: t`LPH Mining`,
     value: 65
   },
   {
     id: 'THRewards',
-    label: 'TH Rewards',
+    label: t`TH Rewards`,
     value: 20
   },
   {
     id: 'TSRewards',
-    label: 'TS Rewards',
+    label: t`TS Rewards`,
     value: 10
   },
   {
     id: 'Defi',
-    label: 'Defi',
+    label: t`Defi`,
     value: 5
   }
 ]
@@ -48,7 +50,9 @@ const Tokenomic: React.FC<{ className?: string; defaultValue?: string }> = (prop
         value="tokenomic"
         name={
           <>
-            <HarmonyOSSansText>Tokenomic</HarmonyOSSansText>
+            <HarmonyOSSansText>
+              <Trans>Tokenomic</Trans>
+            </HarmonyOSSansText>
             <Icon.Tip className="text-text-secondary" />
           </>
         }

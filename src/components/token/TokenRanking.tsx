@@ -10,6 +10,8 @@ import { Rank, useRank } from '@/hooks/services/useRank'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { formatAddress } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { Trans } from '@lingui/react/macro'
+import { t } from '@lingui/core/macro'
 
 const TokenRanking: React.FC = () => {
   const { isMobile } = useMediaQuery()
@@ -42,7 +44,9 @@ const TokenRanking: React.FC = () => {
         value="tokenRanking"
         name={
           <>
-            <HarmonyOSSansText>Hash Ranking</HarmonyOSSansText>
+            <HarmonyOSSansText>
+              <Trans>Ranking</Trans>
+            </HarmonyOSSansText>
             <Icon.Tip className="text-text-secondary" />
           </>
         }
@@ -71,17 +75,17 @@ const TokenRanking: React.FC = () => {
                   }
                 },
                 {
-                  name: 'Address',
+                  name: t`Address`,
                   field: 'account',
                   render: (address) => formatAddress(address, undefined, isMobile ? -2 : undefined)
                 },
                 {
-                  name: 'TS',
+                  name: t`TS`,
                   field: 'ts',
                   align: 'center'
                 },
                 {
-                  name: 'Reward',
+                  name: t`Reward`,
                   field: 'tsReward',
                   align: 'end'
                 }
@@ -105,7 +109,7 @@ const TokenRanking: React.FC = () => {
               scroll={{ y: 320 }}
             />
             <HarmonyOSSansText data-index="out" className="text-center text-[0.625rem]" variant="secondary">
-              - Out of TOP 100 -
+              <Trans>- Out of TOP 100 -</Trans>
             </HarmonyOSSansText>
           </div>
         }

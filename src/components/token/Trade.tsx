@@ -18,6 +18,8 @@ import { HarmonyOSSansText } from '@/components/ui/Text'
 import { useTrade } from '@/hooks/contracts/useMiningPool'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
+import { Trans } from '@lingui/react/macro'
+import { t } from '@lingui/core/macro'
 
 export enum TRADE_TYPE {
   BUY = 'buy',
@@ -68,12 +70,12 @@ const TradeForm: React.FC = () => {
                   options={[
                     {
                       value: TRADE_TYPE.BUY,
-                      label: 'Buy',
+                      label: t`Buy`,
                       className: 'data-[state=checked]:bg-buy'
                     },
                     {
                       value: TRADE_TYPE.SELL,
-                      label: 'Sell',
+                      label: t`Sell`,
                       className: 'data-[state=checked]:bg-sell'
                     }
                   ]}
@@ -90,10 +92,12 @@ const TradeForm: React.FC = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>From</HarmonyOSSansText>
+                  <HarmonyOSSansText>
+                    <Trans>From</Trans>
+                  </HarmonyOSSansText>
                   <SimpleBalance
                     className="text-sm"
-                    prefix="Balance:"
+                    prefix={t`Balance:`}
                     token={tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.address : tokenInfo?.mintToken.address}
                   />
                 </FormLabel>
@@ -115,11 +119,13 @@ const TradeForm: React.FC = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>To</HarmonyOSSansText>
+                  <HarmonyOSSansText>
+                    <Trans>To</Trans>
+                  </HarmonyOSSansText>
                   {tradeType === TRADE_TYPE.BUY ? (
                     <HarmonyOSSansText className="text-sm">{`LPH: ${tokenUserInfo?.lph ?? '--'}`}</HarmonyOSSansText>
                   ) : (
-                    <SimpleBalance className="text-sm" token={tokenInfo?.stableToken.address} prefix="Balance:" />
+                    <SimpleBalance className="text-sm" token={tokenInfo?.stableToken.address} prefix={t`Balance:`} />
                   )}
                 </FormLabel>
                 <FormControl>
@@ -135,7 +141,7 @@ const TradeForm: React.FC = () => {
           />
         </div>
         <Button variant="primary" type="submit" size="md" className="w-full">
-          Buy Hash & Mint
+          <Trans>Buy Hash & Mint</Trans>
         </Button>
       </form>
     </Form>

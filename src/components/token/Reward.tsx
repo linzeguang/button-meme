@@ -9,6 +9,7 @@ import useMediaQuery from '@/hooks/useMediaQuery'
 import Calculator from '@/lib/calculator'
 import { fromRawAmount } from '@/lib/rawAmount'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
+import { Trans } from '@lingui/react/macro'
 
 const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
   const { isMobile } = useMediaQuery()
@@ -20,7 +21,11 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
     <AccordionRoot type="single" value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
         value="reward"
-        name={<HarmonyOSSansText>Reward</HarmonyOSSansText>}
+        name={
+          <HarmonyOSSansText>
+            <Trans>Reward</Trans>
+          </HarmonyOSSansText>
+        }
         contentClassName="border-none pt-0"
         content={
           <Flex className="items-center justify-between">
@@ -31,7 +36,9 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
                   : '--'}
               </span>
               <HarmonyOSSansText variant="secondary" className="flex gap-4 text-xs lg:text-sm">
-                <span>/ Total</span>
+                <span>
+                  <Trans>/ Total</Trans>
+                </span>
                 <span>
                   {tokenUserInfo && tokenInfo
                     ? fromRawAmount(
@@ -50,7 +57,7 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
               disabled={tokenInfo?.checkMerkleRoot}
               className="min-w-[6rem]"
             >
-              Claim
+              <Trans>Claim</Trans>
             </Button>
           </Flex>
         }
