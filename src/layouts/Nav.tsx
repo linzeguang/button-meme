@@ -17,13 +17,17 @@ import { HarmonyOSSansText } from '@/components/ui/Text'
 import { cn, toggleLight } from '@/lib/utils'
 import { ROUTE_PATH } from '@/routes'
 import { projectsAtom } from '@/stores/token'
+import { LOCALES } from '@/constants/settings'
+import useLocale from '@/hooks/useLocale'
 
 const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolean; className?: string }>(
   ({ collapsed, className }, ref) => {
     const navigate = useNavigate()
 
     const [accordionValue, setAccordionValue] = useState<string>('')
+
     const projects = useAtomValue(projectsAtom)
+    const { setLocale } = useLocale()
 
     const accordionOptions: Array<
       | {
@@ -90,16 +94,10 @@ const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolea
         name: 'Locale',
         value: 'locale',
         icon: Sidebar.Locale,
-        childrens: [
-          {
-            name: 'English',
-            onClick: () => toggleLight()
-          },
-          {
-            name: 'English',
-            onClick: () => toggleLight()
-          }
-        ]
+        childrens: Object.values(LOCALES).map(({ name, locale }) => ({
+          name,
+          onClick: () => setLocale(locale)
+        }))
       }
     ]
     const renderAccordionTrigger = useCallback(

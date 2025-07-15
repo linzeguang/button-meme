@@ -3,10 +3,10 @@ import { defineConfig } from '@lingui/cli'
 export default defineConfig({
   sourceLocale: 'en',
   locales: ['en', 'zh'],
-  compileNamespace: 'ts',
+  compileNamespace: 'json',
   catalogs: [
     {
-      path: '<rootDir>/src/locales/{locale}/messages',
+      path: '<rootDir>/public/locales/{locale}/messages',
       include: ['src']
     }
   ]
