@@ -69,7 +69,7 @@ const Tokenomic: React.FC<{ className?: string; defaultValue?: string }> = (prop
             </div>
             <Grid className="mx-auto w-4/5 max-w-64 grid-cols-2 gap-0.5">
               {data.map(({ id, label }) => (
-                <HarmonyOSSansText className="flex items-center gap-1 text-xs" variant="secondary">
+                <HarmonyOSSansText as="div" key={id} className="flex items-center gap-1 text-xs" variant="secondary">
                   <div className="size-2" style={{ backgroundColor: COLOR[id as keyof typeof COLOR] }} />
                   <span>{label}</span>
                 </HarmonyOSSansText>
