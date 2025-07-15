@@ -1,5 +1,6 @@
 import path from 'path'
 
+import { lingui } from '@lingui/vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import externalGlobals from 'rollup-plugin-external-globals'
@@ -19,7 +20,12 @@ export default defineConfig((env) => {
 
   return {
     plugins: [
-      react(),
+      react({
+        babel: {
+          plugins: ['@lingui/babel-plugin-lingui-macro']
+        }
+      }),
+      lingui(),
       tailwindcss(),
       svgr(),
       isVisualizer && visualizer({ open: true }),

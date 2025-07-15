@@ -4,6 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import sortImport from 'eslint-plugin-import'
 import tseslint from 'typescript-eslint'
+import lingui from 'eslint-plugin-lingui'
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -22,6 +23,7 @@ export default tseslint.config(
       }
     },
     plugins: {
+      lingui: lingui,
       import: sortImport,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh
@@ -30,6 +32,8 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       '@typescript-eslint/no-explicit-any': 'off',
       'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
+      // LinguiJS Rules
+      'lingui/no-untranslated-strings': 'warn',
       // 启用 import 排序
       'import/order': [
         'warn',
