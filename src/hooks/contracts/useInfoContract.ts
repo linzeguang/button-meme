@@ -14,17 +14,21 @@ export const useProjects = () => {
 
   const { data: count } = useReadContract({
     abi: InfoAbi,
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getProjectCount'
   })
+  console.log('>>>>>> count: ', count)
   const { data } = useReadContracts({
     contracts: Array.from({ length: Number(count) }, (_, index) => ({
       abi: InfoAbi,
+      chainId: ENV_PARAMS.CHAIN_ID,
       address: ENV_PARAMS.INFO_CONTRACT,
       functionName: 'getProjectInfo',
       args: [BigInt(index)]
     }))
   })
+  console.log('>>>>>> data: ', data)
 
   const projects = useMemo(
     () =>
@@ -38,49 +42,79 @@ export const useProjects = () => {
       }),
     [data]
   )
+  console.log('>>>>>> projects: ', projects)
 
   useEffect(() => {
     setProjects(projects || [])
   }, [projects, setProjects])
 }
 
-export const useTokenBaseInfo = (id: number) => {
+export const useTokenBaseInfo = (project?: Project) => {
   const { data } = useReadContract({
     abi: InfoAbi,
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getBaseInfo',
-    args: [BigInt(id)]
+    args: project && [BigInt(project.id)],
+    query: {
+      enabled: !!project
+    }
   })
 
-  const { data: mintTokenInfo } = useReadContracts({
+  const [stableToken, mintToken] = useMemo(() => [data?.[1], data?.[2]], [data])
+
+  const { data: info } = useReadContracts({
     contracts: [
       {
         abi: erc20Abi,
-        address: data?.[2],
+        chainId: ENV_PARAMS.CHAIN_ID,
+        address: stableToken,
         functionName: 'name'
       },
       {
         abi: erc20Abi,
-        address: data?.[2],
+        chainId: ENV_PARAMS.CHAIN_ID,
+        address: stableToken,
         functionName: 'symbol'
       },
       {
         abi: erc20Abi,
-        address: data?.[2],
+        chainId: ENV_PARAMS.CHAIN_ID,
+        address: stableToken,
         functionName: 'decimals'
       },
       {
         abi: erc20Abi,
-        address: data?.[2],
+        chainId: ENV_PARAMS.CHAIN_ID,
+        address: mintToken,
+        functionName: 'name'
+      },
+      {
+        abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
+        address: mintToken,
+        functionName: 'symbol'
+      },
+      {
+        abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
+        address: mintToken,
+        functionName: 'decimals'
+      },
+      {
+        abi: erc20Abi,
+        chainId: ENV_PARAMS.CHAIN_ID,
+        address: mintToken,
         functionName: 'balanceOf',
         args: [ENV_PARAMS.BURN_CONTRACT]
       }
     ]
   })
+  console.log('>>>>>> erc20Info: ', info)
 
   return useMemo<TokenInfo | undefined>(() => {
     if (!data) return undefined
-    if (!mintTokenInfo) return undefined
+    if (!info) return undefined
     const [
       miningPool,
       stableToken,
@@ -93,11 +127,18 @@ export const useTokenBaseInfo = (id: number) => {
       thRewardsAcc,
       tsRewardsAcc
     ] = data
-    const [{ result: name }, { result: symbol }, { result: decimals }, { result: burnedAmount }] = mintTokenInfo
+    const [
+      { result: stableTokenName },
+      { result: stableTokenSymbol },
+      { result: stableTokenDecimals },
+      { result: mintTokenName },
+      { result: mintTokenSymbol },
+      { result: mintTokenDecimals },
+      { result: mintTokenBurnedAmount }
+    ] = info
 
     return {
       miningPool,
-      stableToken,
       checkMerkleRoot,
       epochReleaseRate,
       startBlock,
@@ -107,23 +148,34 @@ export const useTokenBaseInfo = (id: number) => {
       tsRewardsAcc,
       mintToken: {
         address: mintToken,
-        name,
-        symbol,
-        decimals,
-        burnedAmount
-      }
+        name: mintTokenName!,
+        symbol: mintTokenSymbol!,
+        decimals: mintTokenDecimals!,
+        burnedAmount: mintTokenBurnedAmount!
+      },
+      stableToken: {
+        address: stableToken,
+        name: stableTokenName!,
+        symbol: stableTokenSymbol!,
+        decimals: stableTokenDecimals!
+      },
+      project: project!
     }
-  }, [data, mintTokenInfo])
+  }, [data, info, project])
 }
 
-export const useTokenUserInfo = (id: number) => {
+export const useTokenUserInfo = (project?: Project) => {
   const { address } = useAccount()
 
   const { data } = useReadContract({
     abi: InfoAbi,
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getUserInfo',
-    args: [BigInt(id), address as Address]
+    args: project && [BigInt(project.id), address as Address],
+    query: {
+      enabled: !!project
+    }
   })
 
   return useMemo<TokenUserInfo | undefined>(() => {
@@ -146,6 +198,7 @@ export const useTokenUserInfo = (id: number) => {
 export const useSaleEstimate = (id: bigint, amountIn: bigint) => {
   const { data } = useReadContract({
     abi: InfoAbi,
+    chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'saleEstimate',
     args: [id, amountIn]

@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import z from 'zod'
 
+import { SimpleBalance } from '@/components/common/Balance'
 import { Icon } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
@@ -14,7 +15,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/Input'
 import { RadioGroup } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { useTrade } from '@/hooks/contracts/useMiningPool'
 import { cn } from '@/lib/utils'
+import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 export enum TRADE_TYPE {
   BUY = 'buy',
@@ -24,7 +27,7 @@ export enum TRADE_TYPE {
 const formSchema = z.object({
   tradeType: z.enum([TRADE_TYPE.BUY, TRADE_TYPE.SELL]),
   amountIn: z.string(),
-  amountOut: z.string()
+  amountOut: z.string().optional()
 })
 
 const TradeForm: React.FC = () => {
@@ -36,11 +39,19 @@ const TradeForm: React.FC = () => {
       amountOut: ''
     }
   })
+  const tradeType = form.watch('tradeType')
 
-  const handleSubmit = useCallback((values: z.infer<typeof formSchema>) => {
-    console.log('>>>>>> handleSubmit: values', values)
-    // dialogRef.current?.close()
-  }, [])
+  const { tokenInfo, tokenUserInfo } = useTokenProviderContext()
+  const { buy } = useTrade()
+
+  const handleSubmit = useCallback(
+    (values: z.infer<typeof formSchema>) => {
+      console.log('>>>>>> handleSubmit: values', values)
+      buy()
+      // dialogRef.current?.close()
+    },
+    [buy]
+  )
 
   return (
     <Form {...form}>
@@ -72,18 +83,28 @@ const TradeForm: React.FC = () => {
             </FormItem>
           )}
         />
-        <div className="space-y-2.5">
+        <div className="space-y-4">
           <FormField
             control={form.control}
             name="amountIn"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>Amount</HarmonyOSSansText>
-                  <HarmonyOSSansText>balance</HarmonyOSSansText>
+                  <HarmonyOSSansText>From</HarmonyOSSansText>
+                  <SimpleBalance
+                    className="text-sm"
+                    prefix="Balance:"
+                    token={tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.address : tokenInfo?.mintToken.address}
+                  />
                 </FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    size="lg"
+                    suffixNode={
+                      tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol
+                    }
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
@@ -94,17 +115,26 @@ const TradeForm: React.FC = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>Amount</HarmonyOSSansText>
-                  <HarmonyOSSansText>balance</HarmonyOSSansText>
+                  <HarmonyOSSansText>To</HarmonyOSSansText>
+                  {tradeType === TRADE_TYPE.BUY ? (
+                    <HarmonyOSSansText className="text-sm">{`LPH: ${tokenUserInfo?.lph ?? '--'}`}</HarmonyOSSansText>
+                  ) : (
+                    <SimpleBalance className="text-sm" token={tokenInfo?.stableToken.address} prefix="Balance:" />
+                  )}
                 </FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    size="lg"
+                    readOnly
+                    suffixNode={tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
           />
         </div>
-        <Button variant="primary" type="submit" size="sm" className="w-full">
+        <Button variant="primary" type="submit" size="md" className="w-full">
           Buy Hash & Mint
         </Button>
       </form>

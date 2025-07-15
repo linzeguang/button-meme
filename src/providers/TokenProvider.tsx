@@ -1,30 +1,55 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useEffect, useMemo } from 'react'
 
-import { useParams } from 'react-router'
+import { useAtomValue } from 'jotai/react'
+import { useNavigate, useParams } from 'react-router'
 
 import { TokenInfo, TokenUserInfo } from '@/hooks/contracts/types'
 import { useTokenBaseInfo, useTokenUserInfo } from '@/hooks/contracts/useInfoContract'
+import { Reward, useReward, UserReward, useUserReward } from '@/hooks/services/useReward'
+import { ROUTE_PATH } from '@/routes'
+import { projectsAtom } from '@/stores/token'
 
 export interface TokenProviderContextProps {
   tokenId: number
   tokenInfo: TokenInfo | undefined
   tokenUserInfo: TokenUserInfo | undefined
+  userReward: UserReward | undefined
+  reward: Reward | undefined
 }
 
 const TokenProviderContext = createContext<TokenProviderContextProps>({
   tokenId: 0,
   tokenInfo: undefined,
-  tokenUserInfo: undefined
+  tokenUserInfo: undefined,
+  userReward: undefined,
+  reward: undefined
 })
 
 const TokenProvider: React.FC<Omit<React.ComponentPropsWithRef<typeof TokenProviderContext.Provider>, 'value'>> = (
   props
 ) => {
+  const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
-  const tokenInfo = useTokenBaseInfo(Number(id))
-  const tokenUserInfo = useTokenUserInfo(Number(id))
+  const projects = useAtomValue(projectsAtom)
 
-  return <TokenProviderContext.Provider value={{ tokenId: Number(id), tokenInfo, tokenUserInfo }} {...props} />
+  const project = useMemo(() => projects.find((project) => project.id === Number(id)) || projects[0], [id, projects])
+
+  const tokenInfo = useTokenBaseInfo(project)
+  const tokenUserInfo = useTokenUserInfo(project)
+  const { data: reward } = useReward(project)
+  const { data: userReward } = useUserReward(project)
+
+  useEffect(() => {
+    // id 不正确，重定向到第一个token
+    if (id && project && Number(id) !== project.id) navigate(ROUTE_PATH.TOKEN + `/${project.id}`, { replace: true })
+  }, [id, navigate, project])
+
+  return (
+    <TokenProviderContext.Provider
+      value={{ tokenId: Number(id), tokenInfo, tokenUserInfo, reward, userReward }}
+      {...props}
+    />
+  )
 }
 
 export default TokenProvider

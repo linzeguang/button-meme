@@ -6,7 +6,6 @@ export interface Project {
 
 export interface TokenInfo {
   miningPool: `0x${string}`
-  stableToken: `0x${string}`
   checkMerkleRoot: boolean
   epochReleaseRate: number
   startBlock: bigint
@@ -16,11 +15,18 @@ export interface TokenInfo {
   tsRewardsAcc: bigint
   mintToken: {
     address: `0x${string}`
-    name: string | undefined
-    symbol: string | undefined
-    decimals: number | undefined
-    burnedAmount: bigint | undefined
+    name: string
+    symbol: string
+    decimals: number
+    burnedAmount: bigint
   }
+  stableToken: {
+    address: `0x${string}`
+    name: string
+    symbol: string
+    decimals: number
+  }
+  project: Project
 }
 
 export interface TokenUserInfo {

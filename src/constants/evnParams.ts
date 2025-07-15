@@ -8,7 +8,7 @@ export const ENV_PARAMS = {
   // chain
   RPC_BASE_URL: import.meta.env.VITE_RPC_BASE_URL,
   RPC_URL: import.meta.env.VITE_RPC_URL,
-  CHAIN_ID: import.meta.env.VITE_CHAIN_ID,
+  CHAIN_ID: Number(import.meta.env.VITE_CHAIN_ID),
   INFO_CONTRACT: import.meta.env.VITE_INFO_CONTRACT,
   BURN_CONTRACT: import.meta.env.VITE_BURN_CONTRACT
 }
