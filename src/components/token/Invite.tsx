@@ -26,7 +26,7 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
           <>
             <Flex className="gap-2">
               <Input wrapperClassName="flex-1" disabled />
-              <Button variant="primary" size="sm" className="min-w-[6rem]">
+              <Button variant="primary" size="sm" className="xl:min-w-[6rem]">
                 <Trans>Copy</Trans>
               </Button>
             </Flex>

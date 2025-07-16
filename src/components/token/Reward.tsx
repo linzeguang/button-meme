@@ -56,7 +56,7 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
               variant="primary"
               size={isMobile ? 'sm' : 'md'}
               disabled={tokenInfo?.checkMerkleRoot}
-              className="min-w-[6rem]"
+              className="xl:min-w-[6rem]"
             >
               <Trans>Claim</Trans>
             </Button>

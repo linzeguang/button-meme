@@ -17,7 +17,7 @@
   .header,
   .aside,
   .footer {
-    @apply bg-background-secondary border-border border-solid;
+    @apply bg-background-secondary border-border light:backdrop-blur-2xl border-solid;
   }
 
   .header {
@@ -33,12 +33,12 @@
   }
 
   .overlay {
-    @apply bg-background-overlay;
+    @apply bg-background-overlay light:backdrop-blur-2xl;
   }
 
   .card,
   .popover {
-    @apply bg-background-popover;
+    @apply bg-background-popover light:backdrop-blur-2xl;
   }
 
   .card {

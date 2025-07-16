@@ -1,13 +1,13 @@
 /* light */
 :root:not(.theme-dark) {
-  --text: #495057;
-  --text-hover: #fff;
+  --text: #555;
+  --text-hover: #333;
   --background: transparent;
-  --active-text: #00BDFF;
-  --active-background: #00BDFF;
+  --active-text: #8bfe83;
+  --active-background: #8bfe83;
   --primary-background: #fff;
   --secondary-background: #fff;
-  --border: rgba(164, 164, 164, 0.2);
+  --border: #ededed;
 }
 
 .theme-dark:root {

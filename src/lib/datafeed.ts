@@ -94,26 +94,27 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
   }
   async fetchHistory(ticker: string, resolution: ResolutionString): Promise<Bar[]> {
     try {
-      const data = await fetcher<Kline[]>({
-        url: '/getKine.php',
-        method: METHOD.GET,
-        data: {
-          ca: ticker,
-          interval: SUPPORTED_RESOLUTIONS_MAP[resolution]
-        },
-        php: true
-      })
+      // const data = await fetcher<Kline[]>({
+      //   url: '/getKine.php',
+      //   method: METHOD.GET,
+      //   data: {
+      //     ca: ticker,
+      //     interval: SUPPORTED_RESOLUTIONS_MAP[resolution]
+      //   },
+      //   php: true
+      // })
 
-      if (!data) return []
-      return (
-        data?.map<Bar>(({ close, high, low, open, open_time }) => ({
-          close: Number(close),
-          high: Number(high),
-          low: Number(low),
-          open: Number(open),
-          time: Number(open_time) * 1000
-        })) || []
-      )
+      // if (!data) return []
+      // return (
+      //   data?.map<Bar>(({ close, high, low, open, open_time }) => ({
+      //     close: Number(close),
+      //     high: Number(high),
+      //     low: Number(low),
+      //     open: Number(open),
+      //     time: Number(open_time) * 1000
+      //   })) || []
+      // )
+      return []
     } catch {
       return []
     }

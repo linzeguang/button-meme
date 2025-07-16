@@ -38,10 +38,15 @@ const GREEN = '#10b981'
 const FOREGROUND = '#8bfe83'
 
 const THEME = {
-  BACKGROUND: '#131313',
-  BORDER: '#2a2a2a',
-  TEXTCOLOR: '#fff'
+  BACKGROUND: '#ffffff',
+  BORDER: '#ededed',
+  TEXTCOLOR: '#555'
 }
+// {
+//   BACKGROUND: '#131313',
+//   BORDER: '#2a2a2a',
+//   TEXTCOLOR: '#fff'
+// }
 
 const chartStyleOverrides = ['candleStyle', 'hollowCandleStyle', 'haStyle'].reduce<Partial<WidgetOverrides>>(
   (acc, cv) => {
@@ -117,7 +122,7 @@ export const defaultChartProps = {
   user_id: 'public_user_id',
   fullscreen: false,
   autosize: true,
-  theme: 'dark',
+  theme: 'light',
   custom_css_url: '/charting_library/tradingview-chart.css',
   disabled_features: disabledFeatures,
   enabled_features: enabledFeatures,

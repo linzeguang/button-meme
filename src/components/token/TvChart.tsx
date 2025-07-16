@@ -97,7 +97,7 @@ const TvChart: React.FC = () => {
             </Flex>
           </>
         }
-        content={<div ref={chartContainerRef} className="!h-120" />}
+        content={<div ref={chartContainerRef} className="!h-120 overflow-hidden rounded-l-lg" />}
       />
     </AccordionRoot>
   )

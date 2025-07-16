@@ -66,6 +66,18 @@
 
 @layer theme {
   .light {
+    --color-text-primary: #333;
+    --color-text-secondary: #555;
+    --color-text-tertiary: #999;
+    --color-text-placeholder: #9ca3af;
+
     /* color */
+    --color-background-primary: #f1f1f1;
+    --color-background-secondary: #ffffff80;
+    --color-background-tertiary: transparent;
+    --color-background-fourth: rgba(139, 254, 131, 0.05);
+    --color-background-input: #fff;
+
+    --color-border: #fff;
   }
 }
