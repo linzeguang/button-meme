@@ -1,9 +1,10 @@
 import {
-  SUPPORTED_RESOLUTIONS
-  // SUPPORTED_RESOLUTIONS_MAP
+  SUPPORTED_RESOLUTIONS,
+  SUPPORTED_RESOLUTIONS_MAP,
+  Supported_Resolutions_To_Minute
 } from '@/constants/tradingiew'
 import { TokenInfo } from '@/hooks/contracts/types'
-// import fetcher, { METHOD } from '@/lib/fetcher'
+import fetcher, { METHOD } from '@/lib/fetcher'
 import {
   Bar,
   HistoryCallback,
@@ -54,7 +55,14 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     onResult: HistoryCallback
   ) {
     if (periodParams.firstDataRequest) {
-      const data = await this.fetchHistory(symbolInfo.ticker!, resolution)
+      console.log('>>>>>> periodParams: ', periodParams, symbolInfo)
+      // const data = await this.fetchHistory(symbolInfo.ticker!, resolution)
+      const data = await this.generateKLines(
+        periodParams.countBack,
+        100,
+        Supported_Resolutions_To_Minute[resolution] * 60
+      )
+
       onResult(data, { noData: false })
     }
 
@@ -96,29 +104,27 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     } as LibrarySymbolInfo
   }
   async fetchHistory(ticker: string, resolution: ResolutionString): Promise<Bar[]> {
-    console.log('>>>>>> fetchHistory: ', ticker, resolution)
     try {
-      // const data = await fetcher<Kline[]>({
-      //   url: '/getKine.php',
-      //   method: METHOD.GET,
-      //   data: {
-      //     ca: ticker,
-      //     interval: SUPPORTED_RESOLUTIONS_MAP[resolution]
-      //   },
-      //   php: true
-      // })
+      const data = await fetcher<Kline[]>({
+        url: '/getKine.php',
+        method: METHOD.GET,
+        data: {
+          ca: ticker,
+          interval: SUPPORTED_RESOLUTIONS_MAP[resolution]
+        },
+        php: true
+      })
 
-      // if (!data) return []
-      // return (
-      //   data?.map<Bar>(({ close, high, low, open, open_time }) => ({
-      //     close: Number(close),
-      //     high: Number(high),
-      //     low: Number(low),
-      //     open: Number(open),
-      //     time: Number(open_time) * 1000
-      //   })) || []
-      // )
-      return []
+      if (!data) return []
+      return (
+        data?.map<Bar>(({ close, high, low, open, open_time }) => ({
+          close: Number(close),
+          high: Number(high),
+          low: Number(low),
+          open: Number(open),
+          time: Number(open_time) * 1000
+        })) || []
+      )
     } catch {
       return []
     }
@@ -129,5 +135,32 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
   }
   parseInitSymbol(initSymbol: string) {
     return initSymbol.split('-')
+  }
+  generateKLines(count: number, startPrice = 100, interval = 60): Bar[] {
+    const data: Bar[] = []
+    let lastClose = startPrice
+    let lastTime = Math.floor(Date.now() / 1000) - count * interval
+
+    for (let i = 0; i < count; i++) {
+      const open = lastClose
+      const close = open + (Math.random() - 0.5) * 2
+      const high = Math.max(open, close) + Math.random()
+      const low = Math.min(open, close) - Math.random()
+      const volume = Math.random() * 1000
+
+      data.push({
+        time: lastTime * 1000,
+        open: parseFloat(open.toFixed(2)),
+        high: parseFloat(high.toFixed(2)),
+        low: parseFloat(low.toFixed(2)),
+        close: parseFloat(close.toFixed(2)),
+        volume: parseFloat(volume.toFixed(2))
+      })
+
+      lastClose = close
+      lastTime += interval
+    }
+
+    return data
   }
 }

@@ -24,7 +24,7 @@ const TvChart: React.FC = () => {
   const { tokenInfo } = useTokenProviderContext()
 
   const initChart = useCallback(() => {
-    if (!tokenInfo) return
+    // if (!tokenInfo) return
     if (widgetRef.current) return
 
     let widget: IChartingLibraryWidget | undefined = undefined
@@ -35,7 +35,14 @@ const TvChart: React.FC = () => {
 
     script.onload = () => {
       const widgetOptions: ChartingLibraryWidgetOptions = {
-        symbol: DataFeed.generateInitSymbol(tokenInfo.mintToken),
+        // symbol: DataFeed.generateInitSymbol(tokenInfo.mintToken),
+        symbol: DataFeed.generateInitSymbol({
+          address: '0xfEC72D0bd1c5b3F245e45c61794183598712874d',
+          name: 'Button',
+          symbol: 'BTN',
+          decimals: 18,
+          burnedAmount: 0n
+        }),
         interval,
         datafeed: datafeed.current,
         container: chartContainerRef.current!,
@@ -54,7 +61,7 @@ const TvChart: React.FC = () => {
         })
       })
     }
-  }, [interval, setInterval, theme, tokenInfo])
+  }, [interval, setInterval, theme])
 
   useEffect(() => {
     if (!widgetRef.current) {
