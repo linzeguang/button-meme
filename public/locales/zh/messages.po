@@ -58,7 +58,7 @@ msgstr ""
 msgid "Connect Wallet"
 msgstr ""
 
-#: src/components/token/TokenInfo.tsx:21
+#: src/components/token/TokenInfo.tsx:23
 msgid "Contract"
 msgstr "合约地址"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Enter address to query"
 msgstr ""
 
-#: src/components/token/TvChart.tsx:93
+#: src/components/token/TvChart.tsx:111
 #: src/components/token/OnChainInfo.tsx:161
 msgid "EPoch: "
 msgstr ""
@@ -127,7 +127,7 @@ msgstr ""
 msgid "My TS Rank"
 msgstr ""
 
-#: src/components/token/TokenInfo.tsx:30
+#: src/components/token/TokenInfo.tsx:32
 msgid "Name"
 msgstr ""
 
@@ -152,7 +152,7 @@ msgstr "奖励"
 msgid "Sell"
 msgstr ""
 
-#: src/components/token/TokenInfo.tsx:34
+#: src/components/token/TokenInfo.tsx:36
 msgid "Symbol"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: src/components/token/TokenInfo.tsx:46
+#: src/components/token/TokenInfo.tsx:50
 msgid "Token"
 msgstr ""
 

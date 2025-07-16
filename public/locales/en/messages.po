@@ -58,7 +58,7 @@ msgstr "Claim"
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
-#: src/components/token/TokenInfo.tsx:21
+#: src/components/token/TokenInfo.tsx:23
 msgid "Contract"
 msgstr "Contract"
 
@@ -78,7 +78,7 @@ msgstr "Defi"
 msgid "Enter address to query"
 msgstr "Enter address to query"
 
-#: src/components/token/TvChart.tsx:93
+#: src/components/token/TvChart.tsx:111
 #: src/components/token/OnChainInfo.tsx:161
 msgid "EPoch: "
 msgstr "EPoch: "
@@ -127,7 +127,7 @@ msgstr "MY TS"
 msgid "My TS Rank"
 msgstr "My TS Rank"
 
-#: src/components/token/TokenInfo.tsx:30
+#: src/components/token/TokenInfo.tsx:32
 msgid "Name"
 msgstr "Name"
 
@@ -152,7 +152,7 @@ msgstr "Reward"
 msgid "Sell"
 msgstr "Sell"
 
-#: src/components/token/TokenInfo.tsx:34
+#: src/components/token/TokenInfo.tsx:36
 msgid "Symbol"
 msgstr "Symbol"
 
@@ -164,7 +164,7 @@ msgstr "TH Rewards"
 msgid "To"
 msgstr "To"
 
-#: src/components/token/TokenInfo.tsx:46
+#: src/components/token/TokenInfo.tsx:50
 msgid "Token"
 msgstr "Token"
 

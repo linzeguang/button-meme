@@ -1,20 +1,16 @@
 {
   "rewrites": [
-    // {
-    //   "source": "/api/:path*",
-    //   "destination": "https://button.beecom.ai/:path*"
-    // },
-    // {
-    //   "source": "/php/:path*",
-    //   "destination": "http://8.218.155.42:1018/:path*"
-    // },
-    // {
-    //   "source": "/rpc/:path*",
-    //   "destination": "http://ec2-54-251-227-86.ap-southeast-1.compute.amazonaws.com:6979/:path*"
-    // },
-
-    { "source": "/api/(.*)", "destination": "https://button.beecom.ai/$1" },
-    { "source": "/php/(.*)", "destination": "http://8.218.155.42:1018/$1" },
-    { "source": "/rpc/(.*)", "destination": "http://ec2-54-251-227-86.ap-southeast-1.compute.amazonaws.com:6979/$1" }
+    {
+      "source": "/api/:path*",
+      "destination": "https://button.beecom.ai/:path*"
+    },
+    {
+      "source": "/php/:path*",
+      "destination": "http://8.218.155.42:1018/:path*"
+    },
+    {
+      "source": "/rpc/:path*",
+      "destination": "http://ec2-54-251-227-86.ap-southeast-1.compute.amazonaws.com:6979/:path*"
+    }
   ]
 }
