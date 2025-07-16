@@ -1,6 +1,9 @@
-import { SUPPORTED_RESOLUTIONS, SUPPORTED_RESOLUTIONS_MAP } from '@/constants/tradingiew'
+import {
+  SUPPORTED_RESOLUTIONS
+  // SUPPORTED_RESOLUTIONS_MAP
+} from '@/constants/tradingiew'
 import { TokenInfo } from '@/hooks/contracts/types'
-import fetcher, { METHOD } from '@/lib/fetcher'
+// import fetcher, { METHOD } from '@/lib/fetcher'
 import {
   Bar,
   HistoryCallback,
@@ -13,7 +16,7 @@ import {
   SubscribeBarsCallback
 } from 'public/charting_library/charting_library'
 
-interface Kline {
+export interface Kline {
   close: string
   high: string
   low: string
@@ -93,6 +96,7 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
     } as LibrarySymbolInfo
   }
   async fetchHistory(ticker: string, resolution: ResolutionString): Promise<Bar[]> {
+    console.log('>>>>>> fetchHistory: ', ticker, resolution)
     try {
       // const data = await fetcher<Kline[]>({
       //   url: '/getKine.php',

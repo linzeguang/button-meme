@@ -42,7 +42,7 @@ const Token: React.FC = () => {
       ) : gtLG ? (
         <Flex className={cn('gap-4 pt-10 [&>div]:gap-4')}>
           <Flex className="relative flex-1 flex-col">
-            <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full w-108" />
+            <SearchToken wrapperClassName="absolute w-full -top-4 -translate-y-full w-108" />
             <TvChart />
             <TokenRecord />
             <TokenRanking />

@@ -3,6 +3,7 @@ import {
   ChartingLibraryFeatureset,
   ChartingLibraryWidgetOptions,
   ResolutionString,
+  ThemeName,
   TimeFrameItem,
   WidgetOverrides
 } from 'public/charting_library/charting_library'
@@ -37,16 +38,25 @@ const RED = '#ef4444'
 const GREEN = '#10b981'
 const FOREGROUND = '#8bfe83'
 
-const THEME = {
-  BACKGROUND: '#ffffff',
-  BORDER: '#ededed',
-  TEXTCOLOR: '#555'
+const COLOR: Record<
+  ThemeName,
+  {
+    BACKGROUND: string
+    BORDER: string
+    TEXTCOLOR: string
+  }
+> = {
+  light: {
+    BACKGROUND: '#ffffff',
+    BORDER: '#ededed',
+    TEXTCOLOR: '#555'
+  },
+  dark: {
+    BACKGROUND: '#131313',
+    BORDER: '#2a2a2a',
+    TEXTCOLOR: '#fff'
+  }
 }
-// {
-//   BACKGROUND: '#131313',
-//   BORDER: '#2a2a2a',
-//   TEXTCOLOR: '#fff'
-// }
 
 const chartStyleOverrides = ['candleStyle', 'hollowCandleStyle', 'haStyle'].reduce<Partial<WidgetOverrides>>(
   (acc, cv) => {
@@ -63,30 +73,33 @@ const chartStyleOverrides = ['candleStyle', 'hollowCandleStyle', 'haStyle'].redu
   {}
 )
 
-export const getChartOverrides = (): Pick<Partial<ChartingLibraryWidgetOptions>, 'overrides' | 'loading_screen'> => ({
+export const getChartOverrides = (
+  theme: ThemeName
+): Pick<Partial<ChartingLibraryWidgetOptions>, 'overrides' | 'loading_screen' | 'theme'> => ({
   overrides: {
     'scales.properties.show_left_scale': true,
     'scales.properties.show_right_scale': true,
     'paneProperties.topMargin': 16,
     'paneProperties.bottomMargin': 12,
-    'paneProperties.background': THEME.BACKGROUND,
-    'paneProperties.backgroundGradientStartColor': THEME.BACKGROUND,
-    'paneProperties.backgroundGradientEndColor': THEME.BACKGROUND,
+    'paneProperties.background': COLOR[theme].BACKGROUND,
+    'paneProperties.backgroundGradientStartColor': COLOR[theme].BACKGROUND,
+    'paneProperties.backgroundGradientEndColor': COLOR[theme].BACKGROUND,
     'paneProperties.backgroundType': 'solid',
     // 'paneProperties.vertGridProperties.color': 'rgba(35, 38, 59, 1)',
     // 'paneProperties.vertGridProperties.style': 2,
     // 'paneProperties.horzGridProperties.color': 'rgba(35, 38, 59, 1)',
     // 'paneProperties.horzGridProperties.style': 2,
     // 'mainSeriesProperties.priceLineColor': '#3a3e5e',
-    'scalesProperties.textColor': THEME.TEXTCOLOR,
-    'scalesProperties.lineColor': THEME.BORDER,
+    'scalesProperties.textColor': COLOR[theme].TEXTCOLOR,
+    'scalesProperties.lineColor': COLOR[theme].BORDER,
     // 'mainSeriesProperties.statusViewStyle.showExchange': false,
     ...chartStyleOverrides
   },
   loading_screen: {
-    backgroundColor: THEME.BACKGROUND,
+    backgroundColor: COLOR[theme].BACKGROUND,
     foregroundColor: FOREGROUND
-  }
+  },
+  theme
 })
 
 const disabledFeatures: ChartingLibraryFeatureset[] = [
@@ -122,7 +135,6 @@ export const defaultChartProps = {
   user_id: 'public_user_id',
   fullscreen: false,
   autosize: true,
-  theme: 'light',
   custom_css_url: '/charting_library/tradingview-chart.css',
   disabled_features: disabledFeatures,
   enabled_features: enabledFeatures,

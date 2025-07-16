@@ -13,8 +13,3 @@ export const LOCALES: Record<LOCALE, { name: string; locale: LOCALE }> = {
     locale: LOCALE.ZH
   }
 }
-
-export enum THEME {
-  Dark,
-  Light
-}

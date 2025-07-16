@@ -15,7 +15,8 @@ import { Flex } from '@/components/ui/Box'
 import { Dividing } from '@/components/ui/Dividing'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { LOCALES } from '@/constants/settings'
-import { cn, toggleLight } from '@/lib/utils'
+import { useTheme } from '@/hooks/useTheme'
+import { cn } from '@/lib/utils'
 import { useI18nLocaleProviderContext } from '@/providers/I18nLocaleProvider'
 import { ROUTE_PATH } from '@/routes'
 import { projectsAtom } from '@/stores/token'
@@ -26,6 +27,7 @@ const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolea
 
     const [accordionValue, setAccordionValue] = useState<string>('')
 
+    const { changeTheme } = useTheme()
     const projects = useAtomValue(projectsAtom)
     const { changeLocale } = useI18nLocaleProviderContext()
 
@@ -82,11 +84,11 @@ const Nav = React.forwardRef<{ closeAccordion: () => void }, { collapsed: boolea
         childrens: [
           {
             name: 'Light Mode',
-            onClick: () => toggleLight()
+            onClick: () => changeTheme('light')
           },
           {
             name: 'Dark Mode',
-            onClick: () => toggleLight()
+            onClick: () => changeTheme('dark')
           }
         ]
       },

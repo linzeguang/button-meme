@@ -10,6 +10,7 @@ import { HarmonyOSSansText } from '@/components/ui/Text'
 import { defaultChartProps, getChartOverrides } from '@/constants/tradingiew'
 import DataFeed from '@/lib/datafeed'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
+import { themeAtom } from '@/stores/settings'
 import { intervalAtom } from '@/stores/token'
 import { ChartingLibraryWidgetOptions, IChartingLibraryWidget } from 'public/charting_library/charting_library'
 
@@ -18,11 +19,13 @@ const TvChart: React.FC = () => {
   const widgetRef = useRef<IChartingLibraryWidget>()
   const datafeed = useRef(new DataFeed())
 
+  const [theme] = useAtom(themeAtom)
   const [interval, setInterval] = useAtom(intervalAtom)
   const { tokenInfo } = useTokenProviderContext()
 
   const initChart = useCallback(() => {
     if (!tokenInfo) return
+    if (widgetRef.current) return
 
     let widget: IChartingLibraryWidget | undefined = undefined
     const script = document.createElement('script')
@@ -36,7 +39,7 @@ const TvChart: React.FC = () => {
         interval,
         datafeed: datafeed.current,
         container: chartContainerRef.current!,
-        ...getChartOverrides(),
+        ...getChartOverrides(theme),
         ...defaultChartProps
       }
       widget = new window.TradingView.widget(widgetOptions)
@@ -51,7 +54,7 @@ const TvChart: React.FC = () => {
         })
       })
     }
-  }, [interval, setInterval, tokenInfo])
+  }, [interval, setInterval, theme, tokenInfo])
 
   useEffect(() => {
     if (!widgetRef.current) {
@@ -61,6 +64,14 @@ const TvChart: React.FC = () => {
       if (tokenInfo?.mintToken) chart.setSymbol(DataFeed.generateInitSymbol(tokenInfo.mintToken))
     }
   }, [initChart, tokenInfo?.mintToken])
+
+  useEffect(() => {
+    if (!widgetRef.current) return
+    const widget = widgetRef.current
+    widget.changeTheme(theme).finally(() => {
+      widget.applyOverrides(getChartOverrides(theme).overrides!)
+    })
+  }, [theme])
 
   return (
     <AccordionRoot type="single" collapsible value="tvchart">
