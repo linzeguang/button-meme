@@ -13,6 +13,7 @@ import { useTokenProviderContext } from '@/providers/TokenProvider'
 import { themeAtom } from '@/stores/settings'
 import { intervalAtom } from '@/stores/token'
 import { ChartingLibraryWidgetOptions, IChartingLibraryWidget } from 'public/charting_library/charting_library'
+import { TokenImage } from '@/assets/images'
 
 const TvChart: React.FC = () => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null)
@@ -95,11 +96,7 @@ const TvChart: React.FC = () => {
               className="h-24 w-full bg-cover bg-center lg:h-32"
             ></Flex>
             <Flex className="h-10 w-full items-end gap-4 px-4">
-              <img
-                src="https://image-cdn.solana.fm/images/?imageUrl=https://ipfs.io/ipfs/QmYPb4GHzW6cte3DSiaZCAAiJ2D6fRMitLpHisXgWwerzA"
-                alt="labubu"
-                className="size-16 lg:size-24"
-              />
+              <img src={TokenImage.Button} alt={tokenInfo?.mintToken.name} className="size-16 lg:size-24" />
               <Flex className="flex-1 items-center justify-between py-1.5">
                 <HarmonyOSSansText className="text-sm font-bold lg:text-lg">
                   {tokenInfo?.mintToken.name || '--'}{' '}
