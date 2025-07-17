@@ -91,7 +91,7 @@ const TvChart: React.FC = () => {
           <>
             <Flex
               style={{
-                backgroundImage: `url(${'https://dropsy.store/cdn/shop/collections/BANER_KATEGORIA_STRONA_5fd8394f-c7c1-4451-b5d5-8d5921817bb9.jpg?v=1747136972'})`
+                backgroundImage: `url(${TokenImage.ButtonBg})`
               }}
               className="h-24 w-full bg-cover bg-center lg:h-32"
             ></Flex>
