@@ -17,10 +17,6 @@ msgstr ""
 msgid "- Out of TOP 100 -"
 msgstr "- Out of TOP 100 -"
 
-#: src/components/token/OnChainInfo.tsx:148
-#~ msgid "{0}"
-#~ msgstr "{0}"
-
 #: src/components/token/Reward.tsx:41
 msgid "/ Total"
 msgstr "/ Total"

@@ -1,62 +1,58 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-07-15 21:33+0800\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: @lingui/cli\n"
-"Language: zh\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-15 21:33+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 3.6\n"
 
 #: src/components/token/TokenRanking.tsx:113
 msgid "- Out of TOP 100 -"
-msgstr ""
-
-#: src/components/token/OnChainInfo.tsx:148
-#~ msgid "{0}"
-#~ msgstr ""
+msgstr "超出前 100"
 
 #: src/components/token/Reward.tsx:41
 msgid "/ Total"
-msgstr ""
+msgstr "总收益"
 
 #: src/components/token/TokenRecord.tsx:46
 msgid "Activity Log"
-msgstr ""
+msgstr "活动记录"
 
 #: src/components/token/TokenRanking.tsx:79
 msgid "Address"
-msgstr ""
+msgstr "地址"
 
 #: src/components/token/Trade.tsx:100
 #: src/components/token/Trade.tsx:128
 msgid "Balance:"
-msgstr ""
+msgstr "余额:"
 
 #: src/components/token/OnChainInfo.tsx:62
 msgid "Burned"
-msgstr ""
+msgstr "销毁"
 
 #: src/components/token/Trade.tsx:73
 msgid "Buy"
-msgstr ""
+msgstr "买"
 
 #: src/components/token/Trade.tsx:144
 msgid "Buy Hash & Mint"
-msgstr ""
+msgstr "购买 LPH & 铸币"
 
 #: src/components/token/Reward.tsx:61
 msgid "Claim"
-msgstr ""
+msgstr "领取"
 
 #: src/components/settings/ConnectWallet.tsx:57
 msgid "Connect Wallet"
-msgstr ""
+msgstr "连接钱包"
 
 #: src/components/token/TokenInfo.tsx:23
 msgid "Contract"
@@ -64,72 +60,72 @@ msgstr "合约地址"
 
 #: src/components/token/Invite.tsx:30
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: src/components/token/TokenRecord.tsx:90
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: src/components/token/Tokenomic.tsx:39
 msgid "Defi"
-msgstr ""
+msgstr "DeFi"
 
 #: src/components/token/Search.tsx:29
 msgid "Enter address to query"
-msgstr ""
+msgstr "输入地址查询"
 
 #: src/components/token/TvChart.tsx:111
 #: src/components/token/OnChainInfo.tsx:161
 msgid "EPoch: "
-msgstr ""
+msgstr "周期："
 
 #: src/components/token/Trade.tsx:96
 msgid "From"
-msgstr ""
+msgstr "从"
 
 #: src/components/token/Invite.tsx:22
 msgid "Invite Friends"
-msgstr ""
+msgstr "邀请朋友"
 
 #: src/components/token/Tokenomic.tsx:24
 msgid "LPH Mining"
-msgstr ""
+msgstr "LPH 挖矿"
 
 #: src/components/token/OnChainInfo.tsx:80
 msgid "My direct referrals"
-msgstr ""
+msgstr "M 值"
 
 #: src/components/token/OnChainInfo.tsx:92
 msgid "My harvestable TH rewards"
-msgstr ""
+msgstr "已经领取的 TH 奖励"
 
 #: src/components/token/OnChainInfo.tsx:84
 msgid "My harvested TH rewards"
-msgstr ""
+msgstr "可领取的 TH 奖励"
 
 #: src/components/token/OnChainInfo.tsx:113
 msgid "My harvested TS rewards"
-msgstr ""
+msgstr "我的"
 
 #: src/components/token/OnChainInfo.tsx:103
 msgid "My indirect referrals"
-msgstr ""
+msgstr "间接推荐"
 
 #: src/components/token/OnChainInfo.tsx:76
 msgid "My TH"
-msgstr ""
+msgstr "我的TH"
 
 #: src/components/token/OnChainInfo.tsx:109
 msgid "MY TS"
-msgstr ""
+msgstr "我的TS"
 
 #: src/components/token/OnChainInfo.tsx:99
 msgid "My TS Rank"
-msgstr ""
+msgstr "我的 TS 排名"
 
 #: src/components/token/TokenInfo.tsx:32
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: src/components/token/OnChainInfo.tsx:45
 msgid "Overview"
@@ -137,11 +133,11 @@ msgstr "预览"
 
 #: src/components/token/TokenRecord.tsx:118
 msgid "Price"
-msgstr ""
+msgstr "价格"
 
 #: src/components/token/TokenRanking.tsx:49
 msgid "Ranking"
-msgstr ""
+msgstr "排名"
 
 #: src/components/token/TokenRanking.tsx:89
 #: src/components/token/Reward.tsx:27
@@ -150,64 +146,64 @@ msgstr "奖励"
 
 #: src/components/token/Trade.tsx:78
 msgid "Sell"
-msgstr ""
+msgstr "卖"
 
 #: src/components/token/TokenInfo.tsx:36
 msgid "Symbol"
-msgstr ""
+msgstr "符号"
 
 #: src/components/token/Tokenomic.tsx:29
 msgid "TH Rewards"
-msgstr ""
+msgstr "TH 收益"
 
 #: src/components/token/Trade.tsx:123
 msgid "To"
-msgstr ""
+msgstr "到"
 
 #: src/components/token/TokenInfo.tsx:50
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #: src/components/token/Tokenomic.tsx:54
 msgid "Tokenomic"
-msgstr ""
+msgstr "代币经济"
 
 #: src/components/token/OnChainInfo.tsx:50
 msgid "Total LPH"
-msgstr ""
+msgstr "全网 LPH"
 
 #: src/components/token/OnChainInfo.tsx:54
 msgid "Total TH"
-msgstr ""
+msgstr "全网 TH"
 
 #: src/components/token/OnChainInfo.tsx:58
 msgid "Total TS"
-msgstr ""
+msgstr "全网 TS"
 
 #: src/components/token/TokenRecord.tsx:42
 msgid "Transaction History"
-msgstr ""
+msgstr "交易记录"
 
 #: src/components/token/TokenRanking.tsx:84
 msgid "TS"
-msgstr ""
+msgstr "TS"
 
 #: src/components/token/Tokenomic.tsx:34
 msgid "TS Rewards"
-msgstr ""
+msgstr "TS 收益"
 
 #: src/components/token/TokenRecord.tsx:94
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: src/components/token/Search.tsx:16
 msgid "Type token symbol, address to find"
-msgstr ""
+msgstr "输入 Token 或 合约地址 查找"
 
 #: src/components/token/OnChainInfo.tsx:71
 msgid "UD"
-msgstr ""
+msgstr "用户数据"
 
 #: src/components/token/TokenRecord.tsx:126
 msgid "View"
-msgstr ""
+msgstr "View"
