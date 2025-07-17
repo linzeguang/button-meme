@@ -76,6 +76,7 @@
     --color-background-secondary: #ffffff80;
     --color-background-tertiary: transparent;
     --color-background-fourth: rgba(139, 254, 131, 0.05);
+    --color-background-popover: #ffffffcc;
     --color-background-input: #fff;
 
     --color-border: #fff;

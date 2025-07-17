@@ -20,6 +20,7 @@ import { HarmonyOSSansText } from '@/components/ui/Text'
 import { useTrade } from '@/hooks/contracts/useMiningPool'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
+import { useMemoWithLocale } from '@/hooks/useWithLocale'
 
 export enum TRADE_TYPE {
   BUY = 'buy',
@@ -46,6 +47,22 @@ const TradeForm: React.FC = () => {
   const { tokenInfo, tokenUserInfo } = useTokenProviderContext()
   const { buy } = useTrade()
 
+  const tradeTypes = useMemoWithLocale(
+    () => [
+      {
+        value: TRADE_TYPE.BUY,
+        label: t`Buy`,
+        className: 'data-[state=checked]:bg-buy'
+      },
+      {
+        value: TRADE_TYPE.SELL,
+        label: t`Sell`,
+        className: 'data-[state=checked]:bg-sell'
+      }
+    ],
+    []
+  )
+
   const handleSubmit = useCallback(
     (values: z.infer<typeof formSchema>) => {
       console.log('>>>>>> handleSubmit: values', values)
@@ -67,18 +84,7 @@ const TradeForm: React.FC = () => {
                 <RadioGroup
                   value={field.value}
                   variant="button"
-                  options={[
-                    {
-                      value: TRADE_TYPE.BUY,
-                      label: t`Buy`,
-                      className: 'data-[state=checked]:bg-buy'
-                    },
-                    {
-                      value: TRADE_TYPE.SELL,
-                      label: t`Sell`,
-                      className: 'data-[state=checked]:bg-sell'
-                    }
-                  ]}
+                  options={tradeTypes}
                   onValueChange={(type) => field.onChange(type as TRADE_TYPE)}
                 />
               </FormControl>
@@ -157,7 +163,9 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
         value="trade"
         name={
           <>
-            <HarmonyOSSansText>Trade</HarmonyOSSansText>
+            <HarmonyOSSansText>
+              <Trans>Trade</Trans>
+            </HarmonyOSSansText>
             <Icon.Tip className="text-text-secondary" />
           </>
         }
@@ -174,13 +182,13 @@ export const FooterTrade = () => {
         <Icon.ScrollTop />
       </Button>
       <Dialog
-        title="Trade"
+        title={<Trans>Trade</Trans>}
         closeable
         trigger={{
           asChild: true,
           children: (
             <Button variant="primary" className="flex-1">
-              Trade
+              <Trans>Trade</Trans>
             </Button>
           )
         }}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { MobileConnected } from '@/components/settings/ConnectWallet'
 import { Icon } from '@/components/svgr'
@@ -7,8 +7,9 @@ import { DrawerClose, DrawerContent, DrawerRoot, DrawerTrigger } from '@/compone
 import Nav from '@/layouts/Nav'
 
 const Menu: React.FC = () => {
+  const [open, setOpen] = useState(false)
   return (
-    <DrawerRoot direction="right">
+    <DrawerRoot direction="right" open={open} onOpenChange={setOpen}>
       <DrawerTrigger>
         <Icon.Menu />
       </DrawerTrigger>
@@ -19,7 +20,13 @@ const Menu: React.FC = () => {
           </DrawerClose>
           <MobileConnected />
         </Flex>
-        <Nav collapsed={false} className="overflow-y-scroll" />
+        <Nav
+          collapsed={false}
+          className="overflow-y-scroll"
+          closeMenu={() => {
+            setOpen(false)
+          }}
+        />
       </DrawerContent>
     </DrawerRoot>
   )

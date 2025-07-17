@@ -29,8 +29,8 @@ msgstr "Activity Log"
 msgid "Address"
 msgstr "Address"
 
-#: src/components/token/Trade.tsx:100
-#: src/components/token/Trade.tsx:128
+#: src/components/token/Trade.tsx:106
+#: src/components/token/Trade.tsx:134
 msgid "Balance:"
 msgstr "Balance:"
 
@@ -38,11 +38,11 @@ msgstr "Balance:"
 msgid "Burned"
 msgstr "Burned"
 
-#: src/components/token/Trade.tsx:73
+#: src/components/token/Trade.tsx:54
 msgid "Buy"
 msgstr "Buy"
 
-#: src/components/token/Trade.tsx:144
+#: src/components/token/Trade.tsx:150
 msgid "Buy Hash & Mint"
 msgstr "Buy Hash & Mint"
 
@@ -79,7 +79,7 @@ msgstr "Enter address to query"
 msgid "EPoch: "
 msgstr "EPoch: "
 
-#: src/components/token/Trade.tsx:96
+#: src/components/token/Trade.tsx:102
 msgid "From"
 msgstr "From"
 
@@ -127,6 +127,10 @@ msgstr "My TS Rank"
 msgid "Name"
 msgstr "Name"
 
+#: src/components/ui/Table.tsx:113
+msgid "No Data"
+msgstr "No Data"
+
 #: src/components/token/OnChainInfo.tsx:45
 msgid "Overview"
 msgstr "Overview"
@@ -144,7 +148,7 @@ msgstr "Ranking"
 msgid "Reward"
 msgstr "Reward"
 
-#: src/components/token/Trade.tsx:78
+#: src/components/token/Trade.tsx:59
 msgid "Sell"
 msgstr "Sell"
 
@@ -156,7 +160,7 @@ msgstr "Symbol"
 msgid "TH Rewards"
 msgstr "TH Rewards"
 
-#: src/components/token/Trade.tsx:123
+#: src/components/token/Trade.tsx:129
 msgid "To"
 msgstr "To"
 
@@ -179,6 +183,12 @@ msgstr "Total TH"
 #: src/components/token/OnChainInfo.tsx:58
 msgid "Total TS"
 msgstr "Total TS"
+
+#: src/components/token/Trade.tsx:167
+#: src/components/token/Trade.tsx:185
+#: src/components/token/Trade.tsx:191
+msgid "Trade"
+msgstr "Trade"
 
 #: src/components/token/TokenRecord.tsx:42
 msgid "Transaction History"

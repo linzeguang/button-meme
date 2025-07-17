@@ -29,8 +29,8 @@ msgstr "活动记录"
 msgid "Address"
 msgstr "地址"
 
-#: src/components/token/Trade.tsx:100
-#: src/components/token/Trade.tsx:128
+#: src/components/token/Trade.tsx:106
+#: src/components/token/Trade.tsx:134
 msgid "Balance:"
 msgstr "余额:"
 
@@ -38,11 +38,11 @@ msgstr "余额:"
 msgid "Burned"
 msgstr "销毁"
 
-#: src/components/token/Trade.tsx:73
+#: src/components/token/Trade.tsx:54
 msgid "Buy"
 msgstr "买"
 
-#: src/components/token/Trade.tsx:144
+#: src/components/token/Trade.tsx:150
 msgid "Buy Hash & Mint"
 msgstr "购买 LPH & 铸币"
 
@@ -79,7 +79,7 @@ msgstr "输入地址查询"
 msgid "EPoch: "
 msgstr "周期："
 
-#: src/components/token/Trade.tsx:96
+#: src/components/token/Trade.tsx:102
 msgid "From"
 msgstr "从"
 
@@ -127,6 +127,10 @@ msgstr "我的 TS 排名"
 msgid "Name"
 msgstr "名称"
 
+#: src/components/ui/Table.tsx:113
+msgid "No Data"
+msgstr "暂无数据"
+
 #: src/components/token/OnChainInfo.tsx:45
 msgid "Overview"
 msgstr "预览"
@@ -144,7 +148,7 @@ msgstr "排名"
 msgid "Reward"
 msgstr "奖励"
 
-#: src/components/token/Trade.tsx:78
+#: src/components/token/Trade.tsx:59
 msgid "Sell"
 msgstr "卖"
 
@@ -156,7 +160,7 @@ msgstr "符号"
 msgid "TH Rewards"
 msgstr "TH 收益"
 
-#: src/components/token/Trade.tsx:123
+#: src/components/token/Trade.tsx:129
 msgid "To"
 msgstr "到"
 
@@ -179,6 +183,12 @@ msgstr "全网 TH"
 #: src/components/token/OnChainInfo.tsx:58
 msgid "Total TS"
 msgstr "全网 TS"
+
+#: src/components/token/Trade.tsx:167
+#: src/components/token/Trade.tsx:185
+#: src/components/token/Trade.tsx:191
+msgid "Trade"
+msgstr "交易"
 
 #: src/components/token/TokenRecord.tsx:42
 msgid "Transaction History"

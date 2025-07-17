@@ -2,6 +2,7 @@ import React, { useId, useMemo, type CSSProperties } from 'react'
 
 import { Pagination } from '@/components/ui/Pagination'
 import { cn } from '@/lib/utils'
+import { Trans } from '@lingui/react/macro'
 
 export const TableRoot = React.forwardRef<React.ElementRef<'table'>, React.TableHTMLAttributes<HTMLTableElement>>(
   (props, ref) => <table ref={ref} {...props} className={cn('w-full table-fixed', props.className)} />
@@ -109,7 +110,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
                     colSpan={columns.length}
                     className="font-HarmonyOSSans text-text-secondary py-6 text-center"
                   >
-                    No Data
+                    <Trans>No Data</Trans>
                   </TableDateCell>
                 </TableRow>
               )}

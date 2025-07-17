@@ -21,7 +21,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'overlay fixed top-0 right-0 bottom-0 left-0 z-[998] bg-black/80',
+      'overlay fixed top-0 right-0 bottom-0 left-0 z-[998]',
       'data-[state=open]:animate-in data-[state=open]:fade-in-0',
       'data-[state=closed]:animate-out data-[state=closed]:fade-out-0',
       className
@@ -74,7 +74,7 @@ export const Dialog = React.forwardRef<DialogMethods, DialogProps>((props, metho
         <DialogPrimitive.Content
           {...content}
           className={cn(
-            'fixed top-1/2 left-1/2 z-[999] -translate-1/2',
+            'popover fixed top-1/2 left-1/2 z-[999] -translate-1/2',
             'border-border popover w-[calc(100vw-3rem)] rounded-md border p-4 lg:w-auto',
             'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-1/4',
             'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom-1/4',

@@ -33,12 +33,12 @@
   }
 
   .overlay {
-    @apply bg-background-overlay light:backdrop-blur-2xl;
+    @apply bg-background-overlay backdrop-blur-2xl;
   }
 
   .card,
   .popover {
-    @apply bg-background-popover light:backdrop-blur-2xl;
+    @apply bg-background-popover backdrop-blur-2xl;
   }
 
   .card {

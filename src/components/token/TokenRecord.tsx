@@ -8,6 +8,7 @@ import { Flex } from '@/components/ui/Box'
 import { Table } from '@/components/ui/Table'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
+import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 enum RECORD_TYPE {
   Trade,
@@ -35,6 +36,8 @@ const TokenRecord: React.FC = () => {
   const [recordType, setRecordType] = useState<RECORD_TYPE>(RECORD_TYPE.Trade)
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
+
+  const { tokenInfo } = useTokenProviderContext()
 
   const recordTypes = useMemo(
     () => [
@@ -99,7 +102,7 @@ const TokenRecord: React.FC = () => {
                 }
               },
               {
-                name: 'LBB',
+                name: tokenInfo?.mintToken.symbol,
                 field: 'baseAmount',
                 render: (value, data) => {
                   const isBuy = data.type === TRADE_TYPE.Buy
@@ -107,7 +110,7 @@ const TokenRecord: React.FC = () => {
                 }
               },
               {
-                name: 'ETH',
+                name: tokenInfo?.stableToken.symbol,
                 field: 'quoteAmount',
                 render: (value, data) => {
                   const isBuy = data.type === TRADE_TYPE.Buy
