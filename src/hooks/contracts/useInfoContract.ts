@@ -191,13 +191,16 @@ export const useTokenUserInfo = (project?: Project) => {
   }, [data])
 }
 
-export const useSaleEstimate = (id: bigint, amountIn: bigint) => {
+export const useSaleEstimate = (params?: { id: number; amountIn: bigint }) => {
   const { data } = useReadContract({
     abi: InfoAbi,
     chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'saleEstimate',
-    args: [id, amountIn]
+    args: params && [BigInt(params.id), params.amountIn],
+    query: {
+      enabled: !!params
+    }
   })
 
   return useMemo(() => {
