@@ -18,9 +18,9 @@ import { Input } from '@/components/ui/Input'
 import { RadioGroup } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { useTrade } from '@/hooks/contracts/useMiningPool'
+import { useMemoWithLocale } from '@/hooks/useWithLocale'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
-import { useMemoWithLocale } from '@/hooks/useWithLocale'
 
 export enum TRADE_TYPE {
   BUY = 'buy',

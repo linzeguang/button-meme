@@ -36,7 +36,6 @@ export const DEFAULT_RESOLUTIONS = SUPPORTED_RESOLUTIONS[0] // 1m
 
 const RED = '#ef4444'
 const GREEN = '#10b981'
-const FOREGROUND = '#8bfe83'
 
 const COLOR: Record<
   ThemeName,
@@ -75,32 +74,35 @@ const chartStyleOverrides = ['candleStyle', 'hollowCandleStyle', 'haStyle'].redu
 
 export const getChartOverrides = (
   theme: ThemeName
-): Pick<Partial<ChartingLibraryWidgetOptions>, 'overrides' | 'loading_screen' | 'theme'> => ({
-  overrides: {
-    'scales.properties.show_left_scale': true,
-    'scales.properties.show_right_scale': true,
-    'paneProperties.topMargin': 16,
-    'paneProperties.bottomMargin': 12,
-    'paneProperties.background': COLOR[theme].BACKGROUND,
-    'paneProperties.backgroundGradientStartColor': COLOR[theme].BACKGROUND,
-    'paneProperties.backgroundGradientEndColor': COLOR[theme].BACKGROUND,
-    'paneProperties.backgroundType': 'solid',
-    // 'paneProperties.vertGridProperties.color': 'rgba(35, 38, 59, 1)',
-    // 'paneProperties.vertGridProperties.style': 2,
-    // 'paneProperties.horzGridProperties.color': 'rgba(35, 38, 59, 1)',
-    // 'paneProperties.horzGridProperties.style': 2,
-    // 'mainSeriesProperties.priceLineColor': '#3a3e5e',
-    'scalesProperties.textColor': COLOR[theme].TEXTCOLOR,
-    'scalesProperties.lineColor': COLOR[theme].BORDER,
-    // 'mainSeriesProperties.statusViewStyle.showExchange': false,
-    ...chartStyleOverrides
-  },
-  loading_screen: {
-    backgroundColor: COLOR[theme].BACKGROUND,
-    foregroundColor: FOREGROUND
-  },
-  theme
-})
+): Pick<Partial<ChartingLibraryWidgetOptions>, 'overrides' | 'loading_screen' | 'theme'> => {
+  const FOREGROUND = theme === 'dark' ? '#8bfe83' : '#00cc66'
+  return {
+    overrides: {
+      'scales.properties.show_left_scale': true,
+      'scales.properties.show_right_scale': true,
+      'paneProperties.topMargin': 16,
+      'paneProperties.bottomMargin': 12,
+      'paneProperties.background': COLOR[theme].BACKGROUND,
+      'paneProperties.backgroundGradientStartColor': COLOR[theme].BACKGROUND,
+      'paneProperties.backgroundGradientEndColor': COLOR[theme].BACKGROUND,
+      'paneProperties.backgroundType': 'solid',
+      // 'paneProperties.vertGridProperties.color': 'rgba(35, 38, 59, 1)',
+      // 'paneProperties.vertGridProperties.style': 2,
+      // 'paneProperties.horzGridProperties.color': 'rgba(35, 38, 59, 1)',
+      // 'paneProperties.horzGridProperties.style': 2,
+      // 'mainSeriesProperties.priceLineColor': '#3a3e5e',
+      'scalesProperties.textColor': COLOR[theme].TEXTCOLOR,
+      'scalesProperties.lineColor': COLOR[theme].BORDER,
+      // 'mainSeriesProperties.statusViewStyle.showExchange': false,
+      ...chartStyleOverrides
+    },
+    loading_screen: {
+      backgroundColor: COLOR[theme].BACKGROUND,
+      foregroundColor: FOREGROUND
+    },
+    theme
+  }
+}
 
 const disabledFeatures: ChartingLibraryFeatureset[] = [
   'volume_force_overlay',
@@ -124,8 +126,8 @@ const disabledFeatures: ChartingLibraryFeatureset[] = [
 const enabledFeatures: ChartingLibraryFeatureset[] = [
   'side_toolbar_in_fullscreen_mode',
   'header_in_fullscreen_mode',
-  'items_favoriting',
-  'hide_left_toolbar_by_default'
+  'items_favoriting'
+  // 'hide_left_toolbar_by_default'
 ]
 
 export const defaultChartProps = {

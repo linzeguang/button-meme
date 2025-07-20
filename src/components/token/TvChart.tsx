@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useRef } from 'react'
 import { Trans } from '@lingui/react/macro'
 import { useAtom } from 'jotai/react'
 
+import { TokenImage } from '@/assets/images'
+import { Logo } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
@@ -13,7 +15,6 @@ import { useTokenProviderContext } from '@/providers/TokenProvider'
 import { themeAtom } from '@/stores/settings'
 import { intervalAtom } from '@/stores/token'
 import { ChartingLibraryWidgetOptions, IChartingLibraryWidget } from 'public/charting_library/charting_library'
-import { TokenImage } from '@/assets/images'
 
 const TvChart: React.FC = () => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null)
@@ -96,7 +97,10 @@ const TvChart: React.FC = () => {
               className="h-24 w-full bg-cover bg-center lg:h-32"
             ></Flex>
             <Flex className="h-10 w-full items-end gap-4 px-4">
-              <img src={TokenImage.Button} alt={tokenInfo?.mintToken.name} className="size-16 lg:size-24" />
+              {/* <img src={TokenImage.Button} alt={tokenInfo?.mintToken.name} className="size-16 lg:size-24" /> */}
+              <Flex className="bg-background-secondary border-border light:bg-white size-16 items-center justify-center rounded-lg border lg:size-24">
+                <Logo.Icon className="text-primary size-8 lg:size-12" />
+              </Flex>
               <Flex className="flex-1 items-center justify-between py-1.5">
                 <HarmonyOSSansText className="text-sm font-bold lg:text-lg">
                   {tokenInfo?.mintToken.name || '--'}{' '}

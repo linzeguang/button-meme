@@ -57,6 +57,7 @@
   --color-background-popover: var(--color-background-secondary);
   --color-background-overlay: #3333331a;
   --color-background-input: #000;
+  --color-background-unactive: transparent;
 
   --color-border: #2a2a2a;
   /* --color-border-thin: #23252b; */
@@ -66,19 +67,21 @@
 
 @layer theme {
   .light {
-    --color-text-primary: #333;
-    --color-text-secondary: #555;
-    --color-text-tertiary: #999;
+    --color-primary: #00cc66;
+    --color-text-primary: #1c1c1c;
+    --color-text-secondary: #969696;
+    --color-text-tertiary: #e8e8e8;
     --color-text-placeholder: #9ca3af;
 
     /* color */
     --color-background-primary: #f1f1f1;
     --color-background-secondary: #ffffff80;
     --color-background-tertiary: transparent;
-    --color-background-fourth: rgba(139, 254, 131, 0.05);
+    --color-background-fourth: #e8e8e8;
     --color-background-popover: #ffffffcc;
     --color-background-input: #fff;
+    --color-background-unactive: #969696;
 
-    --color-border: #fff;
+    --color-border: #e8e8e8;
   }
 }
