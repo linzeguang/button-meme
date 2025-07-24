@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
 
-import { Icon } from '@/components/svgr'
+import { Icon, TokenSvgr } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
-import { Container } from '@/components/ui/Box'
+import { Container, Flex } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/Form'
@@ -130,12 +130,16 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
         value="trade"
+        triggerClassName="py-0"
         name={
           <>
             <HarmonyOSSansText>
               <Trans>Trade</Trans>
             </HarmonyOSSansText>
-            <Icon.Tip className="text-text-secondary" />
+            <Flex className="items-center gap-1">
+              <TokenSvgr.Trade className="size-10.5" />
+              <Icon.Tip className="text-text-secondary" />
+            </Flex>
           </>
         }
         content={<TradeForm />}

@@ -1,0 +1,6 @@
+export { default as OnChainInfo } from './OnChainInfo.svg?react'
+export { default as Reward } from './Reward.svg?react'
+export { default as TokenInfo } from './TokenInfo.svg?react'
+export { default as TokenRanking } from './TokenRanking.svg?react'
+export { default as TokenRecord } from './TokenRecord.svg?react'
+export { default as Trade } from './Trade.svg?react'

@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
 
-import { Icon } from '@/components/svgr'
+import { Icon, TokenSvgr } from '@/components/svgr'
 import { SearchHolder } from '@/components/token/Search'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
+import { Flex } from '@/components/ui/Box'
 import { Table } from '@/components/ui/Table'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { Rank, useRank } from '@/hooks/services/useRank'
@@ -43,12 +44,16 @@ const TokenRanking: React.FC = () => {
     <AccordionRoot type="single" collapsible value={value}>
       <TokenAccordionItem
         value="tokenRanking"
+        triggerClassName="py-0"
         name={
           <>
             <HarmonyOSSansText>
               <Trans>Ranking</Trans>
-            </HarmonyOSSansText>
-            <Icon.Tip className="text-text-secondary" />
+            </HarmonyOSSansText>{' '}
+            <Flex className="items-center gap-1">
+              <TokenSvgr.TokenInfo className="size-10.5" />
+              <Icon.Tip className="text-text-secondary" />
+            </Flex>
           </>
         }
         content={

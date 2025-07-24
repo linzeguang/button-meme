@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
 
-import { Icon, Socials } from '@/components/svgr'
+import { Icon, Socials, TokenSvgr } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
@@ -44,12 +44,16 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
         value="tokenInfo"
+        triggerClassName="py-0"
         name={
           <>
             <HarmonyOSSansText>
               <Trans>Token</Trans>
             </HarmonyOSSansText>
-            <Icon.Tip className="text-text-secondary" />
+            <Flex className="items-center gap-1">
+              <TokenSvgr.TokenInfo className="size-10.5" />
+              <Icon.Tip className="text-text-secondary" />
+            </Flex>
           </>
         }
         content={
