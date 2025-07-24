@@ -29,8 +29,8 @@
 
 @theme {
   /* color */
-  --color-primary: #8bfe83;
-  --color-primary-foreground: #131313;
+  --color-primary: #1e88e5;
+  --color-primary-foreground: #fff;
   --color-info: #4994ff;
   --color-success: #10b981;
   --color-destructive: #ef4444;
@@ -67,14 +67,13 @@
 
 @layer theme {
   .light {
-    --color-primary: #00cc66;
     --color-text-primary: #1c1c1c;
     --color-text-secondary: #969696;
     --color-text-tertiary: #e8e8e8;
     --color-text-placeholder: #9ca3af;
 
     /* color */
-    --color-background-primary: #f1f1f1;
+    --color-background-primary: #f2f2f2;
     --color-background-secondary: #ffffff80;
     --color-background-tertiary: transparent;
     --color-background-fourth: #e8e8e8;

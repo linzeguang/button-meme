@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/Form'
 import { Input } from '@/components/ui/Input'
-import { RadioGroup } from '@/components/ui/RadioGroup'
+import { RadioGroup, RadioOption } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { TRADE_TYPE, useTrade } from '@/hooks/contracts/useMiningPool'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
@@ -23,17 +23,19 @@ const TradeForm: React.FC = () => {
 
   const { stableTokenBalance, mintTokenBalance, form, tradeType, handleSubmit } = useTrade()
 
-  const tradeTypes = useMemoWithLocale(
+  const tradeTypes = useMemoWithLocale<RadioOption[]>(
     () => [
       {
         value: TRADE_TYPE.BUY,
         label: t`Buy`,
-        className: 'data-[state=checked]:bg-buy'
+        className: 'data-[state=checked]:bg-buy',
+        wrapperClassName: 'data-[state=checked]:[&_label]:text-white'
       },
       {
         value: TRADE_TYPE.SELL,
         label: t`Sell`,
-        className: 'data-[state=checked]:bg-sell'
+        className: 'data-[state=checked]:bg-sell',
+        wrapperClassName: 'data-[state=checked]:[&_label]:text-white'
       }
     ],
     []

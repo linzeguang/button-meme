@@ -36,6 +36,7 @@ export interface RadioOption {
   value: string
   label: React.ReactNode
   className?: string
+  wrapperClassName?: string
 }
 
 export interface RadioGroupProps
@@ -51,8 +52,12 @@ export const RadioGroup = React.forwardRef<React.ComponentRef<typeof RadioGroupR
 
   return (
     <RadioGroupRoot ref={ref} className={radioGroupVariants({ className, variant, orientation, size })} {...rest}>
-      {options.map(({ value, label, className }) => (
-        <Flex key={`${value}-${id}`} className="item-wrapper">
+      {options.map(({ value, label, className, wrapperClassName }) => (
+        <Flex
+          key={`${value}-${id}`}
+          className={cn('item-wrapper', wrapperClassName)}
+          data-state={value === rest.value ? 'checked' : 'unchecked'}
+        >
           <RadioGroupItem value={value} id={`${value}-${id}`} className={cn('item cursor-pointer', className)}>
             <RadioGroupIndicator />
           </RadioGroupItem>
