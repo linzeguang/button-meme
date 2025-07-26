@@ -4,6 +4,7 @@ import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
 
 import { Icon, TokenSvgr } from '@/components/svgr'
+import InviteAddressDialog from '@/components/token/InviteAddressDialog'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Container, Flex } from '@/components/ui/Box'
@@ -42,84 +43,87 @@ const TradeForm: React.FC = () => {
   )
 
   return (
-    <Form {...form}>
-      <form className="space-y-5" onSubmit={form.handleSubmit(handleSubmit)}>
-        <FormField
-          control={form.control}
-          name="tradeType"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <RadioGroup
-                  value={field.value}
-                  variant="button"
-                  options={tradeTypes}
-                  onValueChange={(type) => field.onChange(type as TRADE_TYPE)}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <div className="space-y-4">
+    <>
+      <Form {...form}>
+        <form className="space-y-5" onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField
             control={form.control}
-            name="amountIn"
+            name="tradeType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>
-                    <Trans>From</Trans>
-                  </HarmonyOSSansText>
-                  <HarmonyOSSansText>
-                    {tradeType === TRADE_TYPE.BUY
-                      ? t`Balance: ${stableTokenBalance?.formatted || '--'}`
-                      : t`Balance: ${mintTokenBalance?.formatted || '--'}`}
-                  </HarmonyOSSansText>
-                </FormLabel>
                 <FormControl>
-                  <Input
-                    size="lg"
-                    suffixNode={
-                      tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol
-                    }
-                    {...field}
+                  <RadioGroup
+                    value={field.value}
+                    variant="button"
+                    options={tradeTypes}
+                    onValueChange={(type) => field.onChange(type as TRADE_TYPE)}
                   />
                 </FormControl>
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="amountOut"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>
-                    <Trans>To</Trans>
-                  </HarmonyOSSansText>
-                  <HarmonyOSSansText>
-                    {tradeType === TRADE_TYPE.BUY
-                      ? t`LPH: ${tokenUserInfo?.lph.toString() ?? '--'}`
-                      : t`Balance: ${stableTokenBalance?.formatted || '--'}`}
-                  </HarmonyOSSansText>
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    size="lg"
-                    readOnly
-                    suffixNode={tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </div>
-        <Button variant="primary" type="submit" size="md" className="w-full">
-          <Trans>Buy Hash & Mint</Trans>
-        </Button>
-      </form>
-    </Form>
+          <div className="space-y-4">
+            <FormField
+              control={form.control}
+              name="amountIn"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center justify-between">
+                    <HarmonyOSSansText>
+                      <Trans>From</Trans>
+                    </HarmonyOSSansText>
+                    <HarmonyOSSansText>
+                      {tradeType === TRADE_TYPE.BUY
+                        ? t`Balance: ${stableTokenBalance?.formatted || '--'}`
+                        : t`Balance: ${mintTokenBalance?.formatted || '--'}`}
+                    </HarmonyOSSansText>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      size="lg"
+                      suffixNode={
+                        tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol
+                      }
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="amountOut"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center justify-between">
+                    <HarmonyOSSansText>
+                      <Trans>To</Trans>
+                    </HarmonyOSSansText>
+                    <HarmonyOSSansText>
+                      {tradeType === TRADE_TYPE.BUY
+                        ? t`LPH: ${tokenUserInfo?.lph.toString() ?? '--'}`
+                        : t`Balance: ${stableTokenBalance?.formatted || '--'}`}
+                    </HarmonyOSSansText>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      size="lg"
+                      readOnly
+                      suffixNode={tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button variant="primary" type="submit" size="md" className="w-full">
+            <Trans>Buy Hash & Mint</Trans>
+          </Button>
+        </form>
+      </Form>
+      <InviteAddressDialog />
+    </>
   )
 }
 
