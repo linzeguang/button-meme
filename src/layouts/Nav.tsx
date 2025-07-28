@@ -53,31 +53,31 @@ const Nav = React.forwardRef<
     | undefined
   > = [
     {
-      name: 'Token',
-      value: 'token',
+      name: 'Home',
+      value: 'home',
       icon: Sidebar.Home,
       childrens: projects.map(({ name, id }) => ({
         name,
         onClick: () => navigate(ROUTE_PATH.TOKEN + `/${id}`)
       }))
     },
-    undefined,
-    {
-      name: 'Doc',
-      value: 'doc',
-      icon: Sidebar.Doc
-    },
-    {
-      name: 'Tutorial',
-      value: 'tutorial',
-      icon: Sidebar.Tutorial
-    },
-    undefined,
-    {
-      name: 'Twitter',
-      value: 'x',
-      icon: Sidebar.X
-    },
+    // undefined,
+    // {
+    //   name: 'Doc',
+    //   value: 'doc',
+    //   icon: Sidebar.Doc
+    // },
+    // {
+    //   name: 'Tutorial',
+    //   value: 'tutorial',
+    //   icon: Sidebar.Tutorial
+    // },
+    // undefined,
+    // {
+    //   name: 'Twitter',
+    //   value: 'x',
+    //   icon: Sidebar.X
+    // },
     undefined,
     {
       name: 'Theme',

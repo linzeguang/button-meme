@@ -52,7 +52,7 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
             </HarmonyOSSansText>
             <Flex className="items-center gap-1">
               <TokenSvgr.TokenInfo className="size-10.5" />
-              <Icon.Tip className="text-text-secondary" />
+              <Icon.Tip className="text-background-fourth light:text-text-tertiary" />
             </Flex>
           </>
         }
@@ -65,7 +65,7 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
                 )
               )}
             </Flex>
-            <HarmonyOSSansText className="text-sm">
+            <HarmonyOSSansText className="text-sm" variant="secondary">
               No description No descriptionNo descriptionNo descriptionNo descriptionNo descriptionNo descriptionNo
               descriptionNo descriptionNo descriptionNo description
             </HarmonyOSSansText>

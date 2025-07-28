@@ -12,7 +12,10 @@ const TokenAccordionItem: React.FC<{
 }> = ({ value, name, content, triggerClassName, contentClassName, wrapperClassName, suffixNode }) => {
   return (
     <AccordionItem value={value} className={cn('card overflow-hidden p-0', wrapperClassName)}>
-      <AccordionTrigger showArrow={false} className={cn('items-center justify-between p-4', triggerClassName)}>
+      <AccordionTrigger
+        showArrow={false}
+        className={cn('items-center justify-between p-4 font-bold', triggerClassName)}
+      >
         {name}
       </AccordionTrigger>
       <AccordionContent className={cn('border-border space-y-2 border-t border-dashed p-4', contentClassName)}>

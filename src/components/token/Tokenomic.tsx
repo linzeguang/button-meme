@@ -57,7 +57,7 @@ const Tokenomic: React.FC<{ className?: string; defaultValue?: string }> = (prop
             <HarmonyOSSansText>
               <Trans>Tokenomic</Trans>
             </HarmonyOSSansText>
-            <Icon.Tip className="text-text-secondary" />
+            <Icon.Tip className="text-background-fourth light:text-text-tertiary" />
           </>
         }
         content={

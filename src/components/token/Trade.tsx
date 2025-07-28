@@ -82,7 +82,9 @@ const TradeForm: React.FC = () => {
                     <Input
                       size="lg"
                       suffixNode={
-                        tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol
+                        <HarmonyOSSansText className="font-bold">
+                          {tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol}
+                        </HarmonyOSSansText>
                       }
                       {...field}
                     />
@@ -109,7 +111,11 @@ const TradeForm: React.FC = () => {
                     <Input
                       size="lg"
                       readOnly
-                      suffixNode={tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
+                      suffixNode={
+                        <HarmonyOSSansText className="font-bold">
+                          {tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
+                        </HarmonyOSSansText>
+                      }
                       {...field}
                     />
                   </FormControl>
@@ -142,7 +148,7 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
             </HarmonyOSSansText>
             <Flex className="items-center gap-1">
               <TokenSvgr.Trade className="size-10.5" />
-              <Icon.Tip className="text-text-secondary" />
+              <Icon.Tip className="text-background-fourth light:text-text-tertiary" />
             </Flex>
           </>
         }
