@@ -94,12 +94,12 @@ const TvChart: React.FC = () => {
               style={{
                 backgroundImage: `url(${TokenImage.ButtonBg})`
               }}
-              className="h-24 w-full bg-cover bg-center lg:h-32"
+              className="aspect-[885/127] w-full bg-cover bg-center"
             ></Flex>
             <Flex className="h-10 w-full items-end gap-4 px-4">
               {/* <img src={TokenImage.Button} alt={tokenInfo?.mintToken.name} className="size-16 lg:size-24" /> */}
               <Flex className="bg-background-secondary border-border light:bg-white size-16 items-center justify-center rounded-lg border lg:size-24">
-                <Logo.Icon className="text-primary size-8 lg:size-12" />
+                <Logo.Icon className="text-primary" />
               </Flex>
               <Flex className="flex-1 items-center justify-between py-1.5">
                 <HarmonyOSSansText className="text-sm font-bold lg:text-lg">

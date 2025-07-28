@@ -19,7 +19,7 @@ msgstr "超出前 100"
 
 #: src/components/token/Reward.tsx:41
 msgid "/ Total"
-msgstr "总收益"
+msgstr "总分配"
 
 #: src/components/token/TokenRecord.tsx:46
 msgid "Activity Log"
@@ -29,8 +29,7 @@ msgstr "活动记录"
 msgid "Address"
 msgstr "地址"
 
-#: src/components/token/Trade.tsx:106
-#: src/components/token/Trade.tsx:134
+#: src/components/token/Trade.tsx:100 src/components/token/Trade.tsx:128
 msgid "Balance:"
 msgstr "余额:"
 
@@ -38,13 +37,13 @@ msgstr "余额:"
 msgid "Burned"
 msgstr "销毁"
 
-#: src/components/token/Trade.tsx:54
+#: src/components/token/Trade.tsx:73
 msgid "Buy"
-msgstr "买"
+msgstr "建造"
 
-#: src/components/token/Trade.tsx:150
+#: src/components/token/Trade.tsx:144
 msgid "Buy Hash & Mint"
-msgstr "购买 LPH & 铸币"
+msgstr "建造矿场"
 
 #: src/components/token/Reward.tsx:61
 msgid "Claim"
@@ -79,7 +78,7 @@ msgstr "输入地址查询"
 msgid "EPoch: "
 msgstr "周期："
 
-#: src/components/token/Trade.tsx:102
+#: src/components/token/Trade.tsx:96
 msgid "From"
 msgstr "从"
 
@@ -89,7 +88,7 @@ msgstr "邀请朋友"
 
 #: src/components/token/Tokenomic.tsx:24
 msgid "LPH Mining"
-msgstr "LPH 挖矿"
+msgstr "矿车分配"
 
 #: src/components/token/OnChainInfo.tsx:80
 msgid "My direct referrals"
@@ -97,15 +96,15 @@ msgstr "M 值"
 
 #: src/components/token/OnChainInfo.tsx:92
 msgid "My harvestable TH rewards"
-msgstr "已经领取的 TH 奖励"
+msgstr "已领取贡献值奖励"
 
 #: src/components/token/OnChainInfo.tsx:84
 msgid "My harvested TH rewards"
-msgstr "可领取的 TH 奖励"
+msgstr "可领取贡献值奖励"
 
 #: src/components/token/OnChainInfo.tsx:113
 msgid "My harvested TS rewards"
-msgstr "我的"
+msgstr "可领取热力值奖励"
 
 #: src/components/token/OnChainInfo.tsx:103
 msgid "My indirect referrals"
@@ -113,23 +112,19 @@ msgstr "间接推荐"
 
 #: src/components/token/OnChainInfo.tsx:76
 msgid "My TH"
-msgstr "我的TH"
+msgstr "我的贡献值"
 
 #: src/components/token/OnChainInfo.tsx:109
 msgid "MY TS"
-msgstr "我的TS"
+msgstr "我的热力值"
 
 #: src/components/token/OnChainInfo.tsx:99
 msgid "My TS Rank"
-msgstr "我的 TS 排名"
+msgstr "热力值排名"
 
 #: src/components/token/TokenInfo.tsx:32
 msgid "Name"
 msgstr "名称"
-
-#: src/components/ui/Table.tsx:113
-msgid "No Data"
-msgstr "暂无数据"
 
 #: src/components/token/OnChainInfo.tsx:45
 msgid "Overview"
@@ -143,14 +138,13 @@ msgstr "价格"
 msgid "Ranking"
 msgstr "排名"
 
-#: src/components/token/TokenRanking.tsx:89
-#: src/components/token/Reward.tsx:27
+#: src/components/token/TokenRanking.tsx:89 src/components/token/Reward.tsx:27
 msgid "Reward"
 msgstr "奖励"
 
-#: src/components/token/Trade.tsx:59
+#: src/components/token/Trade.tsx:78
 msgid "Sell"
-msgstr "卖"
+msgstr "采集"
 
 #: src/components/token/TokenInfo.tsx:36
 msgid "Symbol"
@@ -158,9 +152,9 @@ msgstr "符号"
 
 #: src/components/token/Tokenomic.tsx:29
 msgid "TH Rewards"
-msgstr "TH 收益"
+msgstr "贡献值收益"
 
-#: src/components/token/Trade.tsx:129
+#: src/components/token/Trade.tsx:123
 msgid "To"
 msgstr "到"
 
@@ -174,33 +168,27 @@ msgstr "代币经济"
 
 #: src/components/token/OnChainInfo.tsx:50
 msgid "Total LPH"
-msgstr "全网 LPH"
+msgstr "全网矿车数量"
 
 #: src/components/token/OnChainInfo.tsx:54
 msgid "Total TH"
-msgstr "全网 TH"
+msgstr "全网贡献值"
 
 #: src/components/token/OnChainInfo.tsx:58
 msgid "Total TS"
-msgstr "全网 TS"
-
-#: src/components/token/Trade.tsx:167
-#: src/components/token/Trade.tsx:185
-#: src/components/token/Trade.tsx:191
-msgid "Trade"
-msgstr "交易"
+msgstr "全网热力值"
 
 #: src/components/token/TokenRecord.tsx:42
 msgid "Transaction History"
-msgstr "交易记录"
+msgstr "采集记录"
 
 #: src/components/token/TokenRanking.tsx:84
 msgid "TS"
-msgstr "TS"
+msgstr "热力值"
 
 #: src/components/token/Tokenomic.tsx:34
 msgid "TS Rewards"
-msgstr "TS 收益"
+msgstr "热力值分配"
 
 #: src/components/token/TokenRecord.tsx:94
 msgid "Type"

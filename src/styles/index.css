@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @plugin "tailwindcss-animate";
 @plugin "tailwind-scrollbar";
+/* @plugin "@tailwindcss/aspect-ratio"; */
 
 @import './font.css';
 @import './variants.css';

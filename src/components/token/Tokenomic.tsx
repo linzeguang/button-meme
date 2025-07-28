@@ -7,8 +7,9 @@ import { ResponsivePie } from '@nivo/pie'
 import { Icon } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
-import { Grid } from '@/components/ui/Box'
+import { Flex, Grid } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { useMemoWithLocale } from '@/hooks/useWithLocale'
 import { randomColor } from '@/lib/utils'
 
 const COLOR = {
@@ -18,31 +19,34 @@ const COLOR = {
   Defi: randomColor()
 }
 
-const data = [
-  {
-    id: 'LPHMining',
-    label: t`LPH Mining`,
-    value: 65
-  },
-  {
-    id: 'THRewards',
-    label: t`TH Rewards`,
-    value: 20
-  },
-  {
-    id: 'TSRewards',
-    label: t`TS Rewards`,
-    value: 10
-  },
-  {
-    id: 'Defi',
-    label: t`Defi`,
-    value: 5
-  }
-]
-
 const Tokenomic: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
   const [value, setValue] = useState(props.defaultValue ?? 'tokenomic')
+
+  const data = useMemoWithLocale(
+    () => [
+      {
+        id: 'LPHMining',
+        label: t`LPH Mining`,
+        value: 65
+      },
+      {
+        id: 'THRewards',
+        label: t`TH Rewards`,
+        value: 20
+      },
+      {
+        id: 'TSRewards',
+        label: t`TS Rewards`,
+        value: 10
+      },
+      {
+        id: 'Defi',
+        label: t`Defi`,
+        value: 5
+      }
+    ],
+    []
+  )
 
   return (
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
@@ -71,14 +75,16 @@ const Tokenomic: React.FC<{ className?: string; defaultValue?: string }> = (prop
                 legends={[]}
               />
             </div>
-            <Grid className="mx-auto w-4/5 max-w-64 grid-cols-2 gap-0.5">
-              {data.map(({ id, label }) => (
-                <HarmonyOSSansText as="div" key={id} className="flex items-center gap-1 text-xs" variant="secondary">
-                  <div className="size-2" style={{ backgroundColor: COLOR[id as keyof typeof COLOR] }} />
-                  <span>{label}</span>
-                </HarmonyOSSansText>
-              ))}
-            </Grid>
+            <Flex className="justify-center">
+              <Grid className="grid-cols-2 gap-x-3 gap-y-0.5">
+                {data.map(({ id, label }) => (
+                  <HarmonyOSSansText as="div" key={id} className="flex items-center gap-1 text-xs" variant="secondary">
+                    <div className="size-2" style={{ backgroundColor: COLOR[id as keyof typeof COLOR] }} />
+                    <span>{label}</span>
+                  </HarmonyOSSansText>
+                ))}
+              </Grid>
+            </Flex>
           </>
         }
       />

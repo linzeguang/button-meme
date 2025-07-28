@@ -3,9 +3,9 @@ import React from 'react'
 import Invite from '@/components/token/Invite'
 import OnChainInfo from '@/components/token/OnChainInfo'
 import Reward from '@/components/token/Reward'
-import { SearchToken } from '@/components/token/Search'
+// import { SearchToken } from '@/components/token/Search'
 import TokenInfo from '@/components/token/TokenInfo'
-import Tokenomic from '@/components/token/Tokenomic'
+// import Tokenomic from '@/components/token/Tokenomic'
 import TokenRanking from '@/components/token/TokenRanking'
 import TokenRecord from '@/components/token/TokenRecord'
 import { Trade } from '@/components/token/Trade'
@@ -23,10 +23,11 @@ const Token: React.FC = () => {
       {gt2XL ? (
         <Flex className={cn('gap-6 pt-10 [&>div]:gap-6')}>
           <Flex className="relative w-[24%] max-w-108 flex-col">
-            <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full" />
+            {/* <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full" /> */}
             <TokenInfo />
-            <Tokenomic />
+            {/* <Tokenomic /> */}
             <TokenRanking />
+            <Invite />
           </Flex>
           <Flex className="flex-1 flex-col">
             <TvChart />
@@ -36,13 +37,12 @@ const Token: React.FC = () => {
             <OnChainInfo />
             <Reward />
             <Trade />
-            <Invite />
           </Flex>
         </Flex>
       ) : gtLG ? (
         <Flex className={cn('gap-4 pt-10 [&>div]:gap-4')}>
           <Flex className="relative flex-1 flex-col">
-            <SearchToken wrapperClassName="absolute w-full -top-4 -translate-y-full w-108" />
+            {/* <SearchToken wrapperClassName="absolute w-full -top-4 -translate-y-full w-108" /> */}
             <TvChart />
             <TokenRecord />
             <TokenRanking />
@@ -52,15 +52,15 @@ const Token: React.FC = () => {
             <Reward />
             <Trade />
             <TokenInfo />
-            <Tokenomic />
+            {/* <Tokenomic /> */}
             <Invite />
           </Flex>
         </Flex>
       ) : (
         <Flex className={cn('flex-col gap-4 pt-0')}>
-          <SearchToken wrapperClassName="w-full" />
+          {/* <SearchToken wrapperClassName="w-full" /> */}
           <TokenInfo className="flex-1" defaultValue="" />
-          <Tokenomic className="flex-1" defaultValue="" />
+          {/* <Tokenomic className="flex-1" defaultValue="" /> */}
           <TvChart />
           <OnChainInfo />
           <Reward />

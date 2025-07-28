@@ -22,6 +22,7 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
             <Trans>Invite Friends</Trans>
           </HarmonyOSSansText>
         }
+        contentClassName="border-none pt-0"
         content={
           <>
             <Flex className="gap-2">

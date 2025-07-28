@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 
 import { t } from '@lingui/core/macro'
 
+import { TokenSvgr } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
@@ -70,20 +71,23 @@ const TokenRecord: React.FC = () => {
         value="record"
         triggerClassName="pt-0"
         name={
-          <Flex className="gap-0.5">
-            {recordTypes.map((type) => (
-              <div
-                key={type.value}
-                className={cn(
-                  'relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
-                  recordType === type.value && 'text-primary after:bg-primary'
-                )}
-                onClick={() => setRecordType(type.value)}
-              >
-                {type.name}
-              </div>
-            ))}
-          </Flex>
+          <>
+            <Flex className="gap-0.5">
+              {recordTypes.map((type) => (
+                <div
+                  key={type.value}
+                  className={cn(
+                    'relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
+                    recordType === type.value && 'text-primary after:bg-primary'
+                  )}
+                  onClick={() => setRecordType(type.value)}
+                >
+                  {type.name}
+                </div>
+              ))}
+            </Flex>
+            <TokenSvgr.TokenRecord className="size-10.5" />
+          </>
         }
         contentClassName="pt-0 border-none"
         content={

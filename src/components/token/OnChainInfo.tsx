@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
 
+import { TokenSvgr } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
@@ -137,20 +138,23 @@ const OnChainInfo: React.FC = () => {
         value="onChainInfo"
         triggerClassName="pt-0 pb-2"
         name={
-          <Flex className="gap-0.5">
-            {Object.values(infoTypes).map((type) => (
-              <div
-                key={type.value}
-                className={cn(
-                  'after:bg-background-unactive relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
-                  infoType === type.value && 'text-primary after:bg-primary'
-                )}
-                onClick={() => setInfoType(type.value)}
-              >
-                {type.name}
-              </div>
-            ))}
-          </Flex>
+          <>
+            <Flex className="gap-0.5">
+              {Object.values(infoTypes).map((type) => (
+                <div
+                  key={type.value}
+                  className={cn(
+                    'after:bg-background-unactive relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
+                    infoType === type.value && 'text-primary after:bg-primary'
+                  )}
+                  onClick={() => setInfoType(type.value)}
+                >
+                  {type.name}
+                </div>
+              ))}
+            </Flex>
+            <TokenSvgr.OnChainInfo className="size-10.5" />
+          </>
         }
         contentClassName="border-none pt-0"
         content={

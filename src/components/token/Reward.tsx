@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Trans } from '@lingui/react/macro'
 
+import { TokenSvgr } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
@@ -62,6 +63,8 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
             </Button>
           </Flex>
         }
+        wrapperClassName="relative"
+        suffixNode={<TokenSvgr.Reward className="absolute top-0 right-0 bottom-0 z-[-1]" />}
       />
     </AccordionRoot>
   )

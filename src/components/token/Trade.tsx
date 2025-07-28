@@ -1,156 +1,129 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
-import { useForm } from 'react-hook-form'
-import z from 'zod'
 
-import { SimpleBalance } from '@/components/common/Balance'
-import { Icon } from '@/components/svgr'
+import { Icon, TokenSvgr } from '@/components/svgr'
+import InviteAddressDialog from '@/components/token/InviteAddressDialog'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
-import { Container } from '@/components/ui/Box'
+import { Container, Flex } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/Form'
 import { Input } from '@/components/ui/Input'
-import { RadioGroup } from '@/components/ui/RadioGroup'
+import { RadioGroup, RadioOption } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
-import { useTrade } from '@/hooks/contracts/useMiningPool'
+import { TRADE_TYPE, useTrade } from '@/hooks/contracts/useMiningPool'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
 
-export enum TRADE_TYPE {
-  BUY = 'buy',
-  SELL = 'sell'
-}
-
-const formSchema = z.object({
-  tradeType: z.enum([TRADE_TYPE.BUY, TRADE_TYPE.SELL]),
-  amountIn: z.string(),
-  amountOut: z.string().optional()
-})
-
 const TradeForm: React.FC = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      tradeType: TRADE_TYPE.BUY,
-      amountIn: '',
-      amountOut: ''
-    }
-  })
-  const tradeType = form.watch('tradeType')
-
   const { tokenInfo, tokenUserInfo } = useTokenProviderContext()
-  const { buy } = useTrade()
 
-  const tradeTypes = useMemoWithLocale(
+  const { stableTokenBalance, mintTokenBalance, form, tradeType, handleSubmit } = useTrade()
+
+  const tradeTypes = useMemoWithLocale<RadioOption[]>(
     () => [
       {
         value: TRADE_TYPE.BUY,
         label: t`Buy`,
-        className: 'data-[state=checked]:bg-buy'
+        className: 'data-[state=checked]:bg-buy',
+        wrapperClassName: 'data-[state=checked]:[&_label]:text-white'
       },
       {
         value: TRADE_TYPE.SELL,
         label: t`Sell`,
-        className: 'data-[state=checked]:bg-sell'
+        className: 'data-[state=checked]:bg-sell',
+        wrapperClassName: 'data-[state=checked]:[&_label]:text-white'
       }
     ],
     []
   )
 
-  const handleSubmit = useCallback(
-    (values: z.infer<typeof formSchema>) => {
-      console.log('>>>>>> handleSubmit: values', values)
-      buy()
-      // dialogRef.current?.close()
-    },
-    [buy]
-  )
-
   return (
-    <Form {...form}>
-      <form className="space-y-5" onSubmit={form.handleSubmit(handleSubmit)}>
-        <FormField
-          control={form.control}
-          name="tradeType"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <RadioGroup
-                  value={field.value}
-                  variant="button"
-                  options={tradeTypes}
-                  onValueChange={(type) => field.onChange(type as TRADE_TYPE)}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <div className="space-y-4">
+    <>
+      <Form {...form}>
+        <form className="space-y-5" onSubmit={form.handleSubmit(handleSubmit)}>
           <FormField
             control={form.control}
-            name="amountIn"
+            name="tradeType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>
-                    <Trans>From</Trans>
-                  </HarmonyOSSansText>
-                  <SimpleBalance
-                    className="text-sm"
-                    prefix={t`Balance:`}
-                    token={tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.address : tokenInfo?.mintToken.address}
-                  />
-                </FormLabel>
                 <FormControl>
-                  <Input
-                    size="lg"
-                    suffixNode={
-                      tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol
-                    }
-                    {...field}
+                  <RadioGroup
+                    value={field.value}
+                    variant="button"
+                    options={tradeTypes}
+                    onValueChange={(type) => field.onChange(type as TRADE_TYPE)}
                   />
                 </FormControl>
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="amountOut"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="flex items-center justify-between">
-                  <HarmonyOSSansText>
-                    <Trans>To</Trans>
-                  </HarmonyOSSansText>
-                  {tradeType === TRADE_TYPE.BUY ? (
-                    <HarmonyOSSansText className="text-sm">{`LPH: ${tokenUserInfo?.lph ?? '--'}`}</HarmonyOSSansText>
-                  ) : (
-                    <SimpleBalance className="text-sm" token={tokenInfo?.stableToken.address} prefix={t`Balance:`} />
-                  )}
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    size="lg"
-                    readOnly
-                    suffixNode={tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
-                    {...field}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </div>
-        <Button variant="primary" type="submit" size="md" className="w-full">
-          <Trans>Buy Hash & Mint</Trans>
-        </Button>
-      </form>
-    </Form>
+          <div className="space-y-4">
+            <FormField
+              control={form.control}
+              name="amountIn"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center justify-between">
+                    <HarmonyOSSansText>
+                      <Trans>From</Trans>
+                    </HarmonyOSSansText>
+                    <HarmonyOSSansText>
+                      {tradeType === TRADE_TYPE.BUY
+                        ? t`Balance: ${stableTokenBalance?.formatted || '--'}`
+                        : t`Balance: ${mintTokenBalance?.formatted || '--'}`}
+                    </HarmonyOSSansText>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      size="lg"
+                      suffixNode={
+                        tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol
+                      }
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="amountOut"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center justify-between">
+                    <HarmonyOSSansText>
+                      <Trans>To</Trans>
+                    </HarmonyOSSansText>
+                    <HarmonyOSSansText>
+                      {tradeType === TRADE_TYPE.BUY
+                        ? t`LPH: ${tokenUserInfo?.lph.toString() ?? '--'}`
+                        : t`Balance: ${stableTokenBalance?.formatted || '--'}`}
+                    </HarmonyOSSansText>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      size="lg"
+                      readOnly
+                      suffixNode={tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button variant="primary" type="submit" size="md" className="w-full">
+            <Trans>Buy Hash & Mint</Trans>
+          </Button>
+        </form>
+      </Form>
+      <InviteAddressDialog />
+    </>
   )
 }
 
@@ -161,12 +134,16 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
         value="trade"
+        triggerClassName="py-0"
         name={
           <>
             <HarmonyOSSansText>
               <Trans>Trade</Trans>
             </HarmonyOSSansText>
-            <Icon.Tip className="text-text-secondary" />
+            <Flex className="items-center gap-1">
+              <TokenSvgr.Trade className="size-10.5" />
+              <Icon.Tip className="text-text-secondary" />
+            </Flex>
           </>
         }
         content={<TradeForm />}
