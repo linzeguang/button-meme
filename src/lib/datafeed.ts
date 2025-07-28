@@ -83,7 +83,8 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
   }
   async generateSymbolInfo(symbolName: string) {
     const [address, name, symbol] = this.parseInitSymbol(symbolName)
-    const pricescale = Math.pow(10, 18)
+    // const pricescale = Math.pow(10, 18)
+    const pricescale = 10
     return {
       name: symbol,
       full_name: name,
