@@ -9,7 +9,6 @@ import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
-import Calculator from '@/lib/calculator'
 import { fromRawAmount } from '@/lib/rawAmount'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
@@ -69,58 +68,26 @@ const OnChainInfo: React.FC = () => {
         ]
       },
       [INFO_TYPE.UD]: {
-        name: t`UD`,
+        name: t`矿主数据`,
         value: INFO_TYPE.UD,
         infos: [
           [
             {
-              name: t`My TH`,
+              name: t`矿场数量`,
+              value: tokenUserInfo?.lph.toString() ?? '--'
+            },
+            {
+              name: t`贡献值`,
               value: userReward?.th ?? '--'
             },
             {
-              name: t`My direct referrals`, // 直推人数
-              value: userReward?.referencesCount ?? '--'
-            },
-            {
-              name: t`My harvested TH rewards`,
-              value:
-                tokenUserInfo && tokenInfo
-                  ? fromRawAmount(tokenUserInfo.claimedRewardsTH, tokenInfo.mintToken.decimals)
-                  : '--',
+              name: t`热力值排名`,
+              value: userReward?.tsRankIndex ?? '--',
               highlight: true
             },
             {
-              name: t`My harvestable TH rewards`,
-              value: userReward?.thRewardAcc ?? '--',
-              highlight: true
-            }
-          ],
-          [
-            {
-              name: t`My TS Rank`,
-              value: userReward?.tsRankIndex ?? '--'
-            },
-            {
-              name: t`My indirect referrals`, // 间接推广人数 = 总推 - 直推
-              value: userReward
-                ? Calculator.base(userReward.totalRefsCount).minus(userReward.referencesCount).toString()
-                : '--'
-            },
-            {
-              name: t`MY TS`,
-              value: userReward?.ts ?? '--'
-            },
-            {
-              name: t`My harvested TS rewards`,
-              value:
-                tokenUserInfo && tokenInfo
-                  ? fromRawAmount(tokenUserInfo.claimedRewardsTS, tokenInfo.mintToken.decimals)
-                  : '--',
-              highlight: true
-            },
-            {
-              name: `My harvestable TS rewards`,
-              value: userReward?.tsRewardAcc ?? '--',
+              name: t`热力值`,
+              value: userReward?.ts ?? '--',
               highlight: true
             }
           ]

@@ -1,7 +1,7 @@
 import {
   SUPPORTED_RESOLUTIONS,
-  SUPPORTED_RESOLUTIONS_MAP,
-  Supported_Resolutions_To_Minute
+  SUPPORTED_RESOLUTIONS_MAP
+  // Supported_Resolutions_To_Minute
 } from '@/constants/tradingiew'
 import { TokenInfo } from '@/hooks/contracts/types'
 import fetcher, { METHOD } from '@/lib/fetcher'
@@ -56,12 +56,12 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
   ) {
     if (periodParams.firstDataRequest) {
       console.log('>>>>>> periodParams: ', periodParams, symbolInfo)
-      // const data = await this.fetchHistory(symbolInfo.ticker!, resolution)
-      const data = await this.generateKLines(
-        periodParams.countBack,
-        100,
-        Supported_Resolutions_To_Minute[resolution] * 60
-      )
+      const data = await this.fetchHistory(symbolInfo.ticker!, resolution)
+      // const data = await this.generateKLines(
+      //   periodParams.countBack,
+      //   100,
+      //   Supported_Resolutions_To_Minute[resolution] * 60
+      // )
 
       onResult(data, { noData: false })
     }
