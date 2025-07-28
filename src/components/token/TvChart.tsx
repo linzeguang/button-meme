@@ -94,7 +94,7 @@ const TvChart: React.FC = () => {
               style={{
                 backgroundImage: `url(${TokenImage.ButtonBg})`
               }}
-              className="aspect-[885/127] w-full bg-cover bg-center"
+              className="h-[6.625rem] w-full bg-cover bg-center md:aspect-[885/127] md:h-auto"
             ></Flex>
             <Flex className="h-10 w-full items-end gap-4 px-4">
               <Logo.Mit className="token-logo size-16 lg:size-24" />
@@ -105,9 +105,9 @@ const TvChart: React.FC = () => {
               <Flex className="flex-1 items-center justify-between py-1.5">
                 <HarmonyOSSansText className="text-sm font-bold lg:text-lg">
                   {tokenInfo?.mintToken.name || '--'}{' '}
-                  <HarmonyOSSansText as="span" className="text-xs font-normal lg:text-sm" variant="secondary">
+                  {/* <HarmonyOSSansText as="span" className="text-xs font-normal lg:text-sm" variant="secondary">
                     / {tokenInfo?.mintToken.symbol || '--'}
-                  </HarmonyOSSansText>
+                  </HarmonyOSSansText> */}
                 </HarmonyOSSansText>
                 <HarmonyOSSansText variant="secondary" className="text-sm font-bold lg:text-lg">
                   <Trans>EPoch: </Trans>
@@ -117,7 +117,7 @@ const TvChart: React.FC = () => {
             </Flex>
           </>
         }
-        content={<div ref={chartContainerRef} className="!h-120 overflow-hidden rounded-l-lg" />}
+        content={<div ref={chartContainerRef} className="!h-90 overflow-hidden rounded-l-lg" />}
       />
     </AccordionRoot>
   )

@@ -144,8 +144,9 @@ const OnChainInfo: React.FC = () => {
                 <div
                   key={type.value}
                   className={cn(
-                    'after:bg-background-unactive relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
-                    infoType === type.value && 'text-primary after:bg-primary'
+                    'cursor-pointer px-4 py-2.5 transition-all',
+                    'border-background-unactive border-b-2',
+                    infoType === type.value && 'text-primary border-primary'
                   )}
                   onClick={() => setInfoType(type.value)}
                 >

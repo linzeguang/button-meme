@@ -9,7 +9,7 @@ import { Flex } from '@/components/ui/Box'
 import { Table } from '@/components/ui/Table'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
-import { useTokenProviderContext } from '@/providers/TokenProvider'
+// import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 enum RECORD_TYPE {
   Trade,
@@ -38,12 +38,12 @@ const TokenRecord: React.FC = () => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
 
-  const { tokenInfo } = useTokenProviderContext()
+  // const { tokenInfo } = useTokenProviderContext()
 
   const recordTypes = useMemo(
     () => [
       {
-        name: t`Transaction History`,
+        name: t`矿场数据`,
         value: RECORD_TYPE.Trade
       },
       {
@@ -77,8 +77,9 @@ const TokenRecord: React.FC = () => {
                 <div
                   key={type.value}
                   className={cn(
-                    'after:bg-background-unactive relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
-                    recordType === type.value && 'text-primary after:bg-primary'
+                    'cursor-pointer px-4 py-2.5 transition-all',
+                    'border-background-unactive border-b-2',
+                    recordType === type.value && 'text-primary border-primary'
                   )}
                   onClick={() => setRecordType(type.value)}
                 >
@@ -105,22 +106,7 @@ const TokenRecord: React.FC = () => {
                   return <span className={isBuy ? 'text-success' : 'text-destructive'}>{isBuy ? 'Buy' : 'Sell'}</span>
                 }
               },
-              {
-                name: tokenInfo?.mintToken.symbol,
-                field: 'baseAmount',
-                render: (value, data) => {
-                  const isBuy = data.type === TRADE_TYPE.Buy
-                  return <span className={isBuy ? 'text-success' : 'text-destructive'}>{value}</span>
-                }
-              },
-              {
-                name: tokenInfo?.stableToken.symbol,
-                field: 'quoteAmount',
-                render: (value, data) => {
-                  const isBuy = data.type === TRADE_TYPE.Buy
-                  return <span className={isBuy ? 'text-success' : 'text-destructive'}>{value}</span>
-                }
-              },
+
               {
                 name: t`Price`,
                 field: 'price',
@@ -130,7 +116,15 @@ const TokenRecord: React.FC = () => {
                 }
               },
               {
-                name: t`View`,
+                name: t`数量`,
+                field: 'quoteAmount',
+                render: (value, data) => {
+                  const isBuy = data.type === TRADE_TYPE.Buy
+                  return <span className={isBuy ? 'text-success' : 'text-destructive'}>{value}</span>
+                }
+              },
+              {
+                name: t`总量`,
                 field: 'tx',
                 render: (value) => <span className="text-primary">{value}</span>
               }

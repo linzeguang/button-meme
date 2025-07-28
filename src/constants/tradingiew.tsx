@@ -125,7 +125,9 @@ const disabledFeatures: ChartingLibraryFeatureset[] = [
   'header_fullscreen_button',
   'header_screenshot',
   'header_indicators',
-  'timeframes_toolbar'
+  'timeframes_toolbar',
+  // 'horz_touch_drag_scroll'
+  'vert_touch_drag_scroll'
 ]
 
 const enabledFeatures: ChartingLibraryFeatureset[] = [

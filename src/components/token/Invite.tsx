@@ -9,9 +9,11 @@ import { Flex } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
   const [value, setValue] = useState(props.defaultValue ?? 'invite')
+  const { tokenUserInfo } = useTokenProviderContext()
 
   return (
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
@@ -19,7 +21,8 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
         value="invite"
         name={
           <HarmonyOSSansText>
-            <Trans>Invite Friends</Trans>
+            <Trans>Invite</Trans>
+            {tokenUserInfo?.referencesCount ? `(${tokenUserInfo.referencesCount.toString()})` : ''}
           </HarmonyOSSansText>
         }
         contentClassName="border-none pt-0"
