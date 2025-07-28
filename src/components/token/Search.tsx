@@ -23,7 +23,7 @@ export const SearchHolder: React.FC<React.ComponentProps<typeof Input>> = ({ cla
   return (
     <Input
       size="sm"
-      className={cn('placeholder:text-text-placeholder', className)}
+      className={cn('placeholder:text-text-placeholder font-normal', className)}
       prefixNode={<Icon.Search className="text-text-tertiary" />}
       placeholder={t`Enter address to query`}
       {...rest}

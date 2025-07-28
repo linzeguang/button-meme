@@ -56,7 +56,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
     () => (
       <colgroup>
         {columns.map((column) => (
-          <col key={column.field.toString()} style={{ width: column.width }} />
+          <col key={column.field.toString()} style={{ width: column.width }} className={column.className} />
         ))}
       </colgroup>
     ),
@@ -64,7 +64,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
   )
 
   return (
-    <div id={`table-${id}`}>
+    <div id={`table-${id}`} className="overflow-hidden rounded-t-sm">
       <div className="w-full overflow-x-auto">
         <div style={scroll?.y ? { maxHeight: scroll.y, overflowY: 'auto' } : undefined} className="scrollbar-none">
           <TableRoot {...rest} className={cn('w-full table-auto', rest.className)}>
@@ -80,6 +80,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
                     key={column.field.toString()}
                     {...thProps}
                     style={{ textAlign: column.align || 'start', ...thProps?.style }}
+                    className={column.className}
                   >
                     {column.name}
                   </TableHeadCell>
@@ -99,6 +100,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
                         key={column.field.toString()}
                         {...tdProps}
                         style={{ textAlign: column.align || 'start', ...tdProps?.style }}
+                        className={column.className}
                       >
                         {column.render?.(data[column.field], data, index) || (data[column.field] as React.ReactNode)}
                       </TableDateCell>
@@ -147,6 +149,7 @@ export type TableColumn<D extends object> = {
     field: K
     align?: CSSProperties['textAlign']
     width?: CSSProperties['width']
+    className?: string
     render?: (value: D[K], row: D, index: number) => React.ReactNode
   }
 }[keyof D]

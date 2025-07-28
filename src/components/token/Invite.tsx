@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Trans } from '@lingui/react/macro'
 
-import { Socials } from '@/components/svgr'
+// import { Socials } from '@/components/svgr'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
@@ -27,17 +27,17 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
           <>
             <Flex className="gap-2">
               <Input wrapperClassName="flex-1" disabled />
-              <Button variant="primary" size="sm" className="xl:min-w-[6rem]">
+              <Button variant="primary" size="sm" className="w-[7rem] xl:min-w-[9.625rem]">
                 <Trans>Copy</Trans>
               </Button>
             </Flex>
-            <Flex className="gap-2 [&_svg]:h-4.5">
+            {/* <Flex className="gap-2 [&_svg]:h-4.5">
               <Socials.Facebook />
               <Socials.Telegram />
               <Socials.Twitter />
               <Socials.WhatsApp />
               <Socials.YouTube />
-            </Flex>
+            </Flex> */}
           </>
         }
       />

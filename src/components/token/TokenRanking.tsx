@@ -51,7 +51,7 @@ const TokenRanking: React.FC = () => {
               <Trans>Ranking</Trans>
             </HarmonyOSSansText>{' '}
             <Flex className="items-center gap-1">
-              <TokenSvgr.TokenInfo className="size-10.5" />
+              <TokenSvgr.TokenRanking className="size-10.5" />
               <Icon.Tip className="text-background-fourth light:text-text-tertiary" />
             </Flex>
           </>
@@ -60,7 +60,7 @@ const TokenRanking: React.FC = () => {
           <div className="space-y-4">
             <SearchHolder value={searchValue} onChange={(ev) => setSearchValue(ev.target.value)} />
             <Table<Rank>
-              className="border-separate border-spacing-y-0.5"
+              className="border-separate border-spacing-0"
               columns={[
                 {
                   name: null,
@@ -83,17 +83,20 @@ const TokenRanking: React.FC = () => {
                 {
                   name: t`Address`,
                   field: 'account',
+                  className: 'flex-1',
                   render: (address) => formatAddress(address, undefined, isMobile ? -2 : undefined)
                 },
                 {
                   name: t`TS`,
                   field: 'ts',
-                  align: 'center'
+                  align: 'center',
+                  className: 'flex-1'
                 },
                 {
                   name: t`Reward`,
                   field: 'tsReward',
-                  align: 'end'
+                  align: 'end',
+                  className: 'flex-1'
                 }
               ]}
               dataSource={data || []}

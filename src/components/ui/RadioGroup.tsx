@@ -61,7 +61,7 @@ export const RadioGroup = React.forwardRef<React.ComponentRef<typeof RadioGroupR
           <RadioGroupItem value={value} id={`${value}-${id}`} className={cn('item cursor-pointer', className)}>
             <RadioGroupIndicator />
           </RadioGroupItem>
-          <label htmlFor={`${value}-${id}`} className="label">
+          <label htmlFor={`${value}-${id}`} className="label text-text-secondary">
             {label}
           </label>
         </Flex>

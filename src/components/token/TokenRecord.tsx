@@ -77,7 +77,7 @@ const TokenRecord: React.FC = () => {
                 <div
                   key={type.value}
                   className={cn(
-                    'relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
+                    'after:bg-background-unactive relative cursor-pointer px-4 py-2.5 transition-all after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full',
                     recordType === type.value && 'text-primary after:bg-primary'
                   )}
                   onClick={() => setRecordType(type.value)}
@@ -144,6 +144,9 @@ const TokenRecord: React.FC = () => {
                 setPage(page)
                 setPageSize(pageSize)
               }
+            }}
+            theadProps={{
+              className: 'bg-transparent border-b border-border'
             }}
           />
         }
