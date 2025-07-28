@@ -75,7 +75,7 @@ const chartStyleOverrides = ['candleStyle', 'hollowCandleStyle', 'haStyle'].redu
 export const getChartOverrides = (
   theme: ThemeName
 ): Pick<Partial<ChartingLibraryWidgetOptions>, 'overrides' | 'loading_screen' | 'theme'> => {
-  const FOREGROUND = theme === 'dark' ? '#8bfe83' : '#00cc66'
+  const FOREGROUND = theme === 'dark' ? '#1e88e5' : '#1e88e5'
   return {
     overrides: {
       'scales.properties.show_left_scale': true,
