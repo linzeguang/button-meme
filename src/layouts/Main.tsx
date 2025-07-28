@@ -6,8 +6,8 @@ import { Container } from '@/components/ui/Box'
 
 const Main: React.FC = () => {
   return (
-    <main className="overflow-auto">
-      <Container className="py-6 lg:py-10">
+    <main className="main overflow-auto">
+      <Container className="py-6">
         <Outlet />
       </Container>
     </main>

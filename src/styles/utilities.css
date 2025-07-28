@@ -17,7 +17,7 @@
   .header,
   .aside,
   .footer {
-    @apply bg-background-secondary border-border light:backdrop-blur-2xl border-solid;
+    @apply bg-background-secondary border-border-highlight light:backdrop-blur-2xl border-solid;
   }
 
   .header {
@@ -32,17 +32,35 @@
     @apply border-t;
   }
 
+  .main {
+    background-color: #000;
+    background-image: url('../assets/images/bg/main-bg-light.png');
+    background-position: bottom;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+
+  .light .main {
+    background-color: transparent;
+    background-image: url('../assets/images/bg/main-bg-light.png'), linear-gradient(to bottom, #4fabfb, #fff);
+    background-position: bottom, top;
+    background-size:
+      100% auto,
+      auto;
+  }
+
   .overlay {
     @apply bg-background-overlay backdrop-blur-2xl;
   }
 
   .card,
-  .popover {
+  .popover,
+  .overlay {
     @apply bg-background-popover backdrop-blur-2xl;
   }
 
   .card {
-    @apply border-border rounded-md border p-4;
+    @apply border-border-highlight rounded-md border p-4;
   }
 
   .dividing-wieght {
@@ -50,5 +68,9 @@
   }
   .dividing-wieght-bold {
     --dividing-wieght: 2px; /* 分割线粗细 */
+  }
+
+  .token-logo {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 }

@@ -60,6 +60,7 @@
   --color-background-unactive: transparent;
 
   --color-border: #2a2a2a;
+  --color-border-highlight: var(--color-border);
   /* --color-border-thin: #23252b; */
 
   --color-accordion-arrow: #2a2a2a;
@@ -77,10 +78,11 @@
     --color-background-secondary: #ffffff80;
     --color-background-tertiary: transparent;
     --color-background-fourth: #e8e8e8;
-    --color-background-popover: #ffffffcc;
+    --color-background-popover: #fff;
     --color-background-input: #fff;
     --color-background-unactive: #969696;
 
     --color-border: #e8e8e8;
+    --color-border-highlight: #fdd184;
   }
 }

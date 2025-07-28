@@ -21,7 +21,7 @@ const Token: React.FC = () => {
   return (
     <TokenProvider>
       {gt2XL ? (
-        <Flex className={cn('gap-6 pt-10 [&>div]:gap-6')}>
+        <Flex className={cn('gap-6 [&>div]:gap-6')}>
           <Flex className="relative w-[24%] max-w-108 flex-col">
             {/* <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full" /> */}
             <TokenInfo />
@@ -40,7 +40,7 @@ const Token: React.FC = () => {
           </Flex>
         </Flex>
       ) : gtLG ? (
-        <Flex className={cn('gap-4 pt-10 [&>div]:gap-4')}>
+        <Flex className={cn('gap-4 [&>div]:gap-4')}>
           <Flex className="relative flex-1 flex-col">
             {/* <SearchToken wrapperClassName="absolute w-full -top-4 -translate-y-full w-108" /> */}
             <TvChart />
@@ -57,7 +57,7 @@ const Token: React.FC = () => {
           </Flex>
         </Flex>
       ) : (
-        <Flex className={cn('flex-col gap-4 pt-0')}>
+        <Flex className={cn('flex-col gap-4')}>
           {/* <SearchToken wrapperClassName="w-full" /> */}
           <TokenInfo className="flex-1" defaultValue="" />
           {/* <Tokenomic className="flex-1" defaultValue="" /> */}
