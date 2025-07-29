@@ -4,13 +4,14 @@ import { useAtomValue } from 'jotai/react'
 import { useNavigate, useParams } from 'react-router'
 import { useAccount } from 'wagmi'
 
-import { TokenInfo, TokenUserInfo } from '@/hooks/contracts/types'
+import { Project, TokenInfo, TokenUserInfo } from '@/hooks/contracts/types'
 import { useTokenBaseInfo, useTokenUserInfo } from '@/hooks/contracts/useInfoContract'
 import { Reward, useReward, UserReward, useUserReward } from '@/hooks/services/useReward'
 import { ROUTE_PATH } from '@/routes'
 import { projectsAtom } from '@/stores/token'
 
 export interface TokenProviderContextProps {
+  project: Project
   tokenId: number
   tokenInfo: TokenInfo | undefined
   tokenUserInfo: TokenUserInfo | undefined
@@ -18,13 +19,7 @@ export interface TokenProviderContextProps {
   reward: Reward | undefined
 }
 
-const TokenProviderContext = createContext<TokenProviderContextProps>({
-  tokenId: 0,
-  tokenInfo: undefined,
-  tokenUserInfo: undefined,
-  userReward: undefined,
-  reward: undefined
-})
+const TokenProviderContext = createContext<TokenProviderContextProps>({} as TokenProviderContextProps)
 
 const TokenProvider: React.FC<Omit<React.ComponentPropsWithRef<typeof TokenProviderContext.Provider>, 'value'>> = (
   props
@@ -50,6 +45,7 @@ const TokenProvider: React.FC<Omit<React.ComponentPropsWithRef<typeof TokenProvi
   return (
     <TokenProviderContext.Provider
       value={{
+        project,
         tokenId: Number(id),
         tokenInfo: tokenInfo,
         tokenUserInfo: isConnected ? tokenUserInfo : undefined,

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 
 import { t } from '@lingui/core/macro'
 
@@ -7,9 +7,9 @@ import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { Table } from '@/components/ui/Table'
+import { useMemoWithLocale } from '@/hooks/useWithLocale'
 import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
-// import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 enum RECORD_TYPE {
   Trade,
@@ -40,7 +40,7 @@ const TokenRecord: React.FC = () => {
 
   // const { tokenInfo } = useTokenProviderContext()
 
-  const recordTypes = useMemo(
+  const recordTypes = useMemoWithLocale(
     () => [
       {
         name: t`矿场数据`,

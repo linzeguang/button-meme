@@ -1,3 +1,4 @@
+import { Address } from 'viem'
 import { useAccount } from 'wagmi'
 
 import { Project } from '@/hooks/contracts/types'
@@ -32,7 +33,7 @@ export interface UserReward {
   tsRewardPercent: string
   tsRewardAcc: string // ts累计奖励
   tsRankIndex: number // 我的排名
-  proof: string[]
+  proof: Address[]
   referencesCount: number // 我的直推人数
   totalRefsCount: number // 我的总推广人数
   directRefsInvested: number // 我的直推资金
@@ -48,6 +49,6 @@ export const useUserReward = (project: Project) => {
 
   return {
     ...rest,
-    data: data?.data
+    data: data?.data && Object.keys(data.data).length ? data.data : undefined
   }
 }

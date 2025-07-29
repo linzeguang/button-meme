@@ -7,7 +7,7 @@ import { useWriteContract } from 'wagmi'
 import z from 'zod'
 
 import { MiningPoolAbi } from '@/constants/abi'
-import { useBalance, useTx } from '@/hooks/contracts/useErc20'
+import { TX_STATUS, useBalance, useTx } from '@/hooks/contracts/useErc20'
 import { useSaleEstimate } from '@/hooks/contracts/useInfoContract'
 import { toRawAmount } from '@/lib/rawAmount'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
@@ -127,5 +127,44 @@ export const useTrade = () => {
     tradeType,
     buy,
     handleSubmit
+  }
+}
+
+export const useClaim = () => {
+  const { writeContractAsync } = useWriteContract()
+  const { project, tokenInfo, userReward } = useTokenProviderContext()
+  console.log('>>>>>> userReward: ', userReward)
+  console.log('>>>>>> project: ', project)
+
+  const { transaction, txStatus } = useTx()
+
+  const claimLPHRewards = useCallback(async () => {
+    if (!tokenInfo) return
+    await transaction(
+      writeContractAsync({
+        abi: MiningPoolAbi,
+        address: tokenInfo.miningPool as Address,
+        functionName: 'claimLPHRewards'
+      })
+    )
+  }, [tokenInfo, transaction, writeContractAsync])
+
+  const claimTHTSRewards = useCallback(async () => {
+    if (!tokenInfo || !userReward) return
+    await transaction(
+      writeContractAsync({
+        abi: MiningPoolAbi,
+        address: tokenInfo.miningPool as Address,
+        functionName: 'claimTHTSRewards',
+        args: [BigInt(project?.epoch), BigInt(userReward.thRewardAcc), BigInt(userReward.tsRewardAcc), userReward.proof]
+      })
+    )
+  }, [project?.epoch, tokenInfo, transaction, userReward, writeContractAsync])
+
+  return {
+    txStatus,
+    isLoading: [TX_STATUS.PendingUser, TX_STATUS.Submitted, TX_STATUS.Approving].includes(txStatus),
+    claimLPHRewards,
+    claimTHTSRewards
   }
 }

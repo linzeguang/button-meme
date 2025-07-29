@@ -2,6 +2,7 @@ import React, { type ButtonHTMLAttributes } from 'react'
 
 import { cva, type VariantProps } from 'class-variance-authority'
 
+import { Icon } from '@/components/svgr'
 import { Grid } from '@/components/ui/Box'
 import { cn } from '@/lib/utils'
 
@@ -44,11 +45,18 @@ const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {}
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  loading?: boolean
+}
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { className, ghost, outline, size, variant, ...rest } = props
-  return <button ref={ref} className={cn(buttonVariants({ ghost, outline, size, variant, className }))} {...rest} />
+  const { children, className, ghost, outline, size, variant, loading, ...rest } = props
+  return (
+    <button ref={ref} className={cn(buttonVariants({ ghost, outline, size, variant, className }))} {...rest}>
+      {loading && <Icon.Loading className="loading size-4" />}
+      {children}
+    </button>
+  )
 })
 
 interface BaseOption {
