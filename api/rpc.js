@@ -1,5 +1,5 @@
 // api/rpc.ts
-export default async function handler(req: any, res: any) {
+export default async function handler(req, res) {
   const targetUrl = 'http://ec2-54-251-227-86.ap-southeast-1.compute.amazonaws.com:6979' // 例如 Infura/Alchemy 自己的 RPC 地址
 
   const response = await fetch(targetUrl, {
