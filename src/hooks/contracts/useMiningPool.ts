@@ -7,8 +7,9 @@ import { useWriteContract } from 'wagmi'
 import z from 'zod'
 
 import { MiningPoolAbi } from '@/constants/abi'
-import { TX_STATUS, useBalance, useTx } from '@/hooks/contracts/useErc20'
+import { useBalance, useTx } from '@/hooks/contracts/useErc20'
 import { useSaleEstimate } from '@/hooks/contracts/useInfoContract'
+import Calculator from '@/lib/calculator'
 import { toRawAmount } from '@/lib/rawAmount'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
 
@@ -26,7 +27,7 @@ export const tradeFormSchema = z.object({
 
 export const useTrade = () => {
   const { writeContractAsync } = useWriteContract()
-  const { tokenInfo } = useTokenProviderContext()
+  const { tokenInfo, project } = useTokenProviderContext()
 
   const form = useForm<z.infer<typeof tradeFormSchema>>({
     resolver: zodResolver(tradeFormSchema),
@@ -42,6 +43,15 @@ export const useTrade = () => {
   const leader = form.watch('leader')
   const amountIn = form.watch('amountIn')
   // const amountOut = form.watch('amountOut')
+
+  useEffect(() => {
+    if (tradeType === TRADE_TYPE.BUY) {
+      const previewAmountOut = Calculator.base(amountIn || 0)
+        .multiply(Math.pow(1.01, project?.epoch || 0))
+        .toNumber()
+      form.setValue('amountOut', previewAmountOut ? previewAmountOut.toString() : '')
+    }
+  }, [amountIn, form, project?.epoch, tradeType])
 
   // LPH = USDC*1.01^n
 
@@ -67,7 +77,7 @@ export const useTrade = () => {
     token: tokenInfo?.mintToken.address
   })
 
-  const { approve, transaction, refetchAllowance } = useTx({
+  const { approve, transaction, refetchAllowance, isLoading } = useTx({
     approve: tokenInfo && { token: tokenInfo.stableToken.address, spender: tokenInfo.miningPool },
     onSuccess: () => {
       form.reset()
@@ -125,6 +135,7 @@ export const useTrade = () => {
     mintTokenBalance,
     leader,
     tradeType,
+    isLoading,
     buy,
     handleSubmit
   }
@@ -136,7 +147,7 @@ export const useClaim = () => {
   console.log('>>>>>> userReward: ', userReward)
   console.log('>>>>>> project: ', project)
 
-  const { transaction, txStatus } = useTx()
+  const { transaction, txStatus, isLoading } = useTx()
 
   const claimLPHRewards = useCallback(async () => {
     if (!tokenInfo) return
@@ -163,7 +174,7 @@ export const useClaim = () => {
 
   return {
     txStatus,
-    isLoading: [TX_STATUS.PendingUser, TX_STATUS.Submitted, TX_STATUS.Approving].includes(txStatus),
+    isLoading,
     claimLPHRewards,
     claimTHTSRewards
   }

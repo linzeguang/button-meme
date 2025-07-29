@@ -2,7 +2,7 @@ import { useCallback, useEffect, useId, useState } from 'react'
 
 import { t } from '@lingui/core/macro'
 import toast from 'react-hot-toast'
-import { Address, erc20Abi } from 'viem'
+import { Address, erc20Abi, maxUint256 } from 'viem'
 import {
   useAccount,
   useBalance as useBalanceWithWagmi,
@@ -65,7 +65,7 @@ export const useApprove = (parmas?: { token: Address; spender: Address }) => {
         abi: erc20Abi,
         address: parmas.token,
         functionName: 'approve',
-        args: [parmas.spender, amount]
+        args: [parmas.spender, maxUint256]
       })
     },
     [allowance, parmas, writeContractAsync]
@@ -156,6 +156,7 @@ export const useTx = (parmas?: { approve: Parameters<typeof useApprove>[0]; onSu
     txHash,
     txStatus,
     allowance,
+    isLoading: [TX_STATUS.PendingUser, TX_STATUS.Submitted, TX_STATUS.Approving].includes(txStatus),
     approve,
     refetchAllowance,
     transaction

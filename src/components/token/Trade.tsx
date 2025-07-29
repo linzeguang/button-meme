@@ -14,6 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/Input'
 import { RadioGroup, RadioOption } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { MIT } from '@/constants/token'
 import { TRADE_TYPE, useTrade } from '@/hooks/contracts/useMiningPool'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
 import { cn } from '@/lib/utils'
@@ -22,7 +23,7 @@ import { useTokenProviderContext } from '@/providers/TokenProvider'
 const TradeForm: React.FC = () => {
   const { tokenInfo, tokenUserInfo } = useTokenProviderContext()
 
-  const { stableTokenBalance, mintTokenBalance, form, tradeType, handleSubmit } = useTrade()
+  const { stableTokenBalance, mintTokenBalance, form, tradeType, isLoading, handleSubmit } = useTrade()
 
   const tradeTypes = useMemoWithLocale<RadioOption[]>(
     () => [
@@ -83,7 +84,8 @@ const TradeForm: React.FC = () => {
                       size="lg"
                       suffixNode={
                         <HarmonyOSSansText className="font-bold">
-                          {tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol}
+                          {/* {tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol} */}
+                          {tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : MIT.name}
                         </HarmonyOSSansText>
                       }
                       {...field}
@@ -113,6 +115,7 @@ const TradeForm: React.FC = () => {
                       readOnly
                       suffixNode={
                         <HarmonyOSSansText className="font-bold">
+                          {/* {tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol} */}
                           {tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol}
                         </HarmonyOSSansText>
                       }
@@ -123,8 +126,8 @@ const TradeForm: React.FC = () => {
               )}
             />
           </div>
-          <Button variant="primary" type="submit" size="md" className="w-full">
-            <Trans>Buy Hash & Mint</Trans>
+          <Button variant="primary" type="submit" size="md" loading={isLoading} disabled={isLoading} className="w-full">
+            {tradeType === TRADE_TYPE.BUY ? <Trans>Buy Hash & Mint</Trans> : <Trans>Sell</Trans>}
           </Button>
         </form>
       </Form>
