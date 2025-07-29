@@ -1,4 +1,15 @@
 {
+  "functions": {
+    "proxy/rpc.ts": {
+      "runtime": "vercel-edge"
+    }
+  },
+  "routes": [
+    {
+      "src": "/rpc",
+      "dest": "/api/rpc.ts"
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/:path*",
