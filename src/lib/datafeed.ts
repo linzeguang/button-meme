@@ -1,4 +1,3 @@
-import { MIT } from '@/constants/token'
 import {
   SUPPORTED_RESOLUTIONS,
   SUPPORTED_RESOLUTIONS_MAP
