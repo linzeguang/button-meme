@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react'
 
 import { Trans } from '@lingui/react/macro'
 import { useAtom } from 'jotai/react'
+import { Address } from 'viem'
 
 import { TokenImage } from '@/assets/images'
 import { Logo } from '@/components/svgr'
@@ -40,10 +41,10 @@ const TvChart: React.FC = () => {
       const widgetOptions: ChartingLibraryWidgetOptions = {
         // symbol: DataFeed.generateInitSymbol(tokenInfo.mintToken),
         symbol: DataFeed.generateInitSymbol({
-          address: '0xfEC72D0bd1c5b3F245e45c61794183598712874d',
-          name: 'Button',
-          symbol: 'BTN',
-          decimals: 18,
+          address: MIT.address as Address,
+          name: MIT.name,
+          symbol: MIT.symbol,
+          decimals: MIT.decimals,
           burnedAmount: 0n
         }),
         interval,

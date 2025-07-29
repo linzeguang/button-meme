@@ -1,3 +1,4 @@
+import { MIT } from '@/constants/token'
 import {
   SUPPORTED_RESOLUTIONS,
   SUPPORTED_RESOLUTIONS_MAP
@@ -95,7 +96,7 @@ export default class DataFeed extends EventTarget implements IBasicDataFeed {
       timezone: 'Etc/UTC',
       type: 'crypto',
       visible_plots_set: 'ohlc',
-      exchange: 'Button',
+      exchange: '',
       listed_exchange: '-',
       pricescale,
       format: 'price',
