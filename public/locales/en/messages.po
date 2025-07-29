@@ -13,11 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/token/TokenRanking.tsx:118
+#: src/components/token/TokenRanking.tsx:121
 msgid "- Out of TOP 100 -"
 msgstr "- Out of TOP 100 -"
 
-#: src/components/token/Reward.tsx:42
+#: src/components/token/Reward.tsx:114
 msgid "/ Total"
 msgstr "/ Total"
 
@@ -28,6 +28,10 @@ msgstr "Activity Log"
 #: src/components/token/TokenRanking.tsx:84
 msgid "Address"
 msgstr "Address"
+
+#: src/components/token/TokenRecord.tsx:119
+msgid "Amount"
+msgstr "Amount"
 
 #: src/hooks/contracts/useErc20.ts:96
 msgid "Approving... Please wait"
@@ -44,25 +48,25 @@ msgstr "Awaiting action"
 
 #. placeholder {0}: stableTokenBalance?.formatted || '--'
 #. placeholder {0}: mintTokenBalance?.formatted || '--'
-#: src/components/token/Trade.tsx:75
-#: src/components/token/Trade.tsx:76
-#: src/components/token/Trade.tsx:103
+#: src/components/token/Trade.tsx:78
+#: src/components/token/Trade.tsx:79
+#: src/components/token/Trade.tsx:109
 msgid "Balance: {0}"
 msgstr "Balance: {0}"
 
-#: src/components/token/OnChainInfo.tsx:63
+#: src/components/token/OnChainInfo.tsx:62
 msgid "Burned"
 msgstr "Burned"
 
-#: src/components/token/Trade.tsx:30
+#: src/components/token/Trade.tsx:32
 msgid "Buy"
 msgstr "Buy"
 
-#: src/components/token/Trade.tsx:119
+#: src/components/token/Trade.tsx:130
 msgid "Buy Hash & Mint"
 msgstr "Buy Hash & Mint"
 
-#: src/components/token/Reward.tsx:62
+#: src/components/token/Reward.tsx:127
 msgid "Claim"
 msgstr "Claim"
 
@@ -70,15 +74,15 @@ msgstr "Claim"
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
-#: src/components/token/TokenInfo.tsx:23
+#: src/components/token/TokenInfo.tsx:24
 msgid "Contract"
 msgstr "Contract"
 
-#: src/components/token/Invite.tsx:31
+#: src/components/token/Invite.tsx:34
 msgid "Copy"
 msgstr "Copy"
 
-#: src/components/token/TokenRecord.tsx:97
+#: src/components/token/TokenRecord.tsx:98
 msgid "Date"
 msgstr "Date"
 
@@ -90,69 +94,81 @@ msgstr "Defi"
 msgid "Enter address to query"
 msgstr "Enter address to query"
 
-#: src/components/token/TvChart.tsx:112
-#: src/components/token/OnChainInfo.tsx:165
+#: src/components/token/TvChart.tsx:115
+#: src/components/token/OnChainInfo.tsx:133
 msgid "EPoch: "
 msgstr "EPoch: "
 
-#: src/components/token/Trade.tsx:71
+#: src/components/token/TokenInfo.tsx:77
+msgid "FEC Miner is an interactive game on the chain that integrates simulation management and resource collection for ADN node players. Players develop a mining empire in a dynamic ecosystem by building mines, dispatching mine carts, and exploring resources."
+msgstr "FEC Miner is an interactive game on the chain that integrates simulation management and resource collection for ADN node players. Players develop a mining empire in a dynamic ecosystem by building mines, dispatching mine carts, and exploring resources."
+
+#: src/components/token/TokenInfo.tsx:59
+msgid "FEC Mining Game"
+msgstr "FEC Mining Game"
+
+#: src/components/token/Trade.tsx:74
 msgid "From"
 msgstr "From"
 
+#: src/components/token/Invite.tsx:24
+msgid "Invite"
+msgstr "Invite"
+
 #: src/components/token/Invite.tsx:22
-msgid "Invite Friends"
-msgstr "Invite Friends"
+#~ msgid "Invite Friends"
+#~ msgstr "Invite Friends"
 
 #: src/components/token/Tokenomic.tsx:29
 msgid "LPH Mining"
 msgstr "LPH Mining"
 
 #. placeholder {0}: tokenUserInfo?.lph.toString() ?? '--'
-#: src/components/token/Trade.tsx:102
+#: src/components/token/Trade.tsx:108
 msgid "LPH: {0}"
 msgstr "LPH: {0}"
 
 #: src/components/token/OnChainInfo.tsx:81
-msgid "My direct referrals"
-msgstr "My direct referrals"
+#~ msgid "My direct referrals"
+#~ msgstr "My direct referrals"
 
 #: src/components/token/OnChainInfo.tsx:93
-msgid "My harvestable TH rewards"
-msgstr "My harvestable TH rewards"
+#~ msgid "My harvestable TH rewards"
+#~ msgstr "My harvestable TH rewards"
 
 #: src/components/token/OnChainInfo.tsx:85
-msgid "My harvested TH rewards"
-msgstr "My harvested TH rewards"
+#~ msgid "My harvested TH rewards"
+#~ msgstr "My harvested TH rewards"
 
 #: src/components/token/OnChainInfo.tsx:114
-msgid "My harvested TS rewards"
-msgstr "My harvested TS rewards"
+#~ msgid "My harvested TS rewards"
+#~ msgstr "My harvested TS rewards"
 
 #: src/components/token/OnChainInfo.tsx:104
-msgid "My indirect referrals"
-msgstr "My indirect referrals"
+#~ msgid "My indirect referrals"
+#~ msgstr "My indirect referrals"
 
 #: src/components/token/OnChainInfo.tsx:77
-msgid "My TH"
-msgstr "My TH"
+#~ msgid "My TH"
+#~ msgstr "My TH"
 
 #: src/components/token/OnChainInfo.tsx:110
-msgid "MY TS"
-msgstr "MY TS"
+#~ msgid "MY TS"
+#~ msgstr "MY TS"
 
 #: src/components/token/OnChainInfo.tsx:100
-msgid "My TS Rank"
-msgstr "My TS Rank"
+#~ msgid "My TS Rank"
+#~ msgstr "My TS Rank"
 
-#: src/components/token/TokenInfo.tsx:32
+#: src/components/token/TokenInfo.tsx:38
 msgid "Name"
 msgstr "Name"
 
-#: src/components/ui/Table.tsx:114
+#: src/components/ui/Table.tsx:116
 msgid "No Data"
 msgstr "No Data"
 
-#: src/components/token/OnChainInfo.tsx:46
+#: src/components/token/OnChainInfo.tsx:45
 msgid "Overview"
 msgstr "Overview"
 
@@ -160,7 +176,7 @@ msgstr "Overview"
 msgid "Please confirm the transaction in your wallet"
 msgstr "Please confirm the transaction in your wallet"
 
-#: src/components/token/TokenRecord.tsx:125
+#: src/components/token/TokenRecord.tsx:111
 msgid "Price"
 msgstr "Price"
 
@@ -168,16 +184,16 @@ msgstr "Price"
 msgid "Ranking"
 msgstr "Ranking"
 
-#: src/components/token/TokenRanking.tsx:94
-#: src/components/token/Reward.tsx:28
+#: src/components/token/TokenRanking.tsx:96
 msgid "Reward"
 msgstr "Reward"
 
-#: src/components/token/Trade.tsx:36
+#: src/components/token/Trade.tsx:38
+#: src/components/token/Trade.tsx:130
 msgid "Sell"
 msgstr "Sell"
 
-#: src/components/token/TokenInfo.tsx:36
+#: src/components/token/TokenInfo.tsx:43
 msgid "Symbol"
 msgstr "Symbol"
 
@@ -185,33 +201,33 @@ msgstr "Symbol"
 msgid "TH Rewards"
 msgstr "TH Rewards"
 
-#: src/components/token/Trade.tsx:98
+#: src/components/token/Trade.tsx:104
 msgid "To"
 msgstr "To"
 
 #: src/components/token/TokenInfo.tsx:51
-msgid "Token"
-msgstr "Token"
+#~ msgid "Token"
+#~ msgstr "Token"
 
 #: src/components/token/Tokenomic.tsx:58
 msgid "Tokenomic"
 msgstr "Tokenomic"
 
-#: src/components/token/OnChainInfo.tsx:51
+#: src/components/token/OnChainInfo.tsx:50
 msgid "Total LPH"
 msgstr "Total LPH"
 
-#: src/components/token/OnChainInfo.tsx:55
+#: src/components/token/OnChainInfo.tsx:54
 msgid "Total TH"
 msgstr "Total TH"
 
-#: src/components/token/OnChainInfo.tsx:59
+#: src/components/token/OnChainInfo.tsx:58
 msgid "Total TS"
 msgstr "Total TS"
 
-#: src/components/token/Trade.tsx:137
-#: src/components/token/Trade.tsx:158
-#: src/components/token/Trade.tsx:164
+#: src/components/token/Trade.tsx:150
+#: src/components/token/Trade.tsx:171
+#: src/components/token/Trade.tsx:177
 msgid "Trade"
 msgstr "Trade"
 
@@ -224,8 +240,8 @@ msgid "Transaction failed, please try again"
 msgstr "Transaction failed, please try again"
 
 #: src/components/token/TokenRecord.tsx:46
-msgid "Transaction History"
-msgstr "Transaction History"
+#~ msgid "Transaction History"
+#~ msgstr "Transaction History"
 
 #: src/hooks/contracts/useErc20.ts:100
 msgid "Transaction rejected by user"
@@ -235,7 +251,7 @@ msgstr "Transaction rejected by user"
 msgid "Transaction submitted, waiting for confirmation"
 msgstr "Transaction submitted, waiting for confirmation"
 
-#: src/components/token/TokenRanking.tsx:89
+#: src/components/token/TokenRanking.tsx:90
 msgid "TS"
 msgstr "TS"
 
@@ -243,7 +259,7 @@ msgstr "TS"
 msgid "TS Rewards"
 msgstr "TS Rewards"
 
-#: src/components/token/TokenRecord.tsx:101
+#: src/components/token/TokenRecord.tsx:102
 msgid "Type"
 msgstr "Type"
 
@@ -252,9 +268,45 @@ msgid "Type token symbol, address to find"
 msgstr "Type token symbol, address to find"
 
 #: src/components/token/OnChainInfo.tsx:72
-msgid "UD"
-msgstr "UD"
+#~ msgid "UD"
+#~ msgstr "UD"
 
 #: src/components/token/TokenRecord.tsx:133
-msgid "View"
-msgstr "View"
+#~ msgid "View"
+#~ msgstr "View"
+
+#: src/components/token/TokenRecord.tsx:127
+msgid "Volume"
+msgstr "Volume"
+
+#: src/components/token/OnChainInfo.tsx:89
+msgid "热力值"
+msgstr "热力值"
+
+#: src/components/token/OnChainInfo.tsx:84
+msgid "热力值排名"
+msgstr "热力值排名"
+
+#: src/components/token/OnChainInfo.tsx:71
+msgid "矿主数据"
+msgstr "矿主数据"
+
+#: src/components/token/TokenRecord.tsx:46
+msgid "矿场数据"
+msgstr "矿场数据"
+
+#: src/components/token/OnChainInfo.tsx:76
+msgid "矿场数量"
+msgstr "矿场数量"
+
+#: src/components/token/Reward.tsx:35
+msgid "矿车分配"
+msgstr "矿车分配"
+
+#: src/components/token/Reward.tsx:39
+msgid "矿车奖励"
+msgstr "矿车奖励"
+
+#: src/components/token/OnChainInfo.tsx:80
+msgid "贡献值"
+msgstr "贡献值"
