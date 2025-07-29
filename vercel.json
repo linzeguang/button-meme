@@ -1,6 +1,6 @@
 {
   "functions": {
-    "proxy/rpc.ts": {
+    "api/rpc.ts": {
       "runtime": "now-php@1.0.0"
     }
   },
@@ -15,7 +15,7 @@
     },
     {
       "source": "/rpc/:path*",
-      "destination": "/proxy/rpc.ts"
+      "destination": "/api/rpc.ts"
     }
   ]
 }
