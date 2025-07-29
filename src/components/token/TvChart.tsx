@@ -9,6 +9,7 @@ import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { MIT } from '@/constants/token'
 import { defaultChartProps, getChartOverrides } from '@/constants/tradingiew'
 import DataFeed from '@/lib/datafeed'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
@@ -95,7 +96,7 @@ const TvChart: React.FC = () => {
                 backgroundImage: `url(${TokenImage.ButtonBg})`
               }}
               className="h-[6.625rem] w-full bg-cover bg-center md:aspect-[885/127] md:h-auto"
-            ></Flex>
+            />
             <Flex className="h-10 w-full items-end gap-4 px-4">
               <Logo.Mit className="token-logo size-16 lg:size-24" />
               {/* <img src={TokenImage.Button} alt={tokenInfo?.mintToken.name} className="size-16 lg:size-24" /> */}
@@ -104,7 +105,8 @@ const TvChart: React.FC = () => {
               </Flex> */}
               <Flex className="flex-1 items-center justify-between py-1.5">
                 <HarmonyOSSansText className="text-sm font-bold lg:text-lg">
-                  {tokenInfo?.mintToken.name || '--'}{' '}
+                  {MIT.name}
+                  {/* {tokenInfo?.mintToken.name || '--'} */}
                   {/* <HarmonyOSSansText as="span" className="text-xs font-normal lg:text-sm" variant="secondary">
                     / {tokenInfo?.mintToken.symbol || '--'}
                   </HarmonyOSSansText> */}

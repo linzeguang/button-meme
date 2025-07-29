@@ -54,8 +54,7 @@
   }
 
   .card,
-  .popover,
-  .overlay {
+  .popover {
     @apply bg-background-popover backdrop-blur-2xl;
   }
 

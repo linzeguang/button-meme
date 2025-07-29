@@ -8,6 +8,7 @@ import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { MIT } from '@/constants/token'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
 import { formatAddress } from '@/lib/format'
 import { copy } from '@/lib/utils'
@@ -23,18 +24,25 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
         name: t`Contract`,
         value: (
           <HarmonyOSSansText className="text-primary flex items-center gap-1">
-            <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span>
-            <Icon.Copy className="cursor-pointer" onClick={() => copy(tokenInfo!.mintToken.address)} />
+            {/* <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span> */}
+            <span>{formatAddress(MIT.address)}</span>
+            <Icon.Copy
+              className="cursor-pointer"
+              // onClick={() => copy(tokenInfo!.mintToken.address)}
+              onClick={() => copy(MIT.address)}
+            />
           </HarmonyOSSansText>
         )
       },
       {
         name: t`Name`,
-        value: tokenInfo ? tokenInfo.mintToken.name : '--'
+        // value: tokenInfo ? tokenInfo.mintToken.name : '--'
+        value: MIT.name
       },
       {
         name: t`Symbol`,
-        value: tokenInfo ? tokenInfo.mintToken.symbol : '--'
+        // value: tokenInfo ? tokenInfo.mintToken.symbol : '--'
+        value: MIT.symbol
       }
     ],
     [tokenInfo]
@@ -67,8 +75,9 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
             </Flex> */}
             <HarmonyOSSansText className="text-sm" variant="secondary">
               <Trans>
-                FEC矿车是一款面向ADN节点玩家的融合模拟经营与资源采集的链上互动游戏。
-                玩家通过建设矿场、调度矿车、探索资源，在动态生态中发展采矿帝国。
+                FEC Miner is an interactive game on the chain that integrates simulation management and resource
+                collection for ADN node players. Players develop a mining empire in a dynamic ecosystem by building
+                mines, dispatching mine carts, and exploring resources.
               </Trans>
             </HarmonyOSSansText>
             <ul>

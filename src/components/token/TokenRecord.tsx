@@ -116,7 +116,7 @@ const TokenRecord: React.FC = () => {
                 }
               },
               {
-                name: t`数量`,
+                name: t`Amount`,
                 field: 'quoteAmount',
                 render: (value, data) => {
                   const isBuy = data.type === TRADE_TYPE.Buy
@@ -124,7 +124,7 @@ const TokenRecord: React.FC = () => {
                 }
               },
               {
-                name: t`总量`,
+                name: t`Volume`,
                 field: 'tx',
                 render: (value) => <span className="text-primary">{value}</span>
               }
