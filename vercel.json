@@ -1,16 +1,17 @@
 {
   "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://button.beecom.ai/:path*"
-    },
-    {
-      "source": "/php/:path*",
-      "destination": "http://8.218.155.42:1018/:path*"
-    },
-    {
-      "source": "/rpc/:path*",
-      "destination": "/api/rpc.ts"
-    }
+    // {
+    //   "source": "/api/:path*",
+    //   "destination": "https://button.beecom.ai/:path*"
+    // },
+    // {
+    //   "source": "/php/:path*",
+    //   "destination": "http://8.218.155.42:1018/:path*"
+    // },
+    // {
+    //   "source": "/rpc/:path*",
+    //   "destination": "/api/rpc.ts"
+    // }
+    { "source": "/rpc", "destination": "/api/rpc" }
   ]
 }
