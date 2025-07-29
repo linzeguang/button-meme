@@ -17,6 +17,7 @@ import { HarmonyOSSansText } from '@/components/ui/Text'
 import { MIT } from '@/constants/token'
 import { TRADE_TYPE, useTrade } from '@/hooks/contracts/useMiningPool'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
+import { fromRawAmount } from '@/lib/rawAmount'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
 
@@ -105,7 +106,7 @@ const TradeForm: React.FC = () => {
                     </HarmonyOSSansText>
                     <HarmonyOSSansText>
                       {tradeType === TRADE_TYPE.BUY
-                        ? t`LPH: ${tokenUserInfo?.lph.toString() ?? '--'}`
+                        ? t`LPH: ${tokenUserInfo ? fromRawAmount(tokenUserInfo.lph, 2) : '--'}`
                         : t`Balance: ${stableTokenBalance?.formatted || '--'}`}
                     </HarmonyOSSansText>
                   </FormLabel>

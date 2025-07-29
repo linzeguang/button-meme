@@ -12,14 +12,13 @@ import { projectsAtom } from '@/stores/token'
 export const useProjects = () => {
   const setProjects = useSetAtom(projectsAtom)
 
-  const { data: count, ...getProjectCount } = useReadContract({
+  const { data: count } = useReadContract({
     abi: InfoAbi,
     chainId: ENV_PARAMS.CHAIN_ID,
     address: ENV_PARAMS.INFO_CONTRACT,
     functionName: 'getProjectCount'
   })
-  console.log('>>>>>> getProjectCount: ', getProjectCount)
-  const { data, ...getProjectInfo } = useReadContracts({
+  const { data } = useReadContracts({
     contracts: Array.from({ length: Number(count) }, (_, index) => ({
       abi: InfoAbi,
       chainId: ENV_PARAMS.CHAIN_ID,
@@ -28,7 +27,6 @@ export const useProjects = () => {
       args: [BigInt(index)]
     }))
   })
-  console.log('>>>>>> getProjectInfo: ', getProjectInfo)
 
   const projects = useMemo(
     () =>

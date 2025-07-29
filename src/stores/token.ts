@@ -9,9 +9,4 @@ export const intervalAtom = atomWithStorage<ResolutionString>(STORAGE_KEY.INTERV
   getOnInit: true
 })
 
-export const projectsAtom = atomWithStorage<Project[]>(
-  STORAGE_KEY.PROJECTS,
-  [{ name: 'MIT', epoch: 0, id: 0 }],
-  undefined,
-  { getOnInit: true }
-)
+export const projectsAtom = atomWithStorage<Project[]>(STORAGE_KEY.PROJECTS, [], undefined, { getOnInit: true })

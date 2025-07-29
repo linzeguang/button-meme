@@ -144,8 +144,6 @@ export const useTrade = () => {
 export const useClaim = () => {
   const { writeContractAsync } = useWriteContract()
   const { project, tokenInfo, userReward } = useTokenProviderContext()
-  console.log('>>>>>> userReward: ', userReward)
-  console.log('>>>>>> project: ', project)
 
   const { transaction, txStatus, isLoading } = useTx()
 

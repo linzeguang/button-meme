@@ -48,7 +48,7 @@ const OnChainInfo: React.FC = () => {
           [
             {
               name: t`Total LPH`,
-              value: tokenInfo ? fromRawAmount(tokenInfo.totalLPH, tokenInfo.mintToken.decimals) : '--'
+              value: tokenInfo ? fromRawAmount(tokenInfo.totalLPH, 2) : '--'
             },
             {
               name: t`Total TH`,
