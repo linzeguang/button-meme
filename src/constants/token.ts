@@ -1,5 +1,5 @@
 export const MIT = {
-  address: '0xfEC72D0bd1c5b3F245e45c61794183598712874d',
+  address: '0x3e7712cf29164432efc6ef0aa669c10b674efe43',
   name: 'MIT',
   symbol: 'MIT',
   decimals: 4

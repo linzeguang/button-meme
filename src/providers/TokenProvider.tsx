@@ -35,6 +35,7 @@ const TokenProvider: React.FC<Omit<React.ComponentPropsWithRef<typeof TokenProvi
   const tokenUserInfo = useTokenUserInfo(project)
   const { data: reward } = useReward(project)
   const { data: userReward } = useUserReward(project)
+  console.log('>>>>>> tokenInfo: ', tokenInfo)
 
   useEffect(() => {
     // id 不正确，重定向到第一个token
