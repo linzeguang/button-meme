@@ -32,11 +32,11 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
   const tabTypes = useMemoWithLocale(
     () => [
       {
-        name: t`矿车分配`,
+        name: t`Minecart allocation`,
         value: TAB_TYPE.Distribute
       },
       {
-        name: t`矿车奖励`,
+        name: t`Minecart rewards`,
         value: TAB_TYPE.Reward
       }
     ],

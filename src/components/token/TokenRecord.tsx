@@ -43,11 +43,11 @@ const TokenRecord: React.FC = () => {
   const recordTypes = useMemoWithLocale(
     () => [
       {
-        name: t`矿场数据`,
+        name: t`Mine`,
         value: RECORD_TYPE.Trade
       },
       {
-        name: t`Activity Log`,
+        name: t`Activity`,
         value: RECORD_TYPE.Active
       }
     ],

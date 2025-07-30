@@ -68,25 +68,25 @@ const OnChainInfo: React.FC = () => {
         ]
       },
       [INFO_TYPE.UD]: {
-        name: t`矿主数据`,
+        name: t`Mine owner`,
         value: INFO_TYPE.UD,
         infos: [
           [
             {
-              name: t`矿场数量`,
+              name: t`Mine count`,
               value: tokenUserInfo?.lph.toString() ?? '--'
             },
             {
-              name: t`贡献值`,
+              name: t`Contribution value`,
               value: userReward?.th ?? '--'
             },
             {
-              name: t`热力值排名`,
+              name: t`Heat value ranking`,
               value: userReward?.tsRankIndex ?? '--',
               highlight: true
             },
             {
-              name: t`热力值`,
+              name: t`Heat value`,
               value: userReward?.ts ?? '--',
               highlight: true
             }

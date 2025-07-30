@@ -22,7 +22,7 @@ msgid "/ Total"
 msgstr "总分配"
 
 #: src/components/token/TokenRecord.tsx:50
-msgid "Activity Log"
+msgid "Activity"
 msgstr "活动记录"
 
 #: src/components/token/TokenRanking.tsx:84
@@ -31,37 +31,33 @@ msgstr "地址"
 
 #: src/components/token/TokenRecord.tsx:119
 msgid "Amount"
-msgstr ""
+msgstr "数量"
 
 #: src/hooks/contracts/useErc20.ts:96
 msgid "Approving... Please wait"
-msgstr ""
+msgstr "授权中，请等待..."
 
 #: src/hooks/contracts/useErc20.ts:94
 msgid "Awaiting action"
-msgstr ""
-
-#: src/components/token/Trade.tsx:NaN
-#~ msgid "Balance:"
-#~ msgstr "余额:"
+msgstr "等待操作"
 
 #. placeholder {0}: stableTokenBalance?.formatted || '--'
 #. placeholder {0}: mintTokenBalance?.formatted || '--'
-#: src/components/token/Trade.tsx:78
 #: src/components/token/Trade.tsx:79
-#: src/components/token/Trade.tsx:109
+#: src/components/token/Trade.tsx:80
+#: src/components/token/Trade.tsx:110
 msgid "Balance: {0}"
-msgstr ""
+msgstr "余额：{0}"
 
 #: src/components/token/OnChainInfo.tsx:62
 msgid "Burned"
 msgstr "销毁"
 
-#: src/components/token/Trade.tsx:32
+#: src/components/token/Trade.tsx:33
 msgid "Buy"
 msgstr "建造"
 
-#: src/components/token/Trade.tsx:130
+#: src/components/token/Trade.tsx:131
 msgid "Buy Hash & Mint"
 msgstr "建造矿场"
 
@@ -76,6 +72,10 @@ msgstr "连接钱包"
 #: src/components/token/TokenInfo.tsx:24
 msgid "Contract"
 msgstr "合约地址"
+
+#: src/components/token/OnChainInfo.tsx:80
+msgid "Contribution value"
+msgstr "贡献值"
 
 #: src/components/token/Invite.tsx:34
 msgid "Copy"
@@ -93,71 +93,63 @@ msgstr "DeFi"
 msgid "Enter address to query"
 msgstr "输入地址查询"
 
-#: src/components/token/TvChart.tsx:115
+#: src/components/token/TvChart.tsx:116
 #: src/components/token/OnChainInfo.tsx:133
 msgid "EPoch: "
 msgstr "周期："
 
 #: src/components/token/TokenInfo.tsx:77
 msgid "FEC Miner is an interactive game on the chain that integrates simulation management and resource collection for ADN node players. Players develop a mining empire in a dynamic ecosystem by building mines, dispatching mine carts, and exploring resources."
-msgstr ""
+msgstr "FEC矿车是一款面向ADN节点玩家的融合模拟经营与资源采集的链上互动游戏。玩家通过建设矿场、调度矿车、探索资源，在动态生态中发展采矿帝国。"
 
 #: src/components/token/TokenInfo.tsx:59
 msgid "FEC Mining Game"
-msgstr ""
+msgstr "FEC 矿车游戏"
 
-#: src/components/token/Trade.tsx:74
+#: src/components/token/Trade.tsx:75
 msgid "From"
 msgstr "从"
 
+#: src/components/token/OnChainInfo.tsx:89
+msgid "Heat value"
+msgstr "热力值"
+
+#: src/components/token/OnChainInfo.tsx:84
+msgid "Heat value ranking"
+msgstr "热力值排名"
+
 #: src/components/token/Invite.tsx:24
 msgid "Invite"
-msgstr ""
-
-#: src/components/token/Invite.tsx:22
-#~ msgid "Invite Friends"
-#~ msgstr "邀请朋友"
+msgstr "邀请朋友"
 
 #: src/components/token/Tokenomic.tsx:29
 msgid "LPH Mining"
 msgstr "矿车分配"
 
-#. placeholder {0}: tokenUserInfo?.lph.toString() ?? '--'
-#: src/components/token/Trade.tsx:108
+#. placeholder {0}: tokenUserInfo ? fromRawAmount(tokenUserInfo.lph, 2) : '--'
+#: src/components/token/Trade.tsx:109
 msgid "LPH: {0}"
-msgstr ""
+msgstr "LPH: {0}"
 
-#: src/components/token/OnChainInfo.tsx:80
-#~ msgid "My direct referrals"
-#~ msgstr "M 值"
-
-#: src/components/token/OnChainInfo.tsx:92
-#~ msgid "My harvestable TH rewards"
-#~ msgstr "已领取贡献值奖励"
-
-#: src/components/token/OnChainInfo.tsx:84
-#~ msgid "My harvested TH rewards"
-#~ msgstr "可领取贡献值奖励"
-
-#: src/components/token/OnChainInfo.tsx:113
-#~ msgid "My harvested TS rewards"
-#~ msgstr "可领取热力值奖励"
-
-#: src/components/token/OnChainInfo.tsx:103
-#~ msgid "My indirect referrals"
-#~ msgstr "间接推荐"
+#: src/components/token/TokenRecord.tsx:46
+msgid "Mine"
+msgstr "矿场数据"
 
 #: src/components/token/OnChainInfo.tsx:76
-#~ msgid "My TH"
-#~ msgstr "我的贡献值"
+msgid "Mine count"
+msgstr "矿场数量"
 
-#: src/components/token/OnChainInfo.tsx:109
-#~ msgid "MY TS"
-#~ msgstr "我的热力值"
+#: src/components/token/OnChainInfo.tsx:71
+msgid "Mine owner"
+msgstr "矿主数据"
 
-#: src/components/token/OnChainInfo.tsx:99
-#~ msgid "My TS Rank"
-#~ msgstr "热力值排名"
+#: src/components/token/Reward.tsx:35
+msgid "Minecart allocation"
+msgstr "矿车分配"
+
+#: src/components/token/Reward.tsx:39
+msgid "Minecart rewards"
+msgstr "矿车奖励"
 
 #: src/components/token/TokenInfo.tsx:38
 msgid "Name"
@@ -165,7 +157,7 @@ msgstr "名称"
 
 #: src/components/ui/Table.tsx:116
 msgid "No Data"
-msgstr ""
+msgstr "暂无数据"
 
 #: src/components/token/OnChainInfo.tsx:45
 msgid "Overview"
@@ -173,7 +165,7 @@ msgstr "预览"
 
 #: src/hooks/contracts/useErc20.ts:95
 msgid "Please confirm the transaction in your wallet"
-msgstr ""
+msgstr "请前往钱包确认交易"
 
 #: src/components/token/TokenRecord.tsx:111
 msgid "Price"
@@ -187,8 +179,8 @@ msgstr "排名"
 msgid "Reward"
 msgstr "奖励"
 
-#: src/components/token/Trade.tsx:38
-#: src/components/token/Trade.tsx:130
+#: src/components/token/Trade.tsx:39
+#: src/components/token/Trade.tsx:131
 msgid "Sell"
 msgstr "采集"
 
@@ -200,13 +192,9 @@ msgstr "符号"
 msgid "TH Rewards"
 msgstr "贡献值收益"
 
-#: src/components/token/Trade.tsx:104
+#: src/components/token/Trade.tsx:105
 msgid "To"
 msgstr "到"
-
-#: src/components/token/TokenInfo.tsx:50
-#~ msgid "Token"
-#~ msgstr "Token"
 
 #: src/components/token/Tokenomic.tsx:58
 msgid "Tokenomic"
@@ -224,31 +212,27 @@ msgstr "全网贡献值"
 msgid "Total TS"
 msgstr "全网热力值"
 
-#: src/components/token/Trade.tsx:150
-#: src/components/token/Trade.tsx:171
-#: src/components/token/Trade.tsx:177
+#: src/components/token/Trade.tsx:151
+#: src/components/token/Trade.tsx:172
+#: src/components/token/Trade.tsx:178
 msgid "Trade"
-msgstr ""
+msgstr "交易"
 
 #: src/hooks/contracts/useErc20.ts:98
 msgid "Transaction confirmed successfully"
-msgstr ""
+msgstr "交易成功确认"
 
 #: src/hooks/contracts/useErc20.ts:99
 msgid "Transaction failed, please try again"
-msgstr ""
-
-#: src/components/token/TokenRecord.tsx:42
-#~ msgid "Transaction History"
-#~ msgstr "采集记录"
+msgstr "交易失败，请重试"
 
 #: src/hooks/contracts/useErc20.ts:100
 msgid "Transaction rejected by user"
-msgstr ""
+msgstr "交易被用户拒绝"
 
 #: src/hooks/contracts/useErc20.ts:97
 msgid "Transaction submitted, waiting for confirmation"
-msgstr ""
+msgstr "交易已提交，等待确认"
 
 #: src/components/token/TokenRanking.tsx:90
 msgid "TS"
@@ -266,46 +250,6 @@ msgstr "类型"
 msgid "Type token symbol, address to find"
 msgstr "输入 Token 或 合约地址 查找"
 
-#: src/components/token/OnChainInfo.tsx:71
-#~ msgid "UD"
-#~ msgstr "用户数据"
-
-#: src/components/token/TokenRecord.tsx:126
-#~ msgid "View"
-#~ msgstr "View"
-
 #: src/components/token/TokenRecord.tsx:127
 msgid "Volume"
-msgstr ""
-
-#: src/components/token/OnChainInfo.tsx:89
-msgid "热力值"
-msgstr ""
-
-#: src/components/token/OnChainInfo.tsx:84
-msgid "热力值排名"
-msgstr ""
-
-#: src/components/token/OnChainInfo.tsx:71
-msgid "矿主数据"
-msgstr ""
-
-#: src/components/token/TokenRecord.tsx:46
-msgid "矿场数据"
-msgstr ""
-
-#: src/components/token/OnChainInfo.tsx:76
-msgid "矿场数量"
-msgstr ""
-
-#: src/components/token/Reward.tsx:35
-msgid "矿车分配"
-msgstr ""
-
-#: src/components/token/Reward.tsx:39
-msgid "矿车奖励"
-msgstr ""
-
-#: src/components/token/OnChainInfo.tsx:80
-msgid "贡献值"
-msgstr ""
+msgstr "总量"
