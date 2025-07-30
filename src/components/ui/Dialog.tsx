@@ -21,7 +21,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      'overlay fixed top-0 right-0 bottom-0 left-0 z-[998]',
+      'overlay fixed bottom-0 left-0 right-0 top-0 z-[998]',
       'data-[state=open]:animate-in data-[state=open]:fade-in-0',
       'data-[state=closed]:animate-out data-[state=closed]:fade-out-0',
       className
@@ -74,16 +74,17 @@ export const Dialog = React.forwardRef<DialogMethods, DialogProps>((props, metho
         <DialogPrimitive.Content
           {...content}
           className={cn(
-            'popover fixed top-1/2 left-1/2 z-[999] -translate-1/2',
-            'border-border popover w-[calc(100vw-3rem)] rounded-md border p-4 lg:w-auto',
-            'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-1/4',
-            'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom-1/4',
+            'fixed left-1/2 top-1/2 z-[999] -translate-x-1/2 -translate-y-1/2',
+            'popover border-border rounded-md border p-4',
+            'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
+            'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]',
+            'max-h-[90%] w-[90vw] max-w-[90vw] overflow-x-auto md:w-auto',
             content?.className
           )}
         >
           <DialogPrimitive.Title
             className={cn(
-              'relative flex min-h-8 items-center pr-8 pb-4 text-xl font-semibold',
+              'relative flex min-h-8 items-center pb-4 pr-8 text-xl font-semibold',
               !title && !closeable && 'min-h-auto pb-0'
             )}
           >

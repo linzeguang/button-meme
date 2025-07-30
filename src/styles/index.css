@@ -1,8 +1,83 @@
-@import 'tailwindcss';
-@plugin "tailwindcss-animate";
-@plugin "tailwind-scrollbar";
-/* @plugin "@tailwindcss/aspect-ratio"; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import './font.css';
-@import './variants.css';
-@import './utilities.css';
+@layer base {
+  :root {
+    color: hsl(var(--color-text-primary));
+    background-color: hsl(var(--color-background-primary));
+    scrollbar-color: hsl(var(--color-primary)) transparent;
+    scrollbar-width: thin;
+  }
+
+  :focus-visible {
+    outline: none;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  button {
+    background-color: transparent;
+    outline: none;
+  }
+
+  .header,
+  .aside,
+  .footer {
+    @apply bg-background-secondary border-border-highlight border-solid backdrop-blur-2xl dark:backdrop-blur-none;
+  }
+
+  .header {
+    @apply border-b;
+  }
+
+  .aside {
+    @apply border-r;
+  }
+
+  .footer {
+    @apply border-t;
+  }
+
+  .main {
+    background-color: transparent;
+    background-image: url('../assets/images/bg/main-bg-light.png'), linear-gradient(to bottom, #4fabfb, #fff);
+    background-position: bottom, top;
+    background-size:
+      100% auto,
+      auto;
+  }
+
+  .dark .main {
+    background-color: #000;
+    background-image: url('../assets/images/bg/main-bg-light.png');
+    background-position: bottom;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+  }
+
+  .overlay {
+    @apply bg-background-overlay backdrop-blur-2xl;
+  }
+
+  .card,
+  .popover {
+    @apply bg-background-popover backdrop-blur-2xl;
+  }
+
+  .card {
+    @apply border-border-highlight rounded-md border p-4;
+  }
+
+  .dividing-wieght {
+    --dividing-wieght: 1px; /* 分割线粗细 */
+  }
+  .dividing-wieght-bold {
+    --dividing-wieght: 2px; /* 分割线粗细 */
+  }
+
+  .token-logo {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+}

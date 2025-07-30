@@ -24,7 +24,7 @@ export const SimpleBalance: React.FC<
   })
 
   return (
-    <HarmonyOSSansText className={cn('flex items-center gap-1', 'text-xs', className)} {...props}>
+    <HarmonyOSSansText className={cn('sapce-x-1 flex items-center', 'text-xs', className)} {...props}>
       {prefix && <span>{prefix}</span>}
       {isLoading ? <Icon.Copy /> : (renderBalance ? renderBalance(data) : data?.formatted) || '--'}
     </HarmonyOSSansText>

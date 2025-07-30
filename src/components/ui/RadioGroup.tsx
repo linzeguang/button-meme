@@ -18,7 +18,7 @@ const radioGroupVariants = cva(cn('flex'), {
     },
     orientation: {
       horizontal:
-        'flex-row bg-background-fourth rounded-sm overflow-hidden [&_.item-wrapper]:flex-1 [&_.item-wrapper]:relative [&_.item]:size-full [&_.label]:absolute [&_.label]:top-1/2 [&_.label]:left-1/2 [&_.label]:-translate-1/2', // 水平
+        'flex-row bg-background-fourth rounded-sm overflow-hidden [&_.item-wrapper]:flex-1 [&_.item-wrapper]:relative [&_.item]:size-full [&_.label]:absolute [&_.label]:top-1/2 [&_.label]:left-1/2 [&_.label]:-translate-y-1/2 [&_.label]:-translate-x-1/2', // 水平
       vertical: 'flex-col' // 垂直
     },
     size: {
@@ -61,7 +61,11 @@ export const RadioGroup = React.forwardRef<React.ComponentRef<typeof RadioGroupR
           <RadioGroupItem value={value} id={`${value}-${id}`} className={cn('item cursor-pointer', className)}>
             <RadioGroupIndicator />
           </RadioGroupItem>
-          <label htmlFor={`${value}-${id}`} className="label text-text-secondary">
+          <label
+            htmlFor={`${value}-${id}`}
+            className="label text-text-secondary"
+            data-state={value === rest.value ? 'checked' : 'unchecked'}
+          >
             {label}
           </label>
         </Flex>

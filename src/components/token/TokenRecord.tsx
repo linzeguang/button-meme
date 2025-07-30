@@ -72,7 +72,7 @@ const TokenRecord: React.FC = () => {
         triggerClassName="pt-0"
         name={
           <>
-            <Flex className="gap-0.5">
+            <Flex className="space-x-0.5">
               {recordTypes.map((type) => (
                 <div
                   key={type.value}

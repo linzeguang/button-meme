@@ -106,7 +106,7 @@ const OnChainInfo: React.FC = () => {
         triggerClassName="pt-0 pb-2"
         name={
           <>
-            <Flex className="gap-0.5">
+            <Flex className="space-x-0.5">
               {Object.values(infoTypes).map((type) => (
                 <div
                   key={type.value}

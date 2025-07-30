@@ -1,7 +1,6 @@
 import path from 'path'
 
 import { lingui } from '@lingui/vite-plugin'
-import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import externalGlobals from 'rollup-plugin-external-globals'
 import { visualizer } from 'rollup-plugin-visualizer'
@@ -26,7 +25,6 @@ export default defineConfig((env) => {
         }
       }),
       lingui(),
-      tailwindcss(),
       svgr(),
       isVisualizer && visualizer({ open: true }),
       isProd &&

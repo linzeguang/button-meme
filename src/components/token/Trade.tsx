@@ -150,9 +150,9 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
             <HarmonyOSSansText>
               <Trans>Trade</Trans>
             </HarmonyOSSansText>
-            <Flex className="items-center gap-1">
+            <Flex className="items-center space-x-1">
               <TokenSvgr.Trade className="size-10.5" />
-              <Icon.Tip className="text-background-fourth light:text-text-tertiary" />
+              <Icon.Tip className="dark:text-background-fourth text-text-tertiary" />
             </Flex>
           </>
         }
@@ -164,7 +164,7 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
 
 export const FooterTrade = () => {
   return (
-    <Container className={cn('flex h-20 items-center gap-4')}>
+    <Container className={cn('flex h-20 items-center space-x-4')}>
       <Button variant="fourth" className="text-text-primary px-1">
         <Icon.ScrollTop />
       </Button>

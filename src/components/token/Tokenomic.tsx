@@ -57,7 +57,7 @@ const Tokenomic: React.FC<{ className?: string; defaultValue?: string }> = (prop
             <HarmonyOSSansText>
               <Trans>Tokenomic</Trans>
             </HarmonyOSSansText>
-            <Icon.Tip className="text-background-fourth light:text-text-tertiary" />
+            <Icon.Tip className="drak:text-background-fourth text-text-tertiary" />
           </>
         }
         content={
@@ -78,7 +78,12 @@ const Tokenomic: React.FC<{ className?: string; defaultValue?: string }> = (prop
             <Flex className="justify-center">
               <Grid className="grid-cols-2 gap-x-3 gap-y-0.5">
                 {data.map(({ id, label }) => (
-                  <HarmonyOSSansText as="div" key={id} className="flex items-center gap-1 text-xs" variant="secondary">
+                  <HarmonyOSSansText
+                    as="div"
+                    key={id}
+                    className="flex items-center space-x-1 text-xs"
+                    variant="secondary"
+                  >
                     <div className="size-2" style={{ backgroundColor: COLOR[id as keyof typeof COLOR] }} />
                     <span>{label}</span>
                   </HarmonyOSSansText>

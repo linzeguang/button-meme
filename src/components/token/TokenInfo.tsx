@@ -23,7 +23,7 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
       {
         name: t`Contract`,
         value: (
-          <HarmonyOSSansText className="text-primary flex items-center gap-1">
+          <HarmonyOSSansText className="text-primary flex items-center space-x-1">
             {/* <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span> */}
             <span>{formatAddress(MIT.address)}</span>
             <Icon.Copy
@@ -58,15 +58,15 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
             <HarmonyOSSansText>
               <Trans>FEC Mining Game</Trans>
             </HarmonyOSSansText>
-            <Flex className="items-center gap-1">
+            <Flex className="items-center space-x-1">
               <TokenSvgr.TokenInfo className="size-10.5" />
-              <Icon.Tip className="text-background-fourth light:text-text-tertiary" />
+              <Icon.Tip className="dark:text-background-fourth text-text-tertiary" />
             </Flex>
           </>
         }
         content={
           <>
-            {/* <Flex className="gap-4">
+            {/* <Flex className="space-x-4">
               {[Socials.Facebook, Socials.Twitter, Socials.YouTube, Socials.WhatsApp, Socials.Telegram].map(
                 (SocialsIcon, index) => (
                   <SocialsIcon key={index} className="text-primary size-4.5" />

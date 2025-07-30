@@ -125,7 +125,7 @@ const Nav = React.forwardRef<
           <option.icon className="w-10" />
           <HarmonyOSSansText
             className={cn(
-              'flex-1 overflow-hidden text-sm font-bold whitespace-nowrap text-inherit',
+              'flex-1 overflow-hidden whitespace-nowrap text-sm font-bold text-inherit',
               collapsed && 'w-0'
             )}
           >
@@ -162,7 +162,7 @@ const Nav = React.forwardRef<
             {option.childrens ? (
               <>
                 <AccordionTrigger showArrow={false}>{renderAccordionTrigger(option)}</AccordionTrigger>
-                <AccordionContent className="flex flex-col gap-1 text-balance">
+                <AccordionContent className="flex flex-col space-y-1 text-balance">
                   {option.childrens.map((children, i) => (
                     <a
                       key={i}

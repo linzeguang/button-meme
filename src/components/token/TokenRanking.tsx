@@ -50,9 +50,9 @@ const TokenRanking: React.FC = () => {
             <HarmonyOSSansText>
               <Trans>Ranking</Trans>
             </HarmonyOSSansText>{' '}
-            <Flex className="items-center gap-1">
+            <Flex className="items-center space-x-1">
               <TokenSvgr.TokenRanking className="size-10.5" />
-              <Icon.Tip className="text-background-fourth light:text-text-tertiary" />
+              <Icon.Tip className="dark:text-background-fourth text-text-tertiary" />
             </Flex>
           </>
         }
@@ -106,7 +106,7 @@ const TokenRanking: React.FC = () => {
               }}
               tbodyTrProps={{
                 className: cn(
-                  'bg-linear-to-r hover:!text-primary text-text-secondary',
+                  'bg-gradient-to-r hover:!text-primary text-text-secondary',
                   'data-[index=1]:from-top-1/10 data-[index=1]:to-transparent data-[index=1]:text-text-primary data-[index=1]:font-bold',
                   'data-[index=2]:from-top-2/10 data-[index=2]:to-transparent data-[index=2]:text-text-primary data-[index=1]:font-bold',
                   'data-[index=3]:from-top-3/10 data-[index=3]:to-transparent data-[index=3]:text-text-primary data-[index=1]:font-bold'

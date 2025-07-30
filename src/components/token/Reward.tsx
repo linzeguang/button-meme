@@ -88,7 +88,7 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
         value="reward"
         triggerClassName="pt-0"
         name={
-          <Flex className="gap-0.5">
+          <Flex className="space-x-0.5">
             {tabTypes.map((type) => (
               <div
                 key={type.value}
@@ -107,7 +107,7 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
         contentClassName="border-none pt-0"
         content={
           <Flex className="items-center justify-between">
-            <HarmonyOSSansText as="div" variant="primary" className="flex flex-col gap-1">
+            <HarmonyOSSansText as="div" variant="primary" className="flex flex-col space-y-1">
               <span className="text-primary text-lg font-bold lg:text-2xl">{tabData ? tabData.value : '--'}</span>
               <HarmonyOSSansText variant="secondary" className="flex gap-4 text-xs lg:text-sm">
                 <span>
@@ -129,7 +129,7 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
           </Flex>
         }
         wrapperClassName="relative"
-        suffixNode={<TokenSvgr.Reward className="absolute top-0 right-0 bottom-0 z-[-1]" />}
+        suffixNode={<TokenSvgr.Reward className="absolute bottom-0 right-0 top-0 z-[-1]" />}
       />
     </AccordionRoot>
   )

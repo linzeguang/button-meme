@@ -25,7 +25,7 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
   }, [page, pageSize, total])
 
   return (
-    <Flex className="justify-center gap-1.5 [&_button]:size-5.5 [&_button]:!rounded-xs [&_button]:!p-0">
+    <Flex className="[&_button]:size-5.5 [&_button]:!rounded-xs justify-center space-x-1.5 [&_button]:!p-0">
       <Button
         key="prev"
         variant="fourth"
@@ -48,7 +48,7 @@ export const Pagination: React.FC<PaginationProps> = (props) => {
           key={pageNum}
           variant="fourth"
           size="xs"
-          className={cn('font-HarmonyOSSans text-xs leading-none font-bold', pageNum === page && 'text-primary')}
+          className={cn('font-HarmonyOSSans text-xs font-bold leading-none', pageNum === page && 'text-primary')}
           onClick={() => {
             if (!onChange) return
             onChange({

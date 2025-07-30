@@ -28,13 +28,13 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
         contentClassName="border-none pt-0"
         content={
           <>
-            <Flex className="gap-2">
+            <Flex className="space-x-2">
               <Input wrapperClassName="flex-1" disabled />
               <Button variant="primary" size="sm" className="w-[7rem] xl:min-w-[9.625rem]">
                 <Trans>Copy</Trans>
               </Button>
             </Flex>
-            {/* <Flex className="gap-2 [&_svg]:h-4.5">
+            {/* <Flex className="space-x-2 [&_svg]:h-4.5">
               <Socials.Facebook />
               <Socials.Telegram />
               <Socials.Twitter />
