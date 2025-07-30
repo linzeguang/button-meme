@@ -47,6 +47,7 @@
     background-size:
       100% auto,
       auto;
+    background-repeat: no-repeat;
   }
 
   .dark .main {
@@ -54,7 +55,6 @@
     background-image: url('../assets/images/bg/main-bg-light.png');
     background-position: bottom;
     background-size: 100% auto;
-    background-repeat: no-repeat;
   }
 
   .overlay {
