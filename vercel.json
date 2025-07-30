@@ -6,7 +6,7 @@
     },
     {
       "source": "/php/:path*",
-      "destination": "http://8.218.155.42:1018/:path*"
+      "destination": "http://43.155.142.125:1112/:path*"
     },
     { "source": "/rpc", "destination": "/api/rpc" }
   ]
