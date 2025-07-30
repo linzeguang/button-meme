@@ -21,7 +21,7 @@ const Token: React.FC = () => {
   return (
     <TokenProvider>
       {gt2XL ? (
-        <Flex className={cn('space-x-6 [&>div]:space-x-6')}>
+        <Flex className={cn('space-x-6 [&>div]:space-y-6')}>
           <Flex className="max-w-108 relative w-[24%] flex-col">
             {/* <SearchToken wrapperClassName="absolute w-full -top-6 -translate-y-full" /> */}
             <TokenInfo />
@@ -40,7 +40,7 @@ const Token: React.FC = () => {
           </Flex>
         </Flex>
       ) : gtLG ? (
-        <Flex className={cn('space-y-4 [&>div]:space-y-4')}>
+        <Flex className={cn('space-x-4 [&>div]:space-y-4')}>
           <Flex className="relative flex-1 flex-col">
             {/* <SearchToken wrapperClassName="absolute w-full -top-4 -translate-y-full w-108" /> */}
             <TvChart />

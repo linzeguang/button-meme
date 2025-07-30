@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
 
 import { Icon, TokenSvgr } from '@/components/svgr'
@@ -81,19 +80,19 @@ const TokenRanking: React.FC = () => {
                   }
                 },
                 {
-                  name: t`Address`,
+                  name: <Trans>Address</Trans>,
                   field: 'account',
                   className: 'flex-1',
                   render: (address) => formatAddress(address, undefined, isMobile ? -2 : undefined)
                 },
                 {
-                  name: t`TS`,
+                  name: <Trans>TS</Trans>,
                   field: 'ts',
                   align: 'center',
                   className: 'flex-1'
                 },
                 {
-                  name: t`Reward`,
+                  name: <Trans>Reward</Trans>,
                   field: 'tsReward',
                   align: 'end',
                   className: 'flex-1'

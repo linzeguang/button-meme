@@ -8,7 +8,6 @@ import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { Table } from '@/components/ui/Table'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
-import { formatNumber } from '@/lib/format'
 import { cn } from '@/lib/utils'
 
 enum RECORD_TYPE {
@@ -38,8 +37,6 @@ const TokenRecord: React.FC = () => {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(10)
 
-  // const { tokenInfo } = useTokenProviderContext()
-
   const recordTypes = useMemoWithLocale(
     () => [
       {
@@ -54,16 +51,7 @@ const TokenRecord: React.FC = () => {
     []
   )
 
-  const dataSource: TradeData[] = Array.from({ length: 0 }, () => ({
-    base: 'LABUBU',
-    baseAmount: formatNumber(Math.random() * 1_000_000_000),
-    date: '2025-12-12',
-    price: formatNumber(Math.random() * 1_000),
-    quote: 'ETH',
-    quoteAmount: formatNumber(Math.random() * 1_000_000),
-    tx: '0x*********',
-    type: Math.random() > 0.5 ? TRADE_TYPE.Buy : TRADE_TYPE.Sell
-  }))
+  const dataSource: TradeData[] = []
 
   return (
     <AccordionRoot type="single" collapsible value={value}>
@@ -106,7 +94,6 @@ const TokenRecord: React.FC = () => {
                   return <span className={isBuy ? 'text-success' : 'text-destructive'}>{isBuy ? 'Buy' : 'Sell'}</span>
                 }
               },
-
               {
                 name: t`Price`,
                 field: 'price',

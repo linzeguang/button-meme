@@ -18,7 +18,7 @@ export const MobileConnected = () => {
   return (
     <Grid className="grid-cols-[1fr_auto] grid-rows-2 gap-x-1.5 text-right">
       <HarmonyOSSansText className="text-xs">{formatAddress(address)}</HarmonyOSSansText>
-      <Icon.User className="row-span-2 size-8.5" />
+      <Icon.User className="size-8.5 row-span-2" />
       <SimpleBalance
         className="text-primary text-xs"
         renderBalance={(data) => data && `${formatNumber(data.formatted, 6)} ${data.symbol}`}
@@ -33,13 +33,15 @@ const ConnectWallet: React.FC = () => {
 
   if (isConnected && address)
     return isMobile ? (
-      <MobileConnected />
+      <div onClick={view}>
+        <MobileConnected />
+      </div>
     ) : (
       <Flex className="h-full items-center">
         <Dividing orientation="vertical" />
-        <Grid className="grid-cols-[1fr_auto] grid-rows-2 gap-x-2 px-7.5 text-right">
+        <Grid className="px-7.5 grid-cols-[1fr_auto] grid-rows-2 gap-x-2 text-right">
           <HarmonyOSSansText>{formatAddress(address)}</HarmonyOSSansText>
-          <Icon.User className="row-span-2 size-11.5" />
+          <Icon.User className="size-11.5 row-span-2" />
           <SimpleBalance
             className="text-primary text-base"
             renderBalance={(data) => data && `${formatNumber(data.formatted, 6)} ${data.symbol}`}
