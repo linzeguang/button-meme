@@ -92,12 +92,9 @@ const TvChart: React.FC = () => {
         contentClassName="border-none"
         name={
           <>
-            <Flex
-              style={{
-                backgroundImage: `url(${TokenImage.ButtonBg})`
-              }}
-              className="h-[6.625rem] w-full bg-cover bg-center md:aspect-[885/127] md:h-auto"
-            />
+            <Flex className="w-full">
+              <img src={TokenImage.ButtonBg} alt="MIT" className="w-full" />
+            </Flex>
             <Flex className="h-10 w-full items-end space-x-4 px-4">
               <Logo.Mit className="token-logo size-16 lg:size-24" />
               {/* <img src={TokenImage.Button} alt={tokenInfo?.mintToken.name} className="size-16 lg:size-24" /> */}
