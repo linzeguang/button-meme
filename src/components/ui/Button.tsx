@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 const buttonVariants = cva(
   cn(
     'flex items-center justify-center space-x-2 px-2 border rounded-sm',
-    'transition-all cursor-pointer disabled:pointer-events-none disabled:opacity-50'
+    'transition-all cursor-pointer disabled:pointer-events-none disabled:opacity-90 disabled:backdrop-blur-2xl'
   ),
   {
     variants: {
@@ -54,7 +54,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, r
   return (
     <button ref={ref} className={cn(buttonVariants({ ghost, outline, size, variant, className }))} {...rest}>
       {loading && <Icon.Loading className="loading size-4" />}
-      {children}
+      {typeof children === 'string' ? <span>{children}</span> : children}
     </button>
   )
 })

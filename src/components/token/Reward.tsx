@@ -79,9 +79,9 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
 
   const handleCliam = useCallback(() => {
     if (tabType === TAB_TYPE.Distribute) {
-      claimTHTSRewards()
-    } else {
       claimLPHRewards()
+    } else {
+      claimTHTSRewards()
     }
   }, [claimLPHRewards, claimTHTSRewards, tabType])
 
@@ -127,7 +127,9 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
               className="w-[7rem] xl:min-w-[9.625rem]"
               onClick={handleCliam}
             >
-              <Trans>Claim</Trans>
+              <span>
+                <Trans>Claim</Trans>
+              </span>
             </Button>
           </Flex>
         }
