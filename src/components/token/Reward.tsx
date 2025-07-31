@@ -44,6 +44,9 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
   )
 
   const tabData = useMemoWithLocale(() => {
+    console.log('>>>>>> tokenUserInfo: ', tokenUserInfo)
+    console.log('>>>>>> tokenInfo: ', tokenInfo)
+    console.log('>>>>>> userReward: ', userReward)
     return tabType === TAB_TYPE.Distribute
       ? tokenUserInfo && tokenInfo
         ? {
@@ -70,7 +73,7 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
             )
           }
         : undefined
-  }, [tabType])
+  }, [tabType, tokenUserInfo, tokenInfo, userReward])
 
   const { claimLPHRewards, claimTHTSRewards, isLoading } = useClaim()
 
@@ -81,8 +84,6 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
       claimLPHRewards()
     }
   }, [claimLPHRewards, claimTHTSRewards, tabType])
-
-  console.log('>>>>>> tokenInfo: ', tokenInfo)
 
   return (
     <AccordionRoot type="single" value={value} onValueChange={setValue} {...props}>
@@ -96,8 +97,8 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
                 key={type.value}
                 className={cn(
                   'cursor-pointer px-4 py-2.5 transition-all',
-                  'border-background-unactive border-b-2',
-                  tabType === type.value && 'text-primary border-primary'
+                  'border-b-2 border-background-unactive',
+                  tabType === type.value && 'border-primary text-primary'
                 )}
                 onClick={() => setTabType(type.value)}
               >
@@ -110,7 +111,7 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
         content={
           <Flex className="items-center justify-between">
             <HarmonyOSSansText as="div" variant="primary" className="flex flex-col space-y-1">
-              <span className="text-primary text-lg font-bold lg:text-2xl">{tabData ? tabData.value : '--'}</span>
+              <span className="text-lg font-bold text-primary lg:text-2xl">{tabData ? tabData.value : '--'}</span>
               <HarmonyOSSansText variant="secondary" className="flex gap-4 text-xs lg:text-sm">
                 <span>
                   <Trans>/ Total</Trans>
