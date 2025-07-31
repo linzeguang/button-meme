@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from 'react'
 
-import { useSetAtom } from 'jotai/react'
+import { useAtom, useSetAtom } from 'jotai/react'
 import { Address, erc20Abi } from 'viem'
 import { useAccount, useReadContract, useReadContracts } from 'wagmi'
 
 import { InfoAbi } from '@/constants/abi'
 import { ENV_PARAMS } from '@/constants/evnParams'
 import { Project, TokenInfo, TokenUserInfo } from '@/hooks/contracts/types'
-import { projectsAtom } from '@/stores/token'
+import { projectsAtom, tokenInfoAtom } from '@/stores/token'
 
 export const useProjects = () => {
   const setProjects = useSetAtom(projectsAtom)
@@ -47,6 +47,7 @@ export const useProjects = () => {
 }
 
 export const useTokenBaseInfo = (project?: Project) => {
+  const [tokenInfo, setTokenInfo] = useAtom(tokenInfoAtom)
   const { data } = useReadContract({
     abi: InfoAbi,
     chainId: ENV_PARAMS.CHAIN_ID,
@@ -108,7 +109,7 @@ export const useTokenBaseInfo = (project?: Project) => {
     ]
   })
 
-  return useMemo<TokenInfo | undefined>(() => {
+  const lasterTokenInfo = useMemo<TokenInfo | undefined>(() => {
     if (!data) return undefined
     if (!info) return undefined
     const [
@@ -158,6 +159,12 @@ export const useTokenBaseInfo = (project?: Project) => {
       project: project!
     }
   }, [data, info, project])
+
+  useEffect(() => {
+    if (lasterTokenInfo) setTokenInfo(lasterTokenInfo)
+  }, [lasterTokenInfo, setTokenInfo])
+
+  return tokenInfo
 }
 
 export const useTokenUserInfo = (project?: Project) => {
@@ -170,7 +177,7 @@ export const useTokenUserInfo = (project?: Project) => {
     functionName: 'getUserInfo',
     args: project && [BigInt(project.id), address as Address],
     query: {
-      enabled: !!project
+      enabled: !!project && !!address
     }
   })
 

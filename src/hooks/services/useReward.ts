@@ -1,8 +1,12 @@
+import { useEffect } from 'react'
+
+import { useAtom } from 'jotai/react'
 import { Address } from 'viem'
 import { useAccount } from 'wagmi'
 
 import { Project } from '@/hooks/contracts/types'
 import { useFetch } from '@/hooks/services/useFetch'
+import { rewardAtom } from '@/stores/token'
 
 export interface Reward {
   blockTime: string // 区块时间
@@ -13,11 +17,16 @@ export interface Reward {
 }
 
 export const useReward = (project: Project) => {
+  const [reward, setReward] = useAtom(rewardAtom)
   const { data, ...rest } = useFetch<Reward>({ url: project ? `/rewards/${project.id}/${project.epoch}` : null })
+
+  useEffect(() => {
+    if (data?.data) setReward(data.data)
+  }, [data?.data, setReward])
 
   return {
     ...rest,
-    data: data?.data
+    data: reward
   }
 }
 

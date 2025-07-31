@@ -44,9 +44,6 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
   )
 
   const tabData = useMemoWithLocale(() => {
-    console.log('>>>>>> tokenUserInfo: ', tokenUserInfo)
-    console.log('>>>>>> tokenInfo: ', tokenInfo)
-    console.log('>>>>>> userReward: ', userReward)
     return tabType === TAB_TYPE.Distribute
       ? tokenUserInfo && tokenInfo
         ? {
