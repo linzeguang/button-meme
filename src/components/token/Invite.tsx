@@ -31,9 +31,13 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
       <TokenAccordionItem
         value="invite"
         name={
-          <HarmonyOSSansText>
-            <Trans>Invite</Trans>
-            {tokenUserInfo?.referencesCount ? `(${tokenUserInfo.referencesCount.toString()})` : ''}
+          <HarmonyOSSansText className="flex items-center space-x-1">
+            <span>
+              <Trans>Invite</Trans>
+            </span>
+            <span className="text-primary">
+              {tokenUserInfo?.referencesCount ? `(${tokenUserInfo.referencesCount.toString()})` : ''}
+            </span>
           </HarmonyOSSansText>
         }
         contentClassName="border-none pt-0"
