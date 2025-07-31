@@ -2,10 +2,12 @@ import { useCallback, useEffect, useMemo } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Address } from 'viem'
+import { useSearchParams } from 'react-router'
+import { Address, zeroAddress } from 'viem'
 import { useWriteContract } from 'wagmi'
 import z from 'zod'
 
+import { inviteKey } from '@/components/token/Invite'
 import { MiningPoolAbi } from '@/constants/abi'
 import { useBalance, useTx } from '@/hooks/contracts/useErc20'
 import { useSaleEstimate } from '@/hooks/contracts/useInfoContract'
@@ -26,6 +28,8 @@ export const tradeFormSchema = z.object({
 })
 
 export const useTrade = () => {
+  const [searchParams] = useSearchParams()
+
   const { writeContractAsync } = useWriteContract()
   const { tokenInfo, project } = useTokenProviderContext()
 
@@ -35,7 +39,7 @@ export const useTrade = () => {
       tradeType: TRADE_TYPE.BUY,
       amountIn: '',
       amountOut: '',
-      leader: ''
+      leader: searchParams.get(inviteKey) || ''
     }
   })
 
@@ -97,7 +101,7 @@ export const useTrade = () => {
         abi: MiningPoolAbi,
         address: tokenInfo.miningPool as Address,
         functionName: 'buy',
-        args: [rawAmountIn, leader as Address]
+        args: [rawAmountIn, (leader || zeroAddress) as Address]
       })
     )
   }, [approve, leader, rawAmountIn, tokenInfo, transaction, writeContractAsync])

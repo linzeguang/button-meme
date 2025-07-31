@@ -1,3 +1,4 @@
+import { t } from '@lingui/core/macro'
 import { type ClassValue, clsx } from 'clsx'
 import toast from 'react-hot-toast'
 import { twMerge } from 'tailwind-merge'
@@ -15,7 +16,7 @@ export function randomColor() {
 
 export function copy(text: string) {
   navigator.clipboard.writeText(text)
-  toast.success('copied')
+  toast.success(t`copied`)
 }
 
 export function toggleLight() {

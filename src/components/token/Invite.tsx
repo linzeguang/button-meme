@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { Trans } from '@lingui/react/macro'
 
@@ -9,11 +9,22 @@ import { Flex } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { HarmonyOSSansText } from '@/components/ui/Text'
+import { useWallet } from '@/hooks/useWallet'
+import { copy } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
 
+export const inviteKey = 'inviteCode'
+
 const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) => {
+  const { address } = useWallet()
   const [value, setValue] = useState(props.defaultValue ?? 'invite')
   const { tokenUserInfo } = useTokenProviderContext()
+
+  const inviteUrl = useMemo(() => {
+    const { href } = window.location
+    if (!address) return `{href}`
+    return `${href}?${inviteKey}=${address}`
+  }, [address])
 
   return (
     <AccordionRoot type="single" collapsible value={value} onValueChange={setValue} {...props}>
@@ -29,8 +40,13 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
         content={
           <>
             <Flex className="space-x-2">
-              <Input wrapperClassName="flex-1" disabled />
-              <Button variant="primary" size="sm" className="w-[7rem] xl:min-w-[9.625rem]">
+              <Input wrapperClassName="flex-1" value={inviteUrl} disabled />
+              <Button
+                variant="primary"
+                size="sm"
+                className="w-[7rem] xl:min-w-[9.625rem]"
+                onClick={() => copy(inviteUrl)}
+              >
                 <Trans>Copy</Trans>
               </Button>
             </Flex>

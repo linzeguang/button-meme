@@ -68,9 +68,13 @@ const TradeForm: React.FC = () => {
     }
   })
 
-  const handleLeaderForm = useCallback(() => {
-    dialogRef.current?.open()
-  }, [])
+  const handleLeaderForm = useCallback(async () => {
+    if (tokenUserInfo?.lph) {
+      await handleSubmit(form.getValues())
+    } else {
+      dialogRef.current?.open()
+    }
+  }, [form, handleSubmit, tokenUserInfo?.lph])
 
   const handleLeaderFormSubmit = useCallback(
     async (values: z.infer<typeof formSchema>) => {
