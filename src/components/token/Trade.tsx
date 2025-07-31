@@ -278,9 +278,13 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
 }
 
 export const FooterTrade = () => {
+  const scrollToTop = () => {
+    document.getElementById('main')?.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <Container className={cn('flex h-20 items-center space-x-4')}>
-      <Button variant="fourth" className="px-1 text-text-primary">
+      <Button variant="fourth" className="px-1 text-text-primary" onClick={scrollToTop}>
         <Icon.ScrollTop />
       </Button>
       <Dialog
