@@ -72,12 +72,12 @@ export const useTrade = () => {
       : undefined
   )
 
-  const { refetchBalance: refetchStableTokenBalance, balance: stableTokenBalance } = useBalance({
-    token: tokenInfo?.stableToken.address
-  })
-  const { refetchBalance: refetchMintTokenBalance, balance: mintTokenBalance } = useBalance({
-    token: tokenInfo?.mintToken.address
-  })
+  const { refetchBalance: refetchStableTokenBalance, balance: stableTokenBalance } = useBalance(
+    tokenInfo?.stableToken.address
+  )
+  const { refetchBalance: refetchMintTokenBalance, balance: mintTokenBalance } = useBalance(
+    tokenInfo?.mintToken.address
+  )
 
   const { approve, transaction, refetchAllowance, isLoading } = useTx({
     approve: tokenInfo && { token: tokenInfo.stableToken.address, spender: tokenInfo.miningPool },
@@ -118,8 +118,11 @@ export const useTrade = () => {
   const handleSubmit = useCallback(
     async (values: z.infer<typeof tradeFormSchema>) => {
       console.log('>>>>>> handleSubmit: values', values)
-      if (values.tradeType === TRADE_TYPE.BUY) await buy()
-      else await sell()
+      if (values.tradeType === TRADE_TYPE.BUY) {
+        await buy()
+      } else {
+        await sell()
+      }
     },
     [buy, sell]
   )
@@ -130,7 +133,7 @@ export const useTrade = () => {
   }, [form, tradeType])
 
   useEffect(() => {
-    if (saleEstimate && tokenInfo) {
+    if (saleEstimate && tokenInfo && saleEstimate.totalFund) {
       form.setValue('amountOut', fromRawAmount(saleEstimate.totalFund, tokenInfo.stableToken.decimals))
     }
   }, [form, saleEstimate, tokenInfo])

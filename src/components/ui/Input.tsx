@@ -35,11 +35,29 @@ export interface InputProps
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ prefixNode, suffixNode, size, wrapperClassName, ...rest }, ref) => (
-    <label className={cn(inputVariants({ className: wrapperClassName, size }))}>
-      {prefixNode}
-      <input {...rest} ref={ref} className={cn('grow bg-transparent', rest?.className)} />
-      {suffixNode}
-    </label>
-  )
+  ({ prefixNode, suffixNode, size, wrapperClassName, type, onChange, ...rest }, ref) => {
+    const handleChange = React.useCallback(
+      (ev: React.ChangeEvent<HTMLInputElement>) => {
+        const value = ev.target.value
+        if (value === '.') ev.target.value = '0.'
+        else ev.target.value = value.replace(/[^0-9\\.]/, '')
+
+        onChange?.(ev)
+      },
+      [onChange]
+    )
+
+    return (
+      <label className={cn(inputVariants({ className: wrapperClassName, size }))}>
+        {prefixNode}
+        <input
+          {...rest}
+          ref={ref}
+          className={cn('flex-1 bg-transparent', rest?.className)}
+          onChange={type === 'number' ? handleChange : onChange}
+        />
+        {suffixNode}
+      </label>
+    )
+  }
 )

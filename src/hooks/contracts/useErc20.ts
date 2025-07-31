@@ -1,17 +1,12 @@
-import { useCallback, useEffect, useId, useState } from 'react'
+import { useCallback, useEffect, useId, useMemo, useState } from 'react'
 
 import { t } from '@lingui/core/macro'
 import toast from 'react-hot-toast'
 import { Address, erc20Abi, maxUint256 } from 'viem'
-import {
-  useAccount,
-  useBalance as useBalanceWithWagmi,
-  useReadContract,
-  useWaitForTransactionReceipt,
-  useWriteContract
-} from 'wagmi'
+import { useAccount, useReadContract, useReadContracts, useWaitForTransactionReceipt, useWriteContract } from 'wagmi'
 
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
+import { fromRawAmount } from '@/lib/rawAmount'
 
 export enum TX_STATUS {
   Idle = 'IDLE', // 未发起
@@ -23,23 +18,47 @@ export enum TX_STATUS {
   Rejected = 'REJECTED' // 用户拒绝签名
 }
 
-/**
- * 传token则查token余额，不传则查ETH余额
- */
-export const useBalance = (params?: { account?: Address; token?: Address }) => {
+export const useBalance = (token?: Address) => {
   const { address } = useAccount()
-  const { data, refetch: refetchBalance } = useBalanceWithWagmi({
-    address: params?.account || address,
-    token: params?.token,
+
+  const { data, refetch: refetchBalance } = useReadContracts({
+    contracts: [
+      {
+        abi: erc20Abi,
+        address: token,
+        functionName: 'balanceOf',
+        args: address && [address]
+      },
+      {
+        abi: erc20Abi,
+        address: token,
+        functionName: 'decimals'
+      },
+      {
+        abi: erc20Abi,
+        address: token,
+        functionName: 'symbol'
+      }
+    ],
     query: {
-      enabled: Boolean(params?.account || address)
+      enabled: Boolean(token && address)
     }
   })
 
-  return {
-    balance: data,
-    refetchBalance
-  }
+  return useMemo(() => {
+    if (!data) return { refetchBalance, balance: undefined }
+    const [{ result: value }, { result: decimals }, { result: symbol }] = data
+
+    return {
+      balance: {
+        value,
+        decimals,
+        symbol,
+        formatted: fromRawAmount(value || 0n, decimals || 18)
+      },
+      refetchBalance
+    }
+  }, [data, refetchBalance])
 }
 
 export const useApprove = (parmas?: { token: Address; spender: Address }) => {

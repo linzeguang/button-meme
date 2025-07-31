@@ -22,9 +22,9 @@ const App: React.FC = () => {
         <Toaster
           toastOptions={{
             style: {
-              background: 'var(--color-background-popover)',
-              color: 'var(--color-text-primary)',
-              border: '1px solid var(--color-border)'
+              background: 'hsl(var(--color-background-popover))',
+              color: 'hsl(var(--color-text-primary))',
+              border: '1px solid hsl(var(--color-border))'
             },
             removeDelay: 60 * 1000
           }}

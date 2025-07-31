@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { t } from '@lingui/core/macro'
@@ -19,6 +19,7 @@ import { RadioGroup, RadioOption } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
 import { MIT } from '@/constants/token'
 import { TRADE_TYPE, useTrade } from '@/hooks/contracts/useMiningPool'
+import { useWallet } from '@/hooks/useWallet'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
 import { fromRawAmount } from '@/lib/rawAmount'
 import { cn } from '@/lib/utils'
@@ -29,6 +30,7 @@ const formSchema = z.object({
 })
 
 const TradeForm: React.FC = () => {
+  const { isConnected, connect } = useWallet()
   const { tokenInfo, tokenUserInfo } = useTokenProviderContext()
 
   const tradeTypes = useMemoWithLocale<RadioOption[]>(
@@ -49,6 +51,14 @@ const TradeForm: React.FC = () => {
     []
   )
 
+  const { amountIn, stableTokenBalance, mintTokenBalance, form, tradeType, isLoading, saleEstimate, handleSubmit } =
+    useTrade()
+
+  const isInsufficientBalance = useMemo(() => {
+    if (tradeType === TRADE_TYPE.BUY) return Number(amountIn) > Number(stableTokenBalance?.formatted)
+    return Number(amountIn) > Number(mintTokenBalance?.formatted)
+  }, [amountIn, mintTokenBalance?.formatted, stableTokenBalance?.formatted, tradeType])
+
   const dialogRef = useRef<DialogMethods | null>(null)
 
   const leaderForm = useForm<z.infer<typeof formSchema>>({
@@ -57,9 +67,6 @@ const TradeForm: React.FC = () => {
       address: ''
     }
   })
-
-  const { amountIn, stableTokenBalance, mintTokenBalance, form, tradeType, isLoading, saleEstimate, handleSubmit } =
-    useTrade()
 
   const handleLeaderForm = useCallback(() => {
     dialogRef.current?.open()
@@ -119,6 +126,7 @@ const TradeForm: React.FC = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
+                      type="number"
                       size="lg"
                       suffixNode={
                         <HarmonyOSSansText className="font-bold">
@@ -150,7 +158,7 @@ const TradeForm: React.FC = () => {
                   <FormControl>
                     <Input
                       size="lg"
-                      readOnly
+                      disabled
                       suffixNode={
                         <HarmonyOSSansText className="font-bold">
                           {/* {tradeType === TRADE_TYPE.BUY ? 'LPH' : tokenInfo?.stableToken.symbol} */}
@@ -168,10 +176,13 @@ const TradeForm: React.FC = () => {
             {tradeType === TRADE_TYPE.SELL && saleEstimate && tokenInfo && (
               <Flex className="justify-between">
                 <HarmonyOSSansText>
-                  <Trans>receive: {fromRawAmount(saleEstimate.myFund, tokenInfo.stableToken.decimals)}</Trans>
+                  <Trans>
+                    receive:{' '}
+                    {saleEstimate.myFund ? fromRawAmount(saleEstimate.myFund, tokenInfo.stableToken.decimals) : '--'}
+                  </Trans>
                 </HarmonyOSSansText>
                 <HarmonyOSSansText>
-                  <Trans>LPH: +{fromRawAmount(saleEstimate.myLPH, 2)}</Trans>
+                  <Trans>LPH: {saleEstimate.myLPH ? `+${fromRawAmount(saleEstimate.myLPH, 2)}` : '--'}</Trans>
                 </HarmonyOSSansText>
               </Flex>
             )}
@@ -180,10 +191,20 @@ const TradeForm: React.FC = () => {
               type="button"
               size="md"
               className="w-full"
-              disabled={!amountIn}
-              onClick={handleLeaderForm}
+              disabled={isConnected ? !amountIn || isInsufficientBalance : false}
+              onClick={!isConnected ? connect : handleLeaderForm}
             >
-              <span>{tradeType === TRADE_TYPE.BUY ? <Trans>Buy Hash & Mint</Trans> : <Trans>Sell</Trans>}</span>
+              <span>
+                {!isConnected ? (
+                  <Trans>Connect Wallet</Trans>
+                ) : isInsufficientBalance ? (
+                  <Trans>Insufficient Balance</Trans>
+                ) : tradeType === TRADE_TYPE.BUY ? (
+                  <Trans>Buy Hash & Mint</Trans>
+                ) : (
+                  <Trans>Sell</Trans>
+                )}
+              </span>
             </Button>
           </div>
         </form>
