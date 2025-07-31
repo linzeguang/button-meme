@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.6\n"
 
-#: src/components/token/TokenRanking.tsx:121
+#: src/components/token/TokenRanking.tsx:120
 msgid "- Out of TOP 100 -"
 msgstr "超出前 100"
 
@@ -21,31 +21,31 @@ msgstr "超出前 100"
 msgid "/ Total"
 msgstr "总分配"
 
-#: src/components/token/TokenRecord.tsx:50
+#: src/components/token/TokenRecord.tsx:47
 msgid "Activity"
 msgstr "活动记录"
 
-#: src/components/token/TokenRanking.tsx:84
+#: src/components/token/TokenRanking.tsx:83
 msgid "Address"
 msgstr "地址"
 
-#: src/components/token/TokenRecord.tsx:119
+#: src/components/token/TokenRecord.tsx:106
 msgid "Amount"
 msgstr "数量"
 
-#: src/hooks/contracts/useErc20.ts:96
+#: src/hooks/contracts/useErc20.ts:115
 msgid "Approving... Please wait"
 msgstr "授权中，请等待..."
 
-#: src/hooks/contracts/useErc20.ts:94
+#: src/hooks/contracts/useErc20.ts:113
 msgid "Awaiting action"
 msgstr "等待操作"
 
 #. placeholder {0}: stableTokenBalance?.formatted || '--'
 #. placeholder {0}: mintTokenBalance?.formatted || '--'
-#: src/components/token/Trade.tsx:79
-#: src/components/token/Trade.tsx:80
-#: src/components/token/Trade.tsx:110
+#: src/components/token/Trade.tsx:127
+#: src/components/token/Trade.tsx:128
+#: src/components/token/Trade.tsx:159
 msgid "Balance: {0}"
 msgstr "余额：{0}"
 
@@ -53,19 +53,20 @@ msgstr "余额：{0}"
 msgid "Burned"
 msgstr "销毁"
 
-#: src/components/token/Trade.tsx:33
+#: src/components/token/Trade.tsx:40
 msgid "Buy"
 msgstr "建造"
 
-#: src/components/token/Trade.tsx:131
+#: src/components/token/Trade.tsx:207
 msgid "Buy Hash & Mint"
 msgstr "建造矿场"
 
-#: src/components/token/Reward.tsx:127
+#: src/components/token/Reward.tsx:128
 msgid "Claim"
 msgstr "领取"
 
-#: src/components/settings/ConnectWallet.tsx:57
+#: src/components/token/Trade.tsx:203
+#: src/components/settings/ConnectWallet.tsx:59
 msgid "Connect Wallet"
 msgstr "连接钱包"
 
@@ -77,11 +78,15 @@ msgstr "合约地址"
 msgid "Contribution value"
 msgstr "贡献值"
 
-#: src/components/token/Invite.tsx:34
+#: src/lib/utils.ts:19
+msgid "copied"
+msgstr "复制成功"
+
+#: src/components/token/Invite.tsx:54
 msgid "Copy"
 msgstr "复制"
 
-#: src/components/token/TokenRecord.tsx:98
+#: src/components/token/TokenRecord.tsx:86
 msgid "Date"
 msgstr "日期"
 
@@ -93,7 +98,7 @@ msgstr "DeFi"
 msgid "Enter address to query"
 msgstr "输入地址查询"
 
-#: src/components/token/TvChart.tsx:116
+#: src/components/token/TvChart.tsx:113
 #: src/components/token/OnChainInfo.tsx:133
 msgid "EPoch: "
 msgstr "周期："
@@ -106,7 +111,7 @@ msgstr "FEC矿车是一款面向ADN节点玩家的融合模拟经营与资源采
 msgid "FEC Mining Game"
 msgstr "FEC 矿车游戏"
 
-#: src/components/token/Trade.tsx:75
+#: src/components/token/Trade.tsx:123
 msgid "From"
 msgstr "从"
 
@@ -118,7 +123,11 @@ msgstr "热力值"
 msgid "Heat value ranking"
 msgstr "热力值排名"
 
-#: src/components/token/Invite.tsx:24
+#: src/components/token/Trade.tsx:205
+msgid "Insufficient Balance"
+msgstr "余额不足"
+
+#: src/components/token/Invite.tsx:36
 msgid "Invite"
 msgstr "邀请朋友"
 
@@ -127,11 +136,13 @@ msgid "LPH Mining"
 msgstr "矿车分配"
 
 #. placeholder {0}: tokenUserInfo ? fromRawAmount(tokenUserInfo.lph, 2) : '--'
-#: src/components/token/Trade.tsx:109
+#. placeholder {0}: saleEstimate.myLPH ? `+${fromRawAmount(saleEstimate.myLPH, 2)}` : '--'
+#: src/components/token/Trade.tsx:158
+#: src/components/token/Trade.tsx:189
 msgid "LPH: {0}"
 msgstr "LPH: {0}"
 
-#: src/components/token/TokenRecord.tsx:46
+#: src/components/token/TokenRecord.tsx:43
 msgid "Mine"
 msgstr "矿场数据"
 
@@ -163,24 +174,29 @@ msgstr "暂无数据"
 msgid "Overview"
 msgstr "预览"
 
-#: src/hooks/contracts/useErc20.ts:95
+#: src/hooks/contracts/useErc20.ts:114
 msgid "Please confirm the transaction in your wallet"
 msgstr "请前往钱包确认交易"
 
-#: src/components/token/TokenRecord.tsx:111
+#: src/components/token/TokenRecord.tsx:98
 msgid "Price"
 msgstr "价格"
 
-#: src/components/token/TokenRanking.tsx:51
+#: src/components/token/TokenRanking.tsx:50
 msgid "Ranking"
 msgstr "排名"
 
-#: src/components/token/TokenRanking.tsx:96
+#. placeholder {0}: saleEstimate.myFund ? fromRawAmount(saleEstimate.myFund, tokenInfo.stableToken.decimals) : '--'
+#: src/components/token/Trade.tsx:183
+msgid "receive: {0}"
+msgstr "到手：{0}"
+
+#: src/components/token/TokenRanking.tsx:95
 msgid "Reward"
 msgstr "奖励"
 
-#: src/components/token/Trade.tsx:39
-#: src/components/token/Trade.tsx:131
+#: src/components/token/Trade.tsx:46
+#: src/components/token/Trade.tsx:209
 msgid "Sell"
 msgstr "采集"
 
@@ -192,7 +208,7 @@ msgstr "符号"
 msgid "TH Rewards"
 msgstr "贡献值收益"
 
-#: src/components/token/Trade.tsx:105
+#: src/components/token/Trade.tsx:154
 msgid "To"
 msgstr "到"
 
@@ -212,29 +228,29 @@ msgstr "全网贡献值"
 msgid "Total TS"
 msgstr "全网热力值"
 
-#: src/components/token/Trade.tsx:151
-#: src/components/token/Trade.tsx:172
-#: src/components/token/Trade.tsx:178
+#: src/components/token/Trade.tsx:266
+#: src/components/token/Trade.tsx:291
+#: src/components/token/Trade.tsx:297
 msgid "Trade"
 msgstr "交易"
 
-#: src/hooks/contracts/useErc20.ts:98
+#: src/hooks/contracts/useErc20.ts:117
 msgid "Transaction confirmed successfully"
 msgstr "交易成功确认"
 
-#: src/hooks/contracts/useErc20.ts:99
+#: src/hooks/contracts/useErc20.ts:118
 msgid "Transaction failed, please try again"
 msgstr "交易失败，请重试"
 
-#: src/hooks/contracts/useErc20.ts:100
+#: src/hooks/contracts/useErc20.ts:119
 msgid "Transaction rejected by user"
 msgstr "交易被用户拒绝"
 
-#: src/hooks/contracts/useErc20.ts:97
+#: src/hooks/contracts/useErc20.ts:116
 msgid "Transaction submitted, waiting for confirmation"
 msgstr "交易已提交，等待确认"
 
-#: src/components/token/TokenRanking.tsx:90
+#: src/components/token/TokenRanking.tsx:89
 msgid "TS"
 msgstr "热力值"
 
@@ -242,7 +258,7 @@ msgstr "热力值"
 msgid "TS Rewards"
 msgstr "热力值分配"
 
-#: src/components/token/TokenRecord.tsx:102
+#: src/components/token/TokenRecord.tsx:90
 msgid "Type"
 msgstr "类型"
 
@@ -250,6 +266,6 @@ msgstr "类型"
 msgid "Type token symbol, address to find"
 msgstr "输入 Token 或 合约地址 查找"
 
-#: src/components/token/TokenRecord.tsx:127
+#: src/components/token/TokenRecord.tsx:114
 msgid "Volume"
 msgstr "总量"
