@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
+import { useForm } from 'react-hook-form'
+import { isAddress } from 'viem'
+import z from 'zod'
 
 import { Icon, TokenSvgr } from '@/components/svgr'
-import InviteAddressDialog from '@/components/token/InviteAddressDialog'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Container, Flex } from '@/components/ui/Box'
 import { Button } from '@/components/ui/Button'
-import { Dialog } from '@/components/ui/Dialog'
+import { Dialog, DialogMethods } from '@/components/ui/Dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/Form'
 import { Input } from '@/components/ui/Input'
 import { RadioGroup, RadioOption } from '@/components/ui/RadioGroup'
@@ -21,10 +24,12 @@ import { fromRawAmount } from '@/lib/rawAmount'
 import { cn } from '@/lib/utils'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
 
+const formSchema = z.object({
+  address: z.string()
+})
+
 const TradeForm: React.FC = () => {
   const { tokenInfo, tokenUserInfo } = useTokenProviderContext()
-
-  const { stableTokenBalance, mintTokenBalance, form, tradeType, isLoading, handleSubmit } = useTrade()
 
   const tradeTypes = useMemoWithLocale<RadioOption[]>(
     () => [
@@ -42,6 +47,38 @@ const TradeForm: React.FC = () => {
       }
     ],
     []
+  )
+
+  const dialogRef = useRef<DialogMethods | null>(null)
+
+  const leaderForm = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      address: ''
+    }
+  })
+
+  const { amountIn, stableTokenBalance, mintTokenBalance, form, tradeType, isLoading, saleEstimate, handleSubmit } =
+    useTrade()
+
+  const handleLeaderForm = useCallback(() => {
+    dialogRef.current?.open()
+  }, [])
+
+  const handleLeaderFormSubmit = useCallback(
+    async (values: z.infer<typeof formSchema>) => {
+      const { address } = values
+      if (!isAddress(address)) {
+        leaderForm.setError('address', {
+          message: 'Invalid address. Please check.'
+        })
+        return
+      }
+      form.setValue('leader', address)
+      await handleSubmit(form.getValues())
+      dialogRef.current?.close()
+    },
+    [form, handleSubmit, leaderForm]
   )
 
   return (
@@ -127,12 +164,65 @@ const TradeForm: React.FC = () => {
               )}
             />
           </div>
-          <Button variant="primary" type="submit" size="md" loading={isLoading} disabled={isLoading} className="w-full">
-            {tradeType === TRADE_TYPE.BUY ? <Trans>Buy Hash & Mint</Trans> : <Trans>Sell</Trans>}
-          </Button>
+          <div>
+            {tradeType === TRADE_TYPE.SELL && saleEstimate && tokenInfo && (
+              <Flex className="justify-between">
+                <HarmonyOSSansText>
+                  <Trans>receive: {fromRawAmount(saleEstimate.myFund, tokenInfo.stableToken.decimals)}</Trans>
+                </HarmonyOSSansText>
+                <HarmonyOSSansText>
+                  <Trans>LPH: +{fromRawAmount(saleEstimate.myLPH, 2)}</Trans>
+                </HarmonyOSSansText>
+              </Flex>
+            )}
+            <Button
+              variant="primary"
+              type="button"
+              size="md"
+              className="w-full"
+              disabled={!amountIn}
+              onClick={handleLeaderForm}
+            >
+              <span>{tradeType === TRADE_TYPE.BUY ? <Trans>Buy Hash & Mint</Trans> : <Trans>Sell</Trans>}</span>
+            </Button>
+          </div>
         </form>
       </Form>
-      <InviteAddressDialog />
+      <Dialog
+        ref={dialogRef}
+        title="Fill in your referral address"
+        content={{
+          className: 'md:w-[450px]'
+        }}
+      >
+        <Form {...leaderForm}>
+          <form onSubmit={leaderForm.handleSubmit(handleLeaderFormSubmit)} className="mt-4 space-y-4">
+            <FormField
+              control={leaderForm.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input wrapperClassName="w-full" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <Flex className="mt-4 w-full items-center justify-center">
+              <Button
+                className="min-w-[50%]"
+                type="submit"
+                size="md"
+                variant="primary"
+                loading={isLoading}
+                disabled={isLoading}
+              >
+                Comfirm
+              </Button>
+            </Flex>
+          </form>
+        </Form>
+      </Dialog>
     </>
   )
 }
@@ -152,7 +242,7 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
             </HarmonyOSSansText>
             <Flex className="items-center space-x-1">
               <TokenSvgr.Trade className="size-10.5" />
-              <Icon.Tip className="dark:text-background-fourth text-text-tertiary" />
+              <Icon.Tip className="text-text-tertiary dark:text-background-fourth" />
             </Flex>
           </>
         }
@@ -165,7 +255,7 @@ export const Trade: React.FC<{ className?: string; defaultValue?: string }> = (p
 export const FooterTrade = () => {
   return (
     <Container className={cn('flex h-20 items-center space-x-4')}>
-      <Button variant="fourth" className="text-text-primary px-1">
+      <Button variant="fourth" className="px-1 text-text-primary">
         <Icon.ScrollTop />
       </Button>
       <Dialog

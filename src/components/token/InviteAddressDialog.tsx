@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { isAddress } from 'viem'
+import { Address, isAddress } from 'viem'
 import z from 'zod'
 
 import { Flex } from '@/components/ui/Box'
@@ -15,8 +15,7 @@ const formSchema = z.object({
   address: z.string()
 })
 
-const InviteAddressDialog: React.FC = () => {
-  const dialogRef = useRef<DialogMethods | null>(null)
+const InviteAddressDialog: React.FC<{ onSubmit: (leader: Address) => void }> = ({ onSubmit }) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,41 +34,14 @@ const InviteAddressDialog: React.FC = () => {
         })
         return
       }
-
+      onSubmit(address)
       dialogRef.current?.close()
     },
-    [form]
+    [form, onSubmit]
   )
 
   return (
-    <Dialog
-      ref={dialogRef}
-      title="Fill in your referral address"
-      content={{
-        className: 'w-[450px]'
-      }}
-    >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="mt-4 space-y-4">
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input wrapperClassName="w-full" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Flex className="mt-4 items-center justify-center">
-            <Button type="submit" size="sm" variant="primary">
-              Comfirm
-            </Button>
-          </Flex>
-        </form>
-      </Form>
-    </Dialog>
+
   )
 }
 

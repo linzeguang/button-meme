@@ -10,7 +10,7 @@ import { MiningPoolAbi } from '@/constants/abi'
 import { useBalance, useTx } from '@/hooks/contracts/useErc20'
 import { useSaleEstimate } from '@/hooks/contracts/useInfoContract'
 import Calculator from '@/lib/calculator'
-import { toRawAmount } from '@/lib/rawAmount'
+import { fromRawAmount, toRawAmount } from '@/lib/rawAmount'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 export enum TRADE_TYPE {
@@ -35,14 +35,13 @@ export const useTrade = () => {
       tradeType: TRADE_TYPE.BUY,
       amountIn: '',
       amountOut: '',
-      leader: '0x8e7272Ab041105B37C2dF015C63e5f3531aa3De1'
+      leader: ''
     }
   })
 
   const tradeType = form.watch('tradeType')
   const leader = form.watch('leader')
   const amountIn = form.watch('amountIn')
-  // const amountOut = form.watch('amountOut')
 
   useEffect(() => {
     if (tradeType === TRADE_TYPE.BUY) {
@@ -53,22 +52,25 @@ export const useTrade = () => {
     }
   }, [amountIn, form, project?.epoch, tradeType])
 
-  // LPH = USDC*1.01^n
-
   const rawAmountIn = useMemo(
-    () => (tokenInfo && !isNaN(Number(amountIn)) ? toRawAmount(amountIn, tokenInfo.stableToken.decimals) : 0n),
-    [amountIn, tokenInfo]
+    () =>
+      tokenInfo && !isNaN(Number(amountIn))
+        ? toRawAmount(
+            amountIn,
+            tradeType === TRADE_TYPE.BUY ? tokenInfo.stableToken.decimals : tokenInfo.mintToken.decimals
+          )
+        : 0n,
+    [amountIn, tokenInfo, tradeType]
   )
 
   const saleEstimate = useSaleEstimate(
-    tradeType === TRADE_TYPE.BUY && tokenInfo
+    tradeType === TRADE_TYPE.SELL && tokenInfo
       ? {
           id: tokenInfo.project.id,
           amountIn: rawAmountIn
         }
       : undefined
   )
-  console.log('>>>>>> saleEstimate: ', saleEstimate)
 
   const { refetchBalance: refetchStableTokenBalance, balance: stableTokenBalance } = useBalance({
     token: tokenInfo?.stableToken.address
@@ -114,12 +116,10 @@ export const useTrade = () => {
   }, [approve, rawAmountIn, tokenInfo, transaction, writeContractAsync])
 
   const handleSubmit = useCallback(
-    (values: z.infer<typeof tradeFormSchema>) => {
+    async (values: z.infer<typeof tradeFormSchema>) => {
       console.log('>>>>>> handleSubmit: values', values)
-      if (values.tradeType === TRADE_TYPE.BUY) buy()
-      else sell()
-
-      // dialogRef.current?.close()
+      if (values.tradeType === TRADE_TYPE.BUY) await buy()
+      else await sell()
     },
     [buy, sell]
   )
@@ -129,13 +129,21 @@ export const useTrade = () => {
     form.resetField('amountOut')
   }, [form, tradeType])
 
+  useEffect(() => {
+    if (saleEstimate && tokenInfo) {
+      form.setValue('amountOut', fromRawAmount(saleEstimate.totalFund, tokenInfo.stableToken.decimals))
+    }
+  }, [form, saleEstimate, tokenInfo])
+
   return {
     form,
+    amountIn,
     stableTokenBalance,
     mintTokenBalance,
     leader,
     tradeType,
     isLoading,
+    saleEstimate,
     buy,
     handleSubmit
   }

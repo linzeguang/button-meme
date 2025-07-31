@@ -75,7 +75,7 @@ export const Dialog = React.forwardRef<DialogMethods, DialogProps>((props, metho
           {...content}
           className={cn(
             'fixed left-1/2 top-1/2 z-[999] -translate-x-1/2 -translate-y-1/2',
-            'popover border-border rounded-md border p-4',
+            'popover rounded-md border border-border p-4',
             'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]',
             'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]',
             'max-h-[90%] w-[90vw] max-w-[90vw] overflow-x-auto md:w-auto',
@@ -96,7 +96,7 @@ export const Dialog = React.forwardRef<DialogMethods, DialogProps>((props, metho
                   size="xs"
                   className={cn('absolute right-0 size-6 border-0 !p-0 backdrop-blur-none', !title && 'top-0')}
                 >
-                  <Icon.Close />
+                  <Icon.Close className="text-text-primary" />
                 </Button>
               </DialogClose>
             )}
