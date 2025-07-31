@@ -82,6 +82,8 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
     }
   }, [claimLPHRewards, claimTHTSRewards, tabType])
 
+  console.log('>>>>>> tokenInfo: ', tokenInfo)
+
   return (
     <AccordionRoot type="single" value={value} onValueChange={setValue} {...props}>
       <TokenAccordionItem
@@ -120,7 +122,7 @@ const Reward: React.FC<{ className?: string; defaultValue?: string }> = (props) 
               variant="primary"
               size={isMobile ? 'sm' : 'md'}
               loading={isLoading}
-              disabled={tokenInfo?.checkMerkleRoot || isLoading}
+              disabled={!tokenInfo?.checkMerkleRoot || isLoading}
               className="w-[7rem] xl:min-w-[9.625rem]"
               onClick={handleCliam}
             >
