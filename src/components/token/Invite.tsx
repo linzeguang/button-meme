@@ -22,7 +22,7 @@ const Invite: React.FC<{ className?: string; defaultValue?: string }> = (props) 
 
   const inviteUrl = useMemo(() => {
     const { href } = window.location
-    if (!address) return `{href}`
+    if (!address) return `${href}`
     return `${href}?${inviteKey}=${address}`
   }, [address])
 
