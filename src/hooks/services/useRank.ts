@@ -1,6 +1,5 @@
-import { useState } from 'react'
-
 import { useFetch } from '@/hooks/services/useFetch'
+import { useTokenProviderContext } from '@/providers/TokenProvider'
 
 export interface Rank {
   account: string
@@ -10,15 +9,12 @@ export interface Rank {
 }
 
 export const useRank = () => {
-  const [pid, setPid] = useState(0)
-  const [epoch, setEpoch] = useState(1)
+  const { project } = useTokenProviderContext()
 
-  const { data, ...rest } = useFetch<Rank[]>({ url: `/rank/ts/${pid}/${epoch}` })
+  const { data, ...rest } = useFetch<Rank[]>({ url: `/rank/ts/${project.id}/${project.epoch}` })
 
   return {
     ...rest,
-    data: data?.data,
-    setPid,
-    setEpoch
+    data: data?.data
   }
 }
