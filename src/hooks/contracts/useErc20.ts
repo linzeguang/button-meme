@@ -107,7 +107,7 @@ export const useTx = (parmas?: { approve: Parameters<typeof useApprove>[0]; onSu
   const [txStatus, setTxStatus] = useState<TX_STATUS>(TX_STATUS.Idle)
   const [txHash, setTxHash] = useState<string | undefined>(undefined)
   const { allowance, approve: approveTx, refetchAllowance } = useApprove(parmas ? parmas.approve : undefined)
-  const { isSuccess, isError, error } = useWaitForTransactionReceipt({
+  const { isSuccess, isError, error, data } = useWaitForTransactionReceipt({
     hash: txHash as `0x${string}`,
     query: { enabled: !!txHash }
   })
@@ -142,15 +142,20 @@ export const useTx = (parmas?: { approve: Parameters<typeof useApprove>[0]; onSu
     try {
       setTxStatus(TX_STATUS.PendingUser)
       const txhash = await transactionFn
+      console.log('>>>>>> txhash: ', txhash)
       setTxStatus(TX_STATUS.Submitted)
       setTxHash(txhash)
     } catch (error) {
-      console.log('>>>>>> transaction error: ', error)
+      console.error('>>>>>> transaction error: ', error)
       setTxStatus(TX_STATUS.Rejected)
       setTxHash(undefined)
       throw error
     }
   }, [])
+
+  useEffect(() => {
+    if (data) console.log('>>>>>> data: ', data)
+  }, [data])
 
   useEffect(() => {
     if (isSuccess) setTxStatus(TX_STATUS.Confirmed)

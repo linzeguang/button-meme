@@ -179,6 +179,11 @@ export const useClaim = () => {
 
   const claimTHTSRewards = useCallback(async () => {
     if (!tokenInfo || !userReward) return
+    console.log(
+      '>>>>>> claimTHTSRewards: ',
+      [BigInt(project?.epoch), BigInt(userReward.thRewardAcc), BigInt(userReward.tsRewardAcc), userReward.proof],
+      tokenInfo.miningPool
+    )
 
     await transaction(
       writeContractAsync({
