@@ -22,7 +22,9 @@ const TokenRanking: React.FC = () => {
   const { data } = useRank()
 
   useEffect(() => {
-    const index = searchValue ? data?.findIndex(({ account }) => account.includes(searchValue)) : -1
+    const index = searchValue
+      ? data?.findIndex(({ account }) => account.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+      : -1
     let el: Element | null
     if (index === -1 && searchValue) {
       el = document.querySelector(`[data-index="out"]`)

@@ -92,7 +92,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
                 memoData.map((data, index) => (
                   <TableRow
                     key={typeof rowKey === 'function' ? rowKey(data, index) : (data[rowKey] as string)}
-                    data-index={index + 1}
+                    data-index={index}
                     {...tbodyTrProps}
                   >
                     {columns.map((column) => (
