@@ -84,7 +84,11 @@ export const useTrade = () => {
   )
 
   const { approve, transaction, refetchAllowance, isLoading } = useTx({
-    approve: tokenInfo && { token: tokenInfo.stableToken.address, spender: tokenInfo.miningPool },
+    approve:
+      tokenInfo &&
+      (tradeType === TRADE_TYPE.BUY
+        ? { token: tokenInfo.stableToken.address, spender: tokenInfo.miningPool }
+        : { token: tokenInfo.mintToken.address, spender: tokenInfo.miningPool }),
     onSuccess: () => {
       form.reset()
       refetchStableTokenBalance()
