@@ -22,8 +22,8 @@ const fetcher = async <T = any>({
 
   // 拼接请求url
   url = (php ? import.meta.env.VITE_PHP_BASE_URL : import.meta.env.VITE_API_BASE_URL) + url
-  if (import.meta.env.VITE_MODE === 'production')
-    url = (php ? import.meta.env.VITE_PHP_TARGET_URL : import.meta.env.VITE_API_TARGET_URL) + url
+  // if (import.meta.env.VITE_MODE === 'production')
+  //   url = (php ? import.meta.env.VITE_PHP_TARGET_URL : import.meta.env.VITE_API_TARGET_URL) + url
 
   // 初始化body数据
   let body: BodyInit | undefined

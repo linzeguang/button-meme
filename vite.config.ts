@@ -45,7 +45,8 @@ export default defineConfig((env) => {
       proxy: {
         [processEnv.VITE_API_BASE_URL]: {
           target: processEnv.VITE_API_TARGET_URL,
-          changeOrigin: true
+          changeOrigin: true,
+          rewrite: (path) => path.replace(new RegExp(`^${processEnv.VITE_API_BASE_URL}`), '/api')
         },
         [processEnv.VITE_PHP_BASE_URL]: {
           target: processEnv.VITE_PHP_TARGET_URL,
