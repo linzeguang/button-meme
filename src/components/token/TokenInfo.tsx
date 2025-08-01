@@ -23,7 +23,7 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
       {
         name: t`Contract`,
         value: (
-          <HarmonyOSSansText className="text-primary flex items-center space-x-1">
+          <HarmonyOSSansText className="flex items-center space-x-1 text-primary">
             {/* <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span> */}
             <span>{formatAddress(MIT.address)}</span>
             <Icon.Copy
@@ -60,7 +60,7 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
             </HarmonyOSSansText>
             <Flex className="items-center space-x-1">
               <TokenSvgr.TokenInfo className="size-10.5" />
-              <Icon.Tip className="dark:text-background-fourth text-text-tertiary" />
+              <Icon.Tip className="text-text-tertiary dark:text-background-fourth" />
             </Flex>
           </>
         }
@@ -84,7 +84,7 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
               {baseInfos.map((info, index) => (
                 <li
                   key={index}
-                  className="border-border flex items-center justify-between border-b border-dashed py-2 text-sm last:border-none"
+                  className="flex items-center justify-between border-b border-dashed border-border py-2 text-sm last:border-none"
                 >
                   <HarmonyOSSansText>{info.name}</HarmonyOSSansText>
                   {typeof info.value === 'object' ? info.value : <HarmonyOSSansText>{info.value}</HarmonyOSSansText>}

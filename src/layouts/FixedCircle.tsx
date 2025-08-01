@@ -8,5 +8,5 @@ export const RightBottomCircle = () => {
 }
 
 export const LeftTopCircle = () => {
-  return <Box className={cn(commonClassName, 'bg-primary/20 -top-[500px] -right-[500px]')} />
+  return <Box className={cn(commonClassName, '-right-[500px] -top-[500px] bg-primary/20')} />
 }

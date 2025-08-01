@@ -51,7 +51,7 @@ const TokenRanking: React.FC = () => {
             </HarmonyOSSansText>{' '}
             <Flex className="items-center space-x-1">
               <TokenSvgr.TokenRanking className="size-10.5" />
-              <Icon.Tip className="dark:text-background-fourth text-text-tertiary" />
+              <Icon.Tip className="text-text-tertiary dark:text-background-fourth" />
             </Flex>
           </>
         }
