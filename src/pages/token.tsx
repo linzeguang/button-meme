@@ -13,13 +13,12 @@ import TvChart from '@/components/token/TvChart'
 import { Flex } from '@/components/ui/Box'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { cn } from '@/lib/utils'
-import TokenProvider from '@/providers/TokenProvider'
 
 const Token: React.FC = () => {
   const { gt2XL, gtLG } = useMediaQuery()
 
   return (
-    <TokenProvider>
+    <>
       {gt2XL ? (
         <Flex className={cn('space-x-6 [&>div]:space-y-6')}>
           <Flex className="max-w-108 relative w-[24%] flex-col">
@@ -69,7 +68,7 @@ const Token: React.FC = () => {
           <Invite />
         </Flex>
       )}
-    </TokenProvider>
+    </>
   )
 }
 

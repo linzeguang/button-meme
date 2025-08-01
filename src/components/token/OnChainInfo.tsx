@@ -82,12 +82,12 @@ const OnChainInfo: React.FC = () => {
             },
             {
               name: t`Heat value ranking`,
-              value: userReward?.tsRankIndex ?? '--',
+              value: userReward?.tsRankIndex || '--',
               highlight: true
             },
             {
               name: t`Heat value`,
-              value: userReward?.ts ?? '--',
+              value: userReward?.ts || '--',
               highlight: true
             }
           ]
