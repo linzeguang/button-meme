@@ -20,7 +20,7 @@ export const MobileConnected = () => {
       <HarmonyOSSansText className="text-xs">{formatAddress(address)}</HarmonyOSSansText>
       <Icon.User className="size-8.5 row-span-2" />
       <SimpleBalance
-        className="text-primary text-xs"
+        className="text-xs text-primary"
         renderBalance={(data) => data && `${formatNumber(data.formatted, 6)} ${data.symbol}`}
       />
     </Grid>
@@ -43,7 +43,7 @@ const ConnectWallet: React.FC = () => {
           <HarmonyOSSansText>{formatAddress(address)}</HarmonyOSSansText>
           <Icon.User className="size-11.5 row-span-2" />
           <SimpleBalance
-            className="text-primary text-base"
+            className="text-base text-primary"
             renderBalance={(data) => data && `${formatNumber(data.formatted, 6)} ${data.symbol}`}
           />
         </Grid>

@@ -17,7 +17,7 @@ export const DropdownMenuItem = React.forwardRef<
     ref={ref}
     {...props}
     className={cn(
-      'hover:bg-primary cursor-pointer rounded-lg px-2 py-1 transition-all hover:text-white',
+      'cursor-pointer rounded-lg px-2 py-1 transition-all hover:bg-primary hover:text-white',
       props.className
     )}
   />

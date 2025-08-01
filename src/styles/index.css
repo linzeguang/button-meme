@@ -25,7 +25,7 @@
   .header,
   .aside,
   .footer {
-    @apply bg-background-secondary border-border-highlight border-solid backdrop-blur-2xl dark:backdrop-blur-none;
+    @apply border-solid border-border-highlight bg-background-secondary backdrop-blur-2xl dark:backdrop-blur-none;
   }
 
   .header {
@@ -67,7 +67,7 @@
   }
 
   .card {
-    @apply border-border-highlight rounded-md border p-4;
+    @apply rounded-md border border-border-highlight p-4;
   }
 
   .dividing-wieght {

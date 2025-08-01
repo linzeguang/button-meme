@@ -22,7 +22,7 @@ export const TableRow = React.forwardRef<React.ElementRef<'tr'>, React.HTMLAttri
   (props, ref) => <tr ref={ref} {...props} className={cn('', props.className)} />
 )
 export const TableHeadCell = React.forwardRef<React.ElementRef<'th'>, React.ThHTMLAttributes<HTMLTableCellElement>>(
-  (props, ref) => <th ref={ref} {...props} className={cn('text-text-primary p-2 font-normal', props.className)} />
+  (props, ref) => <th ref={ref} {...props} className={cn('p-2 font-normal text-text-primary', props.className)} />
 )
 export const TableDateCell = React.forwardRef<React.ElementRef<'td'>, React.TdHTMLAttributes<HTMLTableCellElement>>(
   (props, ref) => <td ref={ref} {...props} className={cn('px-2 py-2.5', props.className)} />
@@ -72,7 +72,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
             <TableHead
               id={`table-head-${id}`}
               {...theadProps}
-              className={cn('sticky top-0 z-1', theadProps?.className)}
+              className={cn('z-1 sticky top-0', theadProps?.className)}
             >
               <TableRow {...therdTrProps}>
                 {columns.map((column) => (
@@ -111,7 +111,7 @@ export const Table = <D extends object>(props: TableProps<D>) => {
                 <TableRow key="nodata" {...tbodyTrProps}>
                   <TableDateCell
                     colSpan={columns.length}
-                    className="font-HarmonyOSSans text-text-secondary py-6 text-center"
+                    className="py-6 text-center font-HarmonyOSSans text-text-secondary"
                   >
                     <Trans>No Data</Trans>
                   </TableDateCell>

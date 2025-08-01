@@ -52,11 +52,11 @@ const OnChainInfo: React.FC = () => {
             },
             {
               name: t`Total TH`,
-              value: reward?.totalTH ?? '--'
+              value: reward?.totalTH ? fromRawAmount(BigInt(reward.totalTH), 4) : '--'
             },
             {
               name: t`Total TS`,
-              value: reward?.totalTS ?? '--'
+              value: reward?.totalTS ? fromRawAmount(BigInt(reward.totalTS), 4) : '--'
             },
             {
               name: t`Burned`,
@@ -78,16 +78,16 @@ const OnChainInfo: React.FC = () => {
             },
             {
               name: t`Contribution value`,
-              value: userReward?.th ?? '--'
+              value: userReward?.th ? fromRawAmount(BigInt(userReward.th), 4) : '--'
             },
             {
               name: t`Heat value ranking`,
-              value: userReward?.tsRankIndex ?? '--',
+              value: userReward?.tsRankIndex || '--',
               highlight: true
             },
             {
               name: t`Heat value`,
-              value: userReward?.ts ?? '--',
+              value: userReward?.ts || '--',
               highlight: true
             }
           ]
@@ -112,8 +112,8 @@ const OnChainInfo: React.FC = () => {
                   key={type.value}
                   className={cn(
                     'cursor-pointer px-4 py-2.5 transition-all',
-                    'border-background-unactive border-b-2',
-                    infoType === type.value && 'text-primary border-primary'
+                    'border-b-2 border-background-unactive',
+                    infoType === type.value && 'border-primary text-primary'
                   )}
                   onClick={() => setInfoType(type.value)}
                 >
@@ -136,11 +136,11 @@ const OnChainInfo: React.FC = () => {
               </Flex>
             )}
             {infos.map((_infos, index) => (
-              <ul key={index} className="border-border mb-1 border-b pb-1 last:mb-0 last:border-b-0 last:pb-0">
+              <ul key={index} className="mb-1 border-b border-border pb-1 last:mb-0 last:border-b-0 last:pb-0">
                 {_infos.map(({ name, value, highlight }, i) => (
                   <li
                     key={`${index}-${i}`}
-                    className="border-border flex h-7 items-center justify-between border-b border-dashed text-sm last:border-b-0"
+                    className="flex h-7 items-center justify-between border-b border-dashed border-border text-sm last:border-b-0"
                   >
                     <HarmonyOSSansText as="span" variant="secondary">
                       {name}

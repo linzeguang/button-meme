@@ -66,8 +66,8 @@ const TokenRecord: React.FC = () => {
                   key={type.value}
                   className={cn(
                     'cursor-pointer px-4 py-2.5 transition-all',
-                    'border-background-unactive border-b-2',
-                    recordType === type.value && 'text-primary border-primary'
+                    'border-b-2 border-background-unactive',
+                    recordType === type.value && 'border-primary text-primary'
                   )}
                   onClick={() => setRecordType(type.value)}
                 >

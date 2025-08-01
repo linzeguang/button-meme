@@ -18,7 +18,7 @@ const TokenAccordionItem: React.FC<{
       >
         {name}
       </AccordionTrigger>
-      <AccordionContent className={cn('border-border space-y-2 border-t border-dashed p-4', contentClassName)}>
+      <AccordionContent className={cn('space-y-2 border-t border-dashed border-border p-4', contentClassName)}>
         {content}
       </AccordionContent>
       {suffixNode}

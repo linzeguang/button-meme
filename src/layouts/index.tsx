@@ -5,17 +5,20 @@ import Footer from '@/layouts/Footer'
 import Header from '@/layouts/Header'
 import Main from '@/layouts/Main'
 import SideBar from '@/layouts/SideBar'
+import TokenProvider from '@/providers/TokenProvider'
 
 const RootLayout: React.FC = () => {
   const { isMobile } = useMediaQuery()
 
   return (
-    <section className="grid h-screen grid-rows-[4.5rem_1fr_auto] lg:grid-cols-[auto_1fr] lg:grid-rows-[4.5rem_1fr]">
-      <Header className="lg:col-span-full" />
-      {!isMobile && <SideBar className="lg:col-span-1" />}
-      <Main />
-      {isMobile && <Footer />}
-    </section>
+    <TokenProvider>
+      <section className="grid h-screen grid-rows-[4.5rem_1fr_auto] lg:grid-cols-[auto_1fr] lg:grid-rows-[4.5rem_1fr]">
+        <Header className="lg:col-span-full" />
+        {!isMobile && <SideBar className="lg:col-span-1" />}
+        <Main />
+        {isMobile && <Footer />}
+      </section>
+    </TokenProvider>
   )
 }
 

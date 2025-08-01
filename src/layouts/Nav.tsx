@@ -118,7 +118,7 @@ const Nav = React.forwardRef<
       return (
         <Flex
           className={cn(
-            'hover:text-primary hover:[&_.accordion-arrow]:text-primary flex-1 cursor-pointer items-center',
+            'flex-1 cursor-pointer items-center hover:text-primary hover:[&_.accordion-arrow]:text-primary',
             collapsed && 'justify-center'
           )}
         >
@@ -166,7 +166,7 @@ const Nav = React.forwardRef<
                   {option.childrens.map((children, i) => (
                     <a
                       key={i}
-                      className="bg-background-tertiary hover:text-primary block cursor-pointer py-1 pl-10 text-xs"
+                      className="block cursor-pointer bg-background-tertiary py-1 pl-10 text-xs hover:text-primary"
                       onClick={(ev) => {
                         ev.preventDefault()
                         children.onClick()
