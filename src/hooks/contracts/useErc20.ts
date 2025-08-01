@@ -77,6 +77,10 @@ export const useApprove = (parmas?: { token: Address; spender: Address }) => {
 
   const approve = useCallback(
     async (amount: bigint) => {
+      console.log('>>>>>> allowance: ', {
+        allowance,
+        ...parmas
+      })
       if (!parmas) return
       if (allowance && allowance > amount) return
 
@@ -103,7 +107,7 @@ export const useTx = (parmas?: { approve: Parameters<typeof useApprove>[0]; onSu
   const [txStatus, setTxStatus] = useState<TX_STATUS>(TX_STATUS.Idle)
   const [txHash, setTxHash] = useState<string | undefined>(undefined)
   const { allowance, approve: approveTx, refetchAllowance } = useApprove(parmas ? parmas.approve : undefined)
-  const { isSuccess, isError } = useWaitForTransactionReceipt({
+  const { isSuccess, isError, error } = useWaitForTransactionReceipt({
     hash: txHash as `0x${string}`,
     query: { enabled: !!txHash }
   })
@@ -141,6 +145,7 @@ export const useTx = (parmas?: { approve: Parameters<typeof useApprove>[0]; onSu
       setTxStatus(TX_STATUS.Submitted)
       setTxHash(txhash)
     } catch (error) {
+      console.log('>>>>>> transaction error: ', error)
       setTxStatus(TX_STATUS.Rejected)
       setTxHash(undefined)
       throw error
@@ -152,8 +157,11 @@ export const useTx = (parmas?: { approve: Parameters<typeof useApprove>[0]; onSu
   }, [isSuccess])
 
   useEffect(() => {
-    if (isError) setTxStatus(TX_STATUS.Failed)
-  }, [isError])
+    if (isError && error) {
+      console.error(error)
+      setTxStatus(TX_STATUS.Failed)
+    }
+  }, [error, isError])
 
   useEffect(() => {
     if ([TX_STATUS.Approving, TX_STATUS.PendingUser, TX_STATUS.Submitted].includes(txStatus)) {

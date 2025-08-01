@@ -179,6 +179,7 @@ export const useClaim = () => {
 
   const claimTHTSRewards = useCallback(async () => {
     if (!tokenInfo || !userReward) return
+
     await transaction(
       writeContractAsync({
         abi: MiningPoolAbi,
