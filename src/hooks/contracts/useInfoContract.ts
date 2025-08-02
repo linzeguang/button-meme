@@ -28,6 +28,10 @@ export const useProjects = () => {
     }))
   })
 
+  useEffect(() => {
+    if (count) console.log('>>>>>> getProjectCount: ', count)
+  }, [count])
+
   const projects = useMemo(
     () =>
       data?.map<Project>(({ result }, index) => {
@@ -42,7 +46,10 @@ export const useProjects = () => {
   )
 
   useEffect(() => {
-    if (projects) setProjects(projects)
+    if (projects) {
+      console.log('>>>>>> getProjectInfo: ', projects)
+      setProjects(projects)
+    }
   }, [projects, setProjects])
 }
 
@@ -161,7 +168,10 @@ export const useTokenBaseInfo = (project?: Project) => {
   }, [data, info, project])
 
   useEffect(() => {
-    if (lasterTokenInfo) setTokenInfo(lasterTokenInfo)
+    if (lasterTokenInfo) {
+      console.log('>>>>>> tokenInfo: ', lasterTokenInfo)
+      setTokenInfo(lasterTokenInfo)
+    }
   }, [lasterTokenInfo, setTokenInfo])
 
   return tokenInfo
@@ -181,7 +191,7 @@ export const useTokenUserInfo = (project?: Project) => {
     }
   })
 
-  return useMemo<TokenUserInfo | undefined>(() => {
+  const tokenUserInfo = useMemo<TokenUserInfo | undefined>(() => {
     if (!data) return undefined
     const [investedAcc, lph, lphRewardPending, claimedRewardsLPH, claimedRewardsTH, claimedRewardsTS, referencesCount] =
       data
@@ -196,6 +206,16 @@ export const useTokenUserInfo = (project?: Project) => {
       referencesCount
     }
   }, [data])
+
+  useEffect(() => {
+    if (tokenUserInfo)
+      console.log('>>>>>> tokenUserInfo: ', {
+        tokenUserInfo,
+        args: project && [BigInt(project.id), address as Address]
+      })
+  }, [address, project, tokenUserInfo])
+
+  return tokenUserInfo
 }
 
 export const useSaleEstimate = (params?: { id: number; amountIn: bigint }) => {
@@ -210,7 +230,7 @@ export const useSaleEstimate = (params?: { id: number; amountIn: bigint }) => {
     }
   })
 
-  return useMemo(() => {
+  const saleEstimate = useMemo(() => {
     if (!data) return undefined
     const [totalFund, myFund, myLPH] = data
 
@@ -220,4 +240,10 @@ export const useSaleEstimate = (params?: { id: number; amountIn: bigint }) => {
       myLPH
     }
   }, [data])
+
+  useEffect(() => {
+    console.log('>>>>>> saleEstimate: ', { saleEstimate, args: params && [BigInt(params.id), params.amountIn] })
+  }, [params, saleEstimate])
+
+  return saleEstimate
 }

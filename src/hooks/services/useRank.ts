@@ -11,7 +11,7 @@ export interface Rank {
 export const useRank = () => {
   const { project } = useTokenProviderContext()
 
-  const { data, ...rest } = useFetch<Rank[]>({ url: `/rank/ts/${project.id}/${project.epoch}` })
+  const { data, ...rest } = useFetch<Rank[]>({ url: project ? `/rank/ts/${project.id}/${project.epoch}` : null })
 
   return {
     ...rest,

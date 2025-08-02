@@ -17,7 +17,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/
 import { Input } from '@/components/ui/Input'
 import { RadioGroup, RadioOption } from '@/components/ui/RadioGroup'
 import { HarmonyOSSansText } from '@/components/ui/Text'
-import { MIT } from '@/constants/token'
+// import { MIT } from '@/constants/token'
 import { TRADE_TYPE, useTrade } from '@/hooks/contracts/useMiningPool'
 import { useWallet } from '@/hooks/useWallet'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
@@ -134,8 +134,8 @@ const TradeForm: React.FC = () => {
                       size="lg"
                       suffixNode={
                         <HarmonyOSSansText className="font-bold">
-                          {/* {tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol} */}
-                          {tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : MIT.name}
+                          {tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : tokenInfo?.mintToken.symbol}
+                          {/* {tradeType === TRADE_TYPE.BUY ? tokenInfo?.stableToken.symbol : MIT.name} */}
                         </HarmonyOSSansText>
                       }
                       {...field}

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react'
 
 import { Trans } from '@lingui/react/macro'
 import { useAtom } from 'jotai/react'
-import { Address } from 'viem'
+// import { Address } from 'viem'
 
 import { TokenImage } from '@/assets/images'
 import { Logo } from '@/components/svgr'
@@ -10,7 +10,7 @@ import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
-import { MIT } from '@/constants/token'
+// import { MIT } from '@/constants/token'
 import { defaultChartProps, getChartOverrides } from '@/constants/tradingiew'
 import DataFeed from '@/lib/datafeed'
 import { useTokenProviderContext } from '@/providers/TokenProvider'
@@ -28,7 +28,7 @@ const TvChart: React.FC = () => {
   const { tokenInfo } = useTokenProviderContext()
 
   const initChart = useCallback(() => {
-    // if (!tokenInfo) return
+    if (!tokenInfo) return
     if (widgetRef.current) return
 
     let widget: IChartingLibraryWidget | undefined = undefined
@@ -39,14 +39,14 @@ const TvChart: React.FC = () => {
 
     script.onload = () => {
       const widgetOptions: ChartingLibraryWidgetOptions = {
-        // symbol: DataFeed.generateInitSymbol(tokenInfo.mintToken),
-        symbol: DataFeed.generateInitSymbol({
-          address: MIT.address as Address,
-          name: MIT.name,
-          symbol: MIT.symbol,
-          decimals: MIT.decimals,
-          burnedAmount: 0n
-        }),
+        symbol: DataFeed.generateInitSymbol(tokenInfo.mintToken),
+        // symbol: DataFeed.generateInitSymbol({
+        //   address: MIT.address as Address,
+        //   name: MIT.name,
+        //   symbol: MIT.symbol,
+        //   decimals: MIT.decimals,
+        //   burnedAmount: 0n
+        // }),
         interval,
         datafeed: datafeed.current,
         container: chartContainerRef.current!,
@@ -103,8 +103,8 @@ const TvChart: React.FC = () => {
               </Flex> */}
               <Flex className="flex-1 items-center justify-between py-1.5">
                 <HarmonyOSSansText className="text-sm font-bold lg:text-lg">
-                  {MIT.name}
-                  {/* {tokenInfo?.mintToken.name || '--'} */}
+                  {/* {MIT.name} */}
+                  {tokenInfo?.mintToken.name || '--'}
                   {/* <HarmonyOSSansText as="span" className="text-xs font-normal lg:text-sm" variant="secondary">
                     / {tokenInfo?.mintToken.symbol || '--'}
                   </HarmonyOSSansText> */}

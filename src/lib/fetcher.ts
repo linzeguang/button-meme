@@ -44,7 +44,11 @@ const fetcher = async <T = any>({
     throw error
   }
 
-  return res.json() as T
+  const resp = res.json() as T
+
+  console.log('>>>>>> fetcher: ', url, { resp })
+
+  return resp
 }
 
 export default fetcher

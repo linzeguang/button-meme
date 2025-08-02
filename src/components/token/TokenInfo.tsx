@@ -8,7 +8,7 @@ import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Flex } from '@/components/ui/Box'
 import { HarmonyOSSansText } from '@/components/ui/Text'
-import { MIT } from '@/constants/token'
+// import { MIT } from '@/constants/token'
 import { useMemoWithLocale } from '@/hooks/useWithLocale'
 import { formatAddress } from '@/lib/format'
 import { copy } from '@/lib/utils'
@@ -24,25 +24,25 @@ const TokenInfo: React.FC<{ className?: string; defaultValue?: string }> = (prop
         name: t`Contract`,
         value: (
           <HarmonyOSSansText className="flex items-center space-x-1 text-primary">
-            {/* <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span> */}
-            <span>{formatAddress(MIT.address)}</span>
+            <span>{tokenInfo ? formatAddress(tokenInfo.mintToken.address) : '--'}</span>
+            {/* <span>{formatAddress(MIT.address)}</span> */}
             <Icon.Copy
               className="cursor-pointer"
-              // onClick={() => copy(tokenInfo!.mintToken.address)}
-              onClick={() => copy(MIT.address)}
+              onClick={() => copy(tokenInfo!.mintToken.address)}
+              // onClick={() => copy(MIT.address)}
             />
           </HarmonyOSSansText>
         )
       },
       {
         name: t`Name`,
-        // value: tokenInfo ? tokenInfo.mintToken.name : '--'
-        value: MIT.name
+        value: tokenInfo ? tokenInfo.mintToken.name : '--'
+        // value: MIT.name
       },
       {
         name: t`Symbol`,
-        // value: tokenInfo ? tokenInfo.mintToken.symbol : '--'
-        value: MIT.symbol
+        value: tokenInfo ? tokenInfo.mintToken.symbol : '--'
+        // value: MIT.symbol
       }
     ],
     [tokenInfo]

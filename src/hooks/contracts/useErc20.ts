@@ -154,7 +154,7 @@ export const useTx = (parmas?: { approve: Parameters<typeof useApprove>[0]; onSu
   }, [])
 
   useEffect(() => {
-    if (data) console.log('>>>>>> data: ', data)
+    if (data) console.log('>>>>>> TransactionReceipt data: ', data)
   }, [data])
 
   useEffect(() => {
@@ -163,7 +163,7 @@ export const useTx = (parmas?: { approve: Parameters<typeof useApprove>[0]; onSu
 
   useEffect(() => {
     if (isError && error) {
-      console.error(error)
+      console.error('>>>>>> TransactionReceipt error: ', error)
       setTxStatus(TX_STATUS.Failed)
     }
   }, [error, isError])

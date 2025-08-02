@@ -99,6 +99,7 @@ export const useTrade = () => {
 
   const buy = useCallback(async () => {
     if (!tokenInfo) return
+    console.log('>>>>>> trade buy: ', { rawAmountIn, args: [rawAmountIn, (leader || zeroAddress) as Address] })
     await approve(rawAmountIn)
     await transaction(
       writeContractAsync({
@@ -112,6 +113,7 @@ export const useTrade = () => {
 
   const sell = useCallback(async () => {
     if (!tokenInfo) return
+    console.log('>>>>>> trade sell: ', { rawAmountIn, args: [rawAmountIn] })
     await approve(rawAmountIn)
     await transaction(
       writeContractAsync({
@@ -168,6 +170,7 @@ export const useClaim = () => {
 
   const claimLPHRewards = useCallback(async () => {
     if (!tokenInfo) return
+    console.log('>>>>>> claimLPHRewards: ')
     await transaction(
       writeContractAsync({
         abi: MiningPoolAbi,
@@ -179,11 +182,9 @@ export const useClaim = () => {
 
   const claimTHTSRewards = useCallback(async () => {
     if (!tokenInfo || !userReward) return
-    console.log(
-      '>>>>>> claimTHTSRewards: ',
-      [BigInt(project?.epoch), BigInt(userReward.thRewardAcc), BigInt(userReward.tsRewardAcc), userReward.proof],
-      tokenInfo.miningPool
-    )
+    console.log('>>>>>> claimTHTSRewards: ', {
+      args: [BigInt(project?.epoch), BigInt(userReward.thRewardAcc), BigInt(userReward.tsRewardAcc), userReward.proof]
+    })
 
     await transaction(
       writeContractAsync({
