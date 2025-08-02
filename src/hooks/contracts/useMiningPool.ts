@@ -2,12 +2,10 @@ import { useCallback, useEffect, useMemo } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useSearchParams } from 'react-router'
 import { Address, zeroAddress } from 'viem'
 import { useWriteContract } from 'wagmi'
 import z from 'zod'
 
-import { inviteKey } from '@/components/token/Invite'
 import { MiningPoolAbi } from '@/constants/abi'
 import { useBalance, useTx } from '@/hooks/contracts/useErc20'
 import { useSaleEstimate } from '@/hooks/contracts/useInfoContract'
@@ -28,8 +26,6 @@ export const tradeFormSchema = z.object({
 })
 
 export const useTrade = () => {
-  const [searchParams] = useSearchParams()
-
   const { writeContractAsync } = useWriteContract()
   const { tokenInfo, project } = useTokenProviderContext()
 
@@ -39,12 +35,11 @@ export const useTrade = () => {
       tradeType: TRADE_TYPE.BUY,
       amountIn: '',
       amountOut: '',
-      leader: searchParams.get(inviteKey) || ''
+      leader: ''
     }
   })
 
   const tradeType = form.watch('tradeType')
-  const leader = form.watch('leader')
   const amountIn = form.watch('amountIn')
 
   useEffect(() => {
@@ -99,6 +94,7 @@ export const useTrade = () => {
 
   const buy = useCallback(async () => {
     if (!tokenInfo) return
+    const leader = form.getValues('leader')
     console.log('>>>>>> trade buy: ', { rawAmountIn, args: [rawAmountIn, (leader || zeroAddress) as Address] })
     await approve(rawAmountIn)
     await transaction(
@@ -109,7 +105,7 @@ export const useTrade = () => {
         args: [rawAmountIn, (leader || zeroAddress) as Address]
       })
     )
-  }, [approve, leader, rawAmountIn, tokenInfo, transaction, writeContractAsync])
+  }, [approve, form, rawAmountIn, tokenInfo, transaction, writeContractAsync])
 
   const sell = useCallback(async () => {
     if (!tokenInfo) return
@@ -153,7 +149,6 @@ export const useTrade = () => {
     amountIn,
     stableTokenBalance,
     mintTokenBalance,
-    leader,
     tradeType,
     isLoading,
     saleEstimate,

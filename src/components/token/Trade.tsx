@@ -4,10 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { t } from '@lingui/core/macro'
 import { Trans } from '@lingui/react/macro'
 import { useForm } from 'react-hook-form'
+import { useSearchParams } from 'react-router'
 import { isAddress } from 'viem'
 import z from 'zod'
 
 import { Icon, TokenSvgr } from '@/components/svgr'
+import { inviteKey } from '@/components/token/Invite'
 import TokenAccordionItem from '@/components/token/TokenAccordionItem'
 import { AccordionRoot } from '@/components/ui/Accordion'
 import { Container, Flex } from '@/components/ui/Box'
@@ -32,6 +34,8 @@ const formSchema = z.object({
 const TradeForm: React.FC = () => {
   const { isConnected, connect } = useWallet()
   const { tokenInfo, tokenUserInfo } = useTokenProviderContext()
+
+  const [searchParams] = useSearchParams()
 
   const tradeTypes = useMemoWithLocale<RadioOption[]>(
     () => [
@@ -64,7 +68,7 @@ const TradeForm: React.FC = () => {
   const leaderForm = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      address: ''
+      address: searchParams.get(inviteKey) || ''
     }
   })
 
@@ -86,6 +90,7 @@ const TradeForm: React.FC = () => {
         return
       }
       form.setValue('leader', address)
+      console.log('>>>>>> form: ', form.getValues())
       await handleSubmit(form.getValues())
       dialogRef.current?.close()
     },
